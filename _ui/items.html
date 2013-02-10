@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Items | Store Control Panel</title>
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="main.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="container">
+  <div class="navbar navbar-inverse">
+    <div class="navbar-inner"> <a class="brand" href="dashboard.html">Store Control Panel</a>
+      <ul class="nav">
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="categories.html">Manage Categories</a></li>
+            <li><a href="categories_add.html">Add New Category</a></li>
+          </ul>
+        </li>
+        <li class="dropdown active"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Items <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="items.html">Manage Items</a></li>
+            <li><a href="items_add.html">Add New Item</a></li>
+          </ul>
+        </li>
+        <li><a href="users.html">Users</a></li>
+        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="tools_impex.html">Import/Export System</a></li>
+            <li><a href="tools_update.html">Update Checker</a></li>
+            <li><a href="https://forums.alliedmods.net/showthread.php?t=208129" target="_blank">Help</a></li>
+          </ul>
+        </li>
+        <li><a href="settings.html">Settings</a></li>
+      </ul>
+      <ul class="nav pull-right">
+        <li class="divider-vertical"></li>
+        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="account.html">Edit Account</a></li>
+            <li class="divider"></li>
+            <li><a href="index.html">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <ul class="breadcrumb">
+    <li><a href="dashboard.html">Home</a> <span class="divider">/</span></li>
+    <li class="active">Items</li>
+  </ul>
+  <div class="page-header">
+    <h1>Items</h1>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <div class="pagination scp-pagination">
+        <ul>
+          <li><a href="#">Prev</a></li>
+          <li><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+          <li><a href="#">Next</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="span3">
+      <div class="btn-group pull-right"> <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"> Category Filter <span class="caret"></span> </a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Hats</a></li>
+          <li><a href="#">Titles</a></li>
+          <li><a href="#">Trails</a></li>
+          <li><a href="#">Miscs</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="span3">
+      <form class="form-search pull-right">
+        <div class="input-append">
+          <input type="text" class="span2 search-query">
+          <button type="submit" class="btn">Search</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <table class="table table-bordered table-striped table-hover">
+    <thead>
+      <tr>
+        <th width="5%">ID</th>
+        <th>User</th>
+        <th>Category</th>
+        <th width="15%">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td width="5%">151</td>
+        <td><a href="items_edit.html">Traffic Cone</a></td>
+        <td>Hats</td>
+        <td width="15%">650</td>
+      </tr>
+      <tr>
+        <td width="5%">152</td>
+        <td><a href="items_edit.html">Watermelon</a></td>
+        <td>Hats</td>
+        <td width="15%">650</td>
+      </tr>
+      <tr>
+        <td width="5%">153</td>
+        <td><a href="items_edit.html">Santahat</a></td>
+        <td>Hats</td>
+        <td width="15%">650</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="pagination">
+    <ul>
+      <li><a href="#">Prev</a></li>
+      <li><a href="#">1</a></li>
+      <li><a href="#">2</a></li>
+      <li><a href="#">3</a></li>
+      <li><a href="#">4</a></li>
+      <li><a href="#">Next</a></li>
+    </ul>
+  </div>
+  <hr>
+  <footer>
+    <p>&copy; 2013 Store Plugin Developed by <strong>alongub</strong>.  Store Control Panel by <a href="http://www.bor3dgaming.com/" target="_blank"><strong>Bor3d Gaming</strong></a>.</p>
+  </footer>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script> 
+<script src="bootstrap/js/bootstrap.min.js"></script> 
+<script src="main.js"></script>
+</body>
+</html>

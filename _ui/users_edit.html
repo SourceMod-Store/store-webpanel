@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Edit User | Store Control Panel</title>
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="main.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="container">
+  <div class="navbar navbar-inverse">
+    <div class="navbar-inner"> <a class="brand" href="dashboard.html">Store Control Panel</a>
+      <ul class="nav">
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="categories.html">Manage Categories</a></li>
+            <li><a href="categories_add.html">Add New Category</a></li>
+          </ul>
+        </li>
+        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Items <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="items.html">Manage Items</a></li>
+            <li><a href="items_add.html">Add New Item</a></li>
+          </ul>
+        </li>
+        <li class="active"><a href="users.html">Users</a></li>
+        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="tools_impex.html">Import/Export System</a></li>
+            <li><a href="tools_update.html">Update Checker</a></li>
+            <li><a href="https://forums.alliedmods.net/showthread.php?t=208129" target="_blank">Help</a></li>
+          </ul>
+        </li>
+        <li><a href="settings.html">Settings</a></li>
+      </ul>
+      <ul class="nav pull-right">
+        <li class="divider-vertical"></li>
+        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="account.html">Edit Account</a></li>
+            <li class="divider"></li>
+            <li><a href="index.html">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <ul class="breadcrumb">
+    <li><a href="dashboard.html">Home</a> <span class="divider">/</span></li>
+    <li><a href="users.html">Users</a> <span class="divider">/</span></li>
+    <li class="active">Edit User</li>
+  </ul>
+  <div class="page-header">
+    <h1>Edit "User 1"</h1>
+  </div>
+  <ul class="nav nav-tabs" id="userTabs">
+    <li><a href="#info" data-toggle="tab">Info</a></li>
+    <li><a href="#items" data-toggle="tab">Items</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane" id="info">
+      <form class="form-horizontal">
+        <div class="control-group">
+          <label class="control-label" for="userID">ID</label>
+          <div class="controls">
+            <input type="text" id="userID" disabled class="input-mini" value="731">
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="userSteamID">Steam ID</label>
+          <div class="controls">
+            <input type="text" id="userSteamID" class="input-medium" value="STEAM_0:1:8712329">
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="userName">User</label>
+          <div class="controls">
+            <input type="text" id="userName" value="User 1">
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="userCredits">Credits</label>
+          <div class="controls">
+            <input type="text" id="userCredits" class="input-medium" value="67037">
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+    <div class="tab-pane" id="items">
+      <form>
+        <table class="table table-bordered table-striped table-hover">
+          <thead>
+            <tr>
+              <th width="5%">ID</th>
+              <th>Item Name</th>
+              <th>Category</th>
+              <th width="15%"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="5%">440</td>
+              <td>Traffic Cone</td>
+              <td>Hats</td>
+              <td width="15%"><button class="btn btn-mini btn-danger pull-right" type="button"><i class="icon-remove icon-white"></i> Remove</button></td>
+            </tr>
+            <tr>
+              <td width="5%">441</td>
+              <td>Lady</td>
+              <td>Titles</td>
+              <td width="15%"><button class="btn btn-mini btn-danger pull-right" type="button"><i class="icon-remove icon-white"></i> Remove</button></td>
+            </tr>
+            <tr>
+              <td width="5%">442</td>
+              <td>Glasses</td>
+              <td>Miscs</td>
+              <td width="15%"><button class="btn btn-mini btn-danger pull-right" type="button"><i class="icon-remove icon-white"></i> Remove</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </div>
+  <hr>
+  <footer>
+    <p>&copy; 2013 Store Plugin Developed by <strong>alongub</strong>.  Store Control Panel by <a href="http://www.bor3dgaming.com/" target="_blank"><strong>Bor3d Gaming</strong></a>.</p>
+  </footer>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script> 
+<script src="bootstrap/js/bootstrap.min.js"></script> 
+<script src="main.js"></script>
+</body>
+</html>
