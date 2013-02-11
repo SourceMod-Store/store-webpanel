@@ -2,17 +2,19 @@
 
 class Users extends CI_Controller {
     
-    public function index()
-    {
-        $this->load->view('parts/header');
-        $this->load->view('pages/users/manage');
+    public function index(){
+        $data['page'] = 'users';
+        
+        $this->load->view('parts/header',$data);
+        $this->load->view('pages/users/manage',$data);
         $this->load->view('parts/footer');
     }
     
-    public function edit($slug)
-    {
-        $this->load->view('parts/header');
-        $this->load->view('pages/users/edit');
+    public function edit($slug){
+        $data['page'] = 'users';
+        
+        $this->load->view('parts/header',$data);
+        $this->load->view('pages/users/edit',$data);
         $this->load->view('parts/footer');
     }
 }

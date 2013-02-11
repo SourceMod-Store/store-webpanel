@@ -2,10 +2,11 @@
 
 class Settings extends CI_Controller {
     
-    public function index()
-    {
-        $this->load->view('parts/header');
-        $this->load->view('pages/settings/manage');
+    public function index(){
+        $data['page'] = 'settings';
+        
+        $this->load->view('parts/header',$data);
+        $this->load->view('pages/settings/manage',$data);
         $this->load->view('parts/footer');
     }
 }

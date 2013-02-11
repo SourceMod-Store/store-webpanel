@@ -2,24 +2,27 @@
 
 class Items extends CI_Controller {
     
-    public function index()
-    {
-        $this->load->view('parts/header');
-        $this->load->view('pages/items/manage');
+    public function index(){
+        $data['page'] = 'items';
+        
+        $this->load->view('parts/header',$data);
+        $this->load->view('pages/items/manage',$data);
         $this->load->view('parts/footer');
     }
     
-    public function add()
-    {
-        $this->load->view('parts/header');
-        $this->load->view('pages/items/add');
+    public function add(){
+        $data['page'] = 'items';
+        
+        $this->load->view('parts/header',$data);
+        $this->load->view('pages/items/add',$data);
         $this->load->view('parts/footer');
     }
     
-    public function edit($slug)
-    {
-        $this->load->view('parts/header');
-        $this->load->view('pages/items/edit');
+    public function edit($slug){
+        $data['page'] = 'items';
+        
+        $this->load->view('parts/header',$data);
+        $this->load->view('pages/items/edit',$data);
         $this->load->view('parts/footer');
     }
 }

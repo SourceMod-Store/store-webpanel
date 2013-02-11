@@ -12,25 +12,12 @@
           </tr>
         </thead>
         <tbody>
+          <?php foreach($top_items as $item):?>
           <tr>
-            <td><a href="items_edit.html">Item 1</a></td>
-            <td width="5%">198</td>
+            <td><a href="<?php echo base_url('index.php/items/edit')."/".$item["item_id"]?>"><?=$item['display_name']?></a></td>
+            <td width="5%"><?=$item['num']?></td>
           </tr>
-          <tr>
-            <td><a href="items_edit.html">Item 2</a></td>
-            <td width="5%">73</td>
-          </tr>
-          <tr>
-            <td><a href="items_edit.html">Item 3</a></td>
-            <td width="5%">40</td>
-          </tr>
-          <tr>
-            <td><a href="items_edit.html">Item 4</a></td>
-            <td width="5%">22</td>
-          </tr>
-          <tr>
-            <td><a href="items_edit.html">Item 5</a></td>
-            <td width="5%">13</td>
+          <?php endforeach;?>
           </tr>
         </tbody>
       </table>
@@ -45,26 +32,12 @@
           </tr>
         </thead>
         <tbody>
+          <?php foreach($top_users as $user):?>
           <tr>
-            <td><a href="users_edit.html">User 1</a></td>
-            <td width="10%">37278</td>
+              <td><a href="<?php echo base_url('index.php/users/edit')."/".$user["id"]?>"><?=$user['name']?></a></td>
+            <td width="10%"><?=$user['credits']?></td>
           </tr>
-          <tr>
-            <td><a href="users_edit.html">User 2</a></td>
-            <td width="10%">19834</td>
-          </tr>
-          <tr>
-            <td><a href="users_edit.html">User 3</a></td>
-            <td width="10%">8272</td>
-          </tr>
-          <tr>
-            <td><a href="users_edit.html">User 4</a></td>
-            <td width="10%">4837</td>
-          </tr>
-          <tr>
-            <td><a href="users_edit.html">User 5</a></td>
-            <td width="10%">2039</td>
-          </tr>
+          <?php endforeach;?>
         </tbody>
       </table>
     </div>

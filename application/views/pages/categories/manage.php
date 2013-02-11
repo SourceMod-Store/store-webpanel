@@ -16,33 +16,14 @@
       </tr>
     </thead>
     <tbody>
+      <?php foreach($query_categories as $cat): ?>
       <tr>
-        <td>10</td>
-        <td><a href="categories_edit.html">Hats</a></td>
-        <td>Cosmetic hats that appear on your head.</td>
-        <td>equipment</td>
-        <td>27</td>
+        <td><?=$cat['id']?></td>
+        <td><a href="<?php echo base_url('index.php/categories/edit')."/".$cat['id']?>"><?=$cat['display_name']?></a></td>
+        <td><?=$cat['web_description']?></td>
+        <td><?=$cat['require_plugin']?></td>
+        <td><?=$cat['count']?></td>
       </tr>
-      <tr>
-        <td>11</td>
-        <td><a href="categories_edit.html">Miscs</a></td>
-        <td>Cosmetic items such as glasses and masks.</td>
-        <td>equipment</td>
-        <td>192</td>
-      </tr>
-      <tr>
-        <td>12</td>
-        <td><a href="categories_edit.html">Titles</a></td>
-        <td>Tags in your chat name.</td>
-        <td>title</td>
-        <td>19</td>
-      </tr>
-      <tr>
-        <td>13</td>
-        <td><a href="categories_edit.html">Trails</a></td>
-        <td>Magical trails that follow your character.</td>
-        <td>trails</td>
-        <td>202</td>
-      </tr>
+      <?php endforeach; ?>
     </tbody>
   </table>

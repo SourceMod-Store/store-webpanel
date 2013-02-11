@@ -1,5 +1,5 @@
 <?php
-class Store extends CI_Model{
+class Items extends CI_Model{
     
     //This is a Copy and Paste from the SourceDoantes Project
     //It is not finished atm
