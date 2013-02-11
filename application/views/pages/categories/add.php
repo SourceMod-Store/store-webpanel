@@ -7,7 +7,7 @@
     <h1>Add New Category</h1>
   </div>
   <form class="form-horizontal" action="<?php echo base_url('index.php/categories/process')?>" method="post">
-    <input type="hidden" name="from" value="add">
+    <input type="hidden" name="action" value="add">
     <div class="control-group">
       <label class="control-label" for="catName">Display Name</label>
       <div class="controls">

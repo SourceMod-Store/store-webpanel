@@ -7,7 +7,7 @@
     <h1>Edit "Hats" Category</h1>
   </div>
 <form class="form-horizontal" action="<?php echo base_url('index.php/categories/process')?>" method="post">
-    <input type="hidden" name="from" value="edit">
+    <input type="hidden" name="action" value="edit">
     <div class="control-group">
       <label class="control-label" for="catID">ID</label>
       <div class="controls">
