@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="span3">
-        <form class="form-search pull-right" action ="<?php echo base_url("index.php/items")?>" method="get">
+      <form class="form-search pull-right" action ="<?php echo base_url("index.php/items")?>" method="get">
         <div class="input-append">
           <input type="text" class="span2 search-query" name="s" value="<?=$search?>">
           <button type="submit" class="btn">Search</button>

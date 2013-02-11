@@ -8,20 +8,20 @@
   <div class="row">
     <div class="span6">
       <div class="pagination scp-pagination">
-        <ul>
+<!--        <ul>
           <li><a href="#">Prev</a></li>
           <li><a href="#">1</a></li>
           <li><a href="#">2</a></li>
           <li><a href="#">3</a></li>
           <li><a href="#">4</a></li>
           <li><a href="#">Next</a></li>
-        </ul>
+        </ul>-->
       </div>
     </div>
     <div class="span6">
-      <form class="form-search pull-right">
+      <form class="form-search pull-right" action ="<?php echo base_url("index.php/users");?>" method="get">
         <div class="input-append">
-          <input type="text" class="span2 search-query">
+          <input type="text" class="span2 search-query" name="s" value="<?=$search?>">
           <button type="submit" class="btn">Search</button>
         </div>
       </form>
@@ -32,42 +32,30 @@
       <tr>
         <th>ID</th>
         <th>User</th>
-        <th>Steam ID</th>
+        <th>Auth</th>
         <th>Credits</th>
         <th>Item Count</th>
       </tr>
     </thead>
     <tbody>
+      <?php foreach($users as $user):?>
       <tr>
-        <td>730</td>
-        <td><a href="users_edit.html">User 1</a></td>
-        <td>STEAM_0:1:8712329</td>
-        <td>67037</td>
-        <td>3</td>
+        <td><?=$user['id']?></td>
+        <td><a href="<?php echo base_url('index.php/users/edit').'/'.$user['id'] ?>"><?=$user['name']?></a></td>
+        <td><?=$user['auth']?></td>
+        <td><?=$user['credits']?></td>
+        <td><?=$user['num_items']?></td>
       </tr>
-      <tr>
-        <td>731</td>
-        <td><a href="users_edit.html">User 2</a></td>
-        <td>STEAM_0:0:85632</td>
-        <td>9271</td>
-        <td>8</td>
-      </tr>
-      <tr>
-        <td>732</td>
-        <td><a href="users_edit.html">User 3</a></td>
-        <td>STEAM_0:1:9378621</td>
-        <td>21265</td>
-        <td>5</td>
-      </tr>
+      <?php endforeach;?>
     </tbody>
   </table>
   <div class="pagination">
-    <ul>
+<!--    <ul>
       <li><a href="#">Prev</a></li>
       <li><a href="#">1</a></li>
       <li><a href="#">2</a></li>
       <li><a href="#">3</a></li>
       <li><a href="#">4</a></li>
       <li><a href="#">Next</a></li>
-    </ul>
+    </ul>-->
   </div>
