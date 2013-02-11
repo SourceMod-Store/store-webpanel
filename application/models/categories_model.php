@@ -24,7 +24,7 @@ class Categories_Model extends CI_Model {
             }
             return $array_categories;
         }else{
-            return FALSE;
+            return array();
         }
     }
     
@@ -35,23 +35,21 @@ class Categories_Model extends CI_Model {
         if($query_category->num_rows == 1){
             return $query_category->row_array();
         }else{
-            return FALSE;
+            return array();
         }
     }
     
     function update_category($post){
         $DB_Main = $this->load->database('default', TRUE);
-        if($post['from'] == 'edit'){
-            $data=array(
-                'display_name' => $post['display_name'],
-                'description' => $post['description'],
-                'require_plugin' => $post['require_plugin'],
-                'web_description' => $post['web_description'],
-                'web_color' => $post['web_color']
-            );
-            $DB_Main->where('id',$post['id']);
-            $DB_Main->update('categories',$data);
-        }
+        $data=array(
+            'display_name' => $post['display_name'],
+            'description' => $post['description'],
+            'require_plugin' => $post['require_plugin'],
+            'web_description' => $post['web_description'],
+            'web_color' => $post['web_color']
+        );
+        $DB_Main->where('id',$post['id']);
+        $DB_Main->update('categories',$data);
     }
     
     function add_category($post){

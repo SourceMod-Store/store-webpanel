@@ -1,32 +1,80 @@
 <?php
-class Items extends CI_Model{
-    
-    //This is a Copy and Paste from the SourceDoantes Project
-    //It is not finished atm
-    
-    
+class Items_Model extends CI_Model{
+
     function __construct() {
         parent::__construct();
     }
     
-    function get_storeuserid($store_auth){
-        $config_server['hostname'] = $this->config->item('database_server_host');
-        $config_server['username'] = $this->config->item('database_server_user');
-        $config_server['password'] = $this->config->item('database_server_password');
-        $config_server['database'] = $this->config->item('database_server_db');
-        $config_server['dbdriver'] = "mysql";
-        $config_server['dbprefix'] = $this->config->item('database_server_prefix');
-        $config_server['pconnect'] = FALSE;
-        $config_server['db_debug'] = TRUE;
-        $config_server['cache_on'] = FALSE;
-        $config_server['cachedir'] = "";
-        $config_server['char_set'] = "utf8";
-        $config_server['dbcollat'] = "utf8_general_ci";
-
-        $DB_Server = $this->load->database($config_server,TRUE);
+    function get_search_categories(){
+        $DB_Main = $this->load->database('default', TRUE);
+        $query = $DB_Main->get('categories');
+        return $query->result_array();
+    }
+    
+    function get_items($search, $category){
+        $DB_Main = $this->load->database('default', TRUE);
         
-        $DB_Server->where('auth',$store_auth);
-        $query = $DB_Server->get('store_users');
+        if(isset($category)){
+            $DB_Main->where('type',$category);
+        }
+        
+        if(isset($search)){
+            $DB_Main->like('display_name', $search);
+        }
+        
+        $query = $DB_Main->get('items');
+        
+        return $query->result_array();
+    }
+    
+    function get_item_info($id){
+        $DB_Main = $this->load->database('default', TRUE);
+        $DB_Main->where('id',$id);
+        $query = $DB_Main->get('items');
+        return $query->row_array();
+    }
+    
+    function update_item($post){
+        $DB_Main = $this->load->database('default', TRUE);
+        $DB_Main->where('id',$post['id']);
+        $data=array(
+            'name'=>$post['name'],
+            'display_name'=>$post['display_name'],
+            'description'=>$post['description'],
+            'web_description'=>$post['web_description'],
+            'type'=>$post['type'],
+            'loadout_slot'=>$post['loadout_slot'],
+            'price'=>$post['price'],
+            'attrs'=>$post['attrs'],
+            'is_buyable'=>$post['is_buyable'],
+            'is_tradeable'=>$post['is_tradeable'],
+        );
+        $DB_Main->update('items',$data);
+    }
+    
+    function add_item($post){
+        $DB_Main = $this->load->database('default', TRUE);
+        $data=array(
+            'name'=>$post['name'],
+            'display_name'=>$post['display_name'],
+            'description'=>$post['description'],
+            'web_description'=>$post['web_description'],
+            'type'=>$post['type'],
+            'loadout_slot'=>$post['loadout_slot'],
+            'price'=>$post['price'],
+            'attrs'=>$post['attrs'],
+            'is_buyable'=>$post['is_buyable'],
+            'is_tradeable'=>$post['is_tradeable'],
+        );
+        $DB_Main->insert('items',$data);
+    }
+    
+    
+    function get_storeuserid($store_auth){
+        $DB_Main = $this->load->database('default',TRUE);
+        
+        $DB_Main->where('auth',$store_auth);
+        $query = $DB_Main->get('users');
         
         if($query->num_rows == 1){
             $row = $query->row();
@@ -38,66 +86,37 @@ class Items extends CI_Model{
         }
     }
     
-    
     function add_useritem($store_userid,$item_id){
-        //Load the DB
-        $config_server['hostname'] = $this->config->item('database_server_host');
-        $config_server['username'] = $this->config->item('database_server_user');
-        $config_server['password'] = $this->config->item('database_server_password');
-        $config_server['database'] = $this->config->item('database_server_db');
-        $config_server['dbdriver'] = "mysql";
-        $config_server['dbprefix'] = $this->config->item('database_server_prefix');
-        $config_server['pconnect'] = FALSE;
-        $config_server['db_debug'] = TRUE;
-        $config_server['cache_on'] = FALSE;
-        $config_server['cachedir'] = "";
-        $config_server['char_set'] = "utf8";
-        $config_server['dbcollat'] = "utf8_general_ci";
-        
-        $DB_Server = $this->load->database($config_server,TRUE);
+        $DB_Main = $this->load->database('default',TRUE);
         
         //Check for Duplicates
-        $DB_Server->where('user_id',$store_userid);
-        $DB_Server->where('item_id',$item_id);
-        $query = $DB_Server->get('store_users_items');
+        $DB_Main->where('user_id',$store_userid);
+        $DB_Main->where('item_id',$item_id);
+        $query = $DB_Main->get('users_items');
         
         if($query->num_rows() == 0){
             $data = array(
                 'user_id' => $store_userid,
                 'item_id' => $item_id
             );
-            $DB_Server->insert('store_users_items',$data);
+            $DB_Main->insert('users_items',$data);
         }else{
             log_message('error', 'store-add_useritem, User/Item Combo already exists');
         }
     }
     
     function remove_useritem($store_userid,$item_id){
-        //Load the DB
-        $config_server['hostname'] = $this->config->item('database_server_host');
-        $config_server['username'] = $this->config->item('database_server_user');
-        $config_server['password'] = $this->config->item('database_server_password');
-        $config_server['database'] = $this->config->item('database_server_db');
-        $config_server['dbdriver'] = "mysql";
-        $config_server['dbprefix'] = $this->config->item('database_server_prefix');
-        $config_server['pconnect'] = FALSE;
-        $config_server['db_debug'] = TRUE;
-        $config_server['cache_on'] = FALSE;
-        $config_server['cachedir'] = "";
-        $config_server['char_set'] = "utf8";
-        $config_server['dbcollat'] = "utf8_general_ci";
-        
-        $DB_Server = $this->load->database($config_server,TRUE);
+        $DB_Main = $this->load->database('default',TRUE);
         
         //Check for Duplicates
-        $DB_Server->where('user_id',$store_userid);
-        $DB_Server->where('item_id',$item_id);
-        $query = $DB_Server->get('store_users_items');
+        $DB_Main->where('user_id',$store_userid);
+        $DB_Main->where('item_id',$item_id);
+        $query = $DB_Main->get('users_items');
         
         if($query->num_rows() == 1){
-            $DB_Server->where('user_id',$store_userid);
-            $DB_Server->where('item_id',$item_id);
-            $DB_Server->delete('store_users_items');
+            $DB_Main->where('user_id',$store_userid);
+            $DB_Main->where('item_id',$item_id);
+            $DB_Main->delete('users_items');
         }else{
             log_message('error', 'store-remove_useritem, User/Item Combo does not exists');
         }

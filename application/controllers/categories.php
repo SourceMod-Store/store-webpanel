@@ -38,9 +38,9 @@ class Categories extends CI_Controller {
         $post = $this->input->post();
         $data['post'] = $post;
         
-        if($post['from'] == 'update'){
+        if($post['action'] == 'edit'){
             $this->categories_model->update_category($post);
-        }elseif ($post['from'] == 'add') {
+        }elseif ($post['action'] == 'add') {
             $this->categories_model->add_category($post);
         }
         $this->load->view('parts/header',$data);
