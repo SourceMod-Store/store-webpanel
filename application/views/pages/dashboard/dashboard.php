@@ -3,7 +3,7 @@
     This makes it easy to manage your community's store system.  Report any and all issues on the <a href="http://jira.sourcedonates.com/browse/STWPAN" target="_blank">Webpanel Bugtracker (you need to register first to prevent spam)</a>.</div>
   <div class="row">
     <div class="span6">
-      <h2>Top Purchased Items</h2>
+      <h2>Most popular items</h2>
       <table class="table table-striped">
         <thead>
           <tr>
@@ -23,7 +23,7 @@
       </table>
     </div>
     <div class="span6">
-      <h2>Top Richest Users</h2>
+      <h2>Richest Users</h2>
       <table class="table table-striped">
         <thead>
           <tr>
