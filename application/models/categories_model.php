@@ -54,7 +54,7 @@ class Categories_Model extends CI_Model {
     
     function add_category($post){
         $DB_Main = $this->load->database('default', TRUE);
-        if($post['from'] == 'add'){
+        if($post['action'] == 'add'){
             $data=array(
                 'display_name' => $post['display_name'],
                 'description' => $post['description'],

@@ -29,13 +29,13 @@
         <li class="dropdown <?php if($page == "tools"){ echo "active"; }?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="<?php echo base_url("index.php/tools/impex");?>">Import/Export System</a></li>
-            <li><a href="<?php echo base_url("index.php/tools/update");?>">Update Checker</a></li>
+            <!--<li><a href="<?php echo base_url("index.php/tools/update");?>">Update Checker</a></li>-->
             <li><a href="http://confluence.sourcedonates.com/x/AgAc" target="_blank">Help</a></li>
           </ul>
         </li>
-        <li class="<?php if($page == "settings"){ echo "active"; }?>"><a href="<?php echo base_url("index.php/settings");?>">Settings</a></li>
+        <!--<li class="<?php if($page == "settings"){ echo "active"; }?>"><a href="<?php echo base_url("index.php/settings");?>">Settings</a></li>-->
       </ul>
-      <ul class="nav pull-right">
+<!--      <ul class="nav pull-right">
         <li class="divider-vertical"></li>
         <li class="dropdown <?php if($page == "account"){ echo "active"; }?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
           <ul class="dropdown-menu">
@@ -44,6 +44,6 @@
             <li><a href="index.html">Logout</a></li>
           </ul>
         </li>
-      </ul>
+      </ul>-->
     </div>
   </div>
