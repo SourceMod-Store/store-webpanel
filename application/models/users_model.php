@@ -6,7 +6,7 @@ class Users_Model extends CI_Model {
         parent::__construct();
     }
     
-    function get_uesrs($search){
+    function get_users($search){
         $DB_Main = $this->load->database('default', TRUE);
         
         if(isset($search)){
@@ -60,5 +60,23 @@ class Users_Model extends CI_Model {
         return $array_users_items;
     }
     
+    
+    function edit_user($post){
+        $DB_Main = $this->load->database('default',TRUE);
+        $DB_Main->where('id',$post['id']);
+        $data = array(
+            'auth' => $post['auth'],
+            'name' => $post['name'],
+            'credits' => $post['credits']
+        );
+        $DB_Main->update('users', $data);
+    }
+    
+    
+    function remove_useritem($post){
+        $DB_Main = $this->load->database('default', TRUE);
+        $DB_Main->where('id',$post['useritem_id']);
+        $DB_Main->delete('users_items');
+    }
 }
 ?>

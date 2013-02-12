@@ -58,7 +58,10 @@
            <?php foreach($user_items as $item):?>
             <form action="<?php echo base_url('index.php/users/process')?>" method="post">
               <input type="hidden" name="action" value="remove_item">
-              <input type="hidden" name="item_id" value="<?=$item['id']?>">
+              <input type="hidden" name="user_id" value="<?=$user['id']?>">
+              <input type="hidden" name="user_name" value="<?=$user['name']?>">
+              <input type="hidden" name="useritem_id" value="<?=$item['id']?>">
+              <input type="hidden" name="item_name" value="<?=$item['display_name']?>">
               <tr>
                 <td width="5%"><?=$item['id']?></td>
                 <td><?=$item['display_name']?></td>

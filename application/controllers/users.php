@@ -11,7 +11,7 @@ class Users extends CI_Controller {
         $data['page'] = 'users';
         $search = $this->input->get('s');
         
-        $data['users'] = $this->users_model->get_uesrs($search);
+        $data['users'] = $this->users_model->get_users($search);
         $data['search'] = $search;
         
         $this->load->view('parts/header',$data);
@@ -30,7 +30,19 @@ class Users extends CI_Controller {
     }
     
     public function process(){
+        $data['page'] = 'users';
+        $post = $this->input->post();
+        $data['post'] = $post;
         
+        if($post['action'] == 'edit'){
+            $this->users_model->edit_user($post);
+        }elseif($post['action'] == 'remove_item'){
+            $this->users_model->remove_useritem($post);
+        }
+        
+        $this->load->view('parts/header',$data);
+        $this->load->view('pages/users/process',$data);
+        $this->load->view('parts/footer');
     }
 }
 
