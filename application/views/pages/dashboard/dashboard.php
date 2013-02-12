@@ -1,6 +1,6 @@
 <h1>Dashboard</h1>
   <div class="alert alert-info"><strong>Welcome to your Store Control Panel!</strong><br />
-    This makes it easy to manage your community's store system.  Report any and all issues to <strong>alongub</strong> on the <a href="https://forums.alliedmods.net/showthread.php?t=207157" target="_blank">AlliedModders Forum</a>.</div>
+    This makes it easy to manage your community's store system.  Report any and all issues on the <a href="http://jira.sourcedonates.com/browse/STWPAN" target="_blank">Webpanel Bugtracker (you need to register first to prevent spam)</a>.</div>
   <div class="row">
     <div class="span6">
       <h2>Top Purchased Items</h2>
