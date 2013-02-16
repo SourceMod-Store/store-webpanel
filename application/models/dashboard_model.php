@@ -16,7 +16,7 @@ class Dashboard_Model extends CI_Model {
         if($query->num_rows() != 0){
             return $query->result_array();
         }else{
-            return FALSE;
+            return array();
         }
     }
     
