@@ -1,6 +1,6 @@
 <h1>Dashboard</h1>
   <div class="alert alert-info"><strong>Welcome to your Store Control Panel!</strong><br />
-    This makes it easy to manage your community's store system.  Report any and all issues on the <a href="http://jira.sourcedonates.com/browse/STWPAN" target="_blank">Webpanel Bugtracker (you need to register first to prevent spam)</a>.</div>
+    This makes it easy to manage your community's store system.  Report any and all issues by clicking on the "Report a Bug" Button on the right side of this page</div>
   <div class="row">
     <div class="span6">
       <h2>Most popular items</h2>
