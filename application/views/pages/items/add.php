@@ -4,7 +4,7 @@
     <li class="active">Add Item</li>
   </ul>
   <div class="page-header">
-    <h1>Add New Item Item</h1>
+    <h1>Add New Item</h1>
   </div>
   <form class="form-horizontal" action="<?php echo base_url('index.php/items/process'); ?>" method="post">
     <input type="hidden" name="action" value="add">
@@ -53,10 +53,10 @@
     <div class="control-group">
       <label class="control-label" for="itemCat">Category</label>
       <div class="controls">
-        <select id="itemCat">
+        <select id="itemCat" name="category_id">
           <option>-- Select Category --</option>
           <?php foreach($categories as $category):?>
-          <option><?=$category['display_name']?></option>
+          <option value="<?=$category['id']?>"><?=$category['display_name']?></option>
           <?php endforeach;?>
         </select>
       </div>
@@ -70,15 +70,21 @@
     <div class="control-group">
       <label class="control-label" for="itemPrice">Is Buyable</label>
       <div class="controls">
-        <input type="text" class="input-small" id="itemPrice" name="is_buyable">
+        <input type="text" class="input-small" id="itemPrice" name="is_buyable" value="1">
       </div>
     </div>
     <div class="control-group">
       <label class="control-label" for="itemPrice">Is Tradeable</label>
       <div class="controls">
-        <input type="text" class="input-small" id="itemPrice" name="is_tradeable">
+        <input type="text" class="input-small" id="itemPrice" name="is_tradeable" value="1">
       </div>
     </div>
+    <div class="control-group">
+      <label class="control-label" for="itemPrice">Is Refundable</label>
+      <div class="controls">
+        <input type="text" class="input-small" id="itemPrice" name="is_refundable" value="1">
+      </div>
+    </div>	
     <div class="form-actions">
       <button type="submit" class="btn btn-primary">Save Changes</button>
     </div>

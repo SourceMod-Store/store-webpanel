@@ -1,0 +1,33 @@
+{
+    "categories": [
+        {
+            "display_name": "Awesomeness",
+            "description": "awesomeness is awesomeness",
+            "require_plugin": "awesomeness!",
+            "items": [
+				{
+					"name": "my_item",
+					"display_name": "My Item",
+					"description": "123",
+					"type": "awesomeness",
+					"loadout_slot": "awesomeness",
+					"attrs": { 
+						"path": "doors/door_metal_gate_close1.wav", 
+						"volume": 0.4 
+					}
+				},
+				{
+					"name": "my_item2",
+					"display_name": "My Item 2",
+					"description": "1234",
+					"type": "awesomeness",
+					"loadout_slot": "awesomeness",
+					"attrs": { 
+						"path": "doors/door_metal_gate_close2.wav", 
+						"volume": 0.6
+					}
+				}				
+			]
+        }
+    ]
+}

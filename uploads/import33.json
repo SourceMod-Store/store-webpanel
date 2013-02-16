@@ -1,0 +1,43 @@
+{
+    "categories": [
+        {
+            "display_name": "Awesomeness",
+            "description": "awesomeness is awesomeness",
+            "require_plugin": "awesomeness!",
+			"web_description": "",
+			"web_color": "",
+            "items": [
+				{
+					"name": "my_item",
+					"display_name": "My Item",
+					"description": "123",
+					"web_description": "",
+					"type": "awesomeness",
+					"loadout_slot": "awesomeness",
+					"price": 500,
+					"attrs": { 
+						"path": "doors/door_metal_gate_close1.wav", 
+						"volume": 0.4 
+					},
+					"is_buyable": true,
+					"is_tradeable": true,
+					"is_refundable": true
+				},
+				{
+					"name": "my_item2",
+					"display_name": "My Item 2",
+					"description": "1234",
+					"type": "awesomeness",
+					"loadout_slot": "awesomeness",
+					"attrs": { 
+						"path": "doors/door_metal_gate_close2.wav", 
+						"volume": 0.6
+					},
+					"is_buyable": true,
+					"is_tradeable": true,
+					"is_refundable": true
+				}				
+			]
+        }
+    ]
+}

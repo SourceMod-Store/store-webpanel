@@ -37,7 +37,10 @@ class Items extends CI_Controller {
     public function edit($slug){
         $data['page'] = 'items';
         
-        $data['item_info'] = $this->items_model->get_item_info($slug);
+		$itemInfo = $this->items_model->get_item_info($slug);
+		$itemInfo['attrs'] = json_encode(json_decode($itemInfo['attrs']), JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
+		
+        $data['item_info'] = $itemInfo;
         $data['categories'] = $this->items_model->get_search_categories();
         $this->load->view('parts/header',$data);
         $this->load->view('pages/items/edit',$data);
@@ -53,7 +56,7 @@ class Items extends CI_Controller {
             $this->items_model->update_item($post);
         } elseif ($post['action'] == 'add') {
             echo "adding item";
-            $this->items_model->add_item($post);
+            $this->items_model->add_item($post['name'], $post['display_name'], $post['description'], $post['web_description'], $post['type'], $post['loadout_slot'], $post['price'], json_encode(json_decode($post['attrs']), JSON_UNESCAPED_SLASHES), $post['is_buyable'], $post['is_tradeable'], $post['is_refundable'], $post['category_id']);
         }
 		
         redirect('/items', 'refresh');

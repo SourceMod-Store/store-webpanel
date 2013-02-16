@@ -45,26 +45,30 @@ class Items_Model extends CI_Model{
             'type'=>$post['type'],
             'loadout_slot'=>$post['loadout_slot'],
             'price'=>$post['price'],
-            'attrs'=>$post['attrs'],
+            'attrs'=>json_encode(json_decode($post['attrs']), JSON_UNESCAPED_SLASHES),
             'is_buyable'=>$post['is_buyable'],
             'is_tradeable'=>$post['is_tradeable'],
+			'is_refundable'=>$post['is_refundable'],
+			'category_id'=>$post['category_id']
         );
         $DB_Main->update('items',$data);
     }
     
-    function add_item($post){
+    function add_item($name, $display_name, $description, $web_description, $type, $loadout_slot, $price, $attrs, $is_buyable, $is_tradeable, $is_refundable, $category_id){
         $DB_Main = $this->load->database('default', TRUE);
         $data=array(
-            'name'=>$post['name'],
-            'display_name'=>$post['display_name'],
-            'description'=>$post['description'],
-            'web_description'=>$post['web_description'],
-            'type'=>$post['type'],
-            'loadout_slot'=>$post['loadout_slot'],
-            'price'=>$post['price'],
-            'attrs'=>$post['attrs'],
-            'is_buyable'=>$post['is_buyable'],
-            'is_tradeable'=>$post['is_tradeable'],
+            'name'=>$name,
+            'display_name'=>$display_name,
+            'description'=>$description,
+            'web_description'=>$web_description,
+            'type'=>$type,
+            'loadout_slot'=>$loadout_slot,
+            'price'=>$price,
+            'attrs'=>$attrs,
+            'is_buyable'=>$is_buyable,
+            'is_tradeable'=>$is_tradeable,
+			'is_refundable'=>$is_refundable,
+			'category_id'=>$category_id
         );
         $DB_Main->insert('items',$data);
     }
@@ -97,8 +101,10 @@ class Items_Model extends CI_Model{
         if($query->num_rows() == 0){
             $data = array(
                 'user_id' => $store_userid,
-                'item_id' => $item_id
+                'item_id' => $item_id,
+				'aquire_method' => 'web'
             );
+			$DB_Main->set('aquire_date', 'NOW()', FALSE);
             $DB_Main->insert('users_items',$data);
         }else{
             log_message('error', 'store-add_useritem, User/Item Combo already exists');
@@ -113,7 +119,10 @@ class Items_Model extends CI_Model{
         $DB_Main->where('item_id',$item_id);
         $query = $DB_Main->get('users_items');
         
-        if($query->num_rows() == 1){
+        if($query->num_rows() >= 1){
+			$DB_Main->where('useritem_id', $query->id);
+			$DB_Main->delete('users_items_loadouts');
+			
             $DB_Main->where('user_id',$store_userid);
             $DB_Main->where('item_id',$item_id);
             $DB_Main->delete('users_items');
@@ -121,5 +130,12 @@ class Items_Model extends CI_Model{
             log_message('error', 'store-remove_useritem, User/Item Combo does not exists');
         }
     }
+	
+	function delete_items_by_type($type)
+	{
+		$DB_Main = $this->load->database('default',TRUE);
+        $DB_Main->where('type',$type);
+        $DB_Main->delete('items');		
+	}
 }
 ?>
