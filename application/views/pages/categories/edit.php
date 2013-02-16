@@ -1,6 +1,6 @@
 <ul class="breadcrumb">
-    <li><a href="dashboard.html">Home</a> <span class="divider">/</span></li>
-    <li><a href="categories.html">Categories</a> <span class="divider">/</span></li>
+    <li><a href="<?php echo base_url("/");?>">Home</a> <span class="divider">/</span></li>
+    <li><a href="<?php echo site_url("/categories");?>">Categories</a> <span class="divider">/</span></li>
     <li class="active">Edit Category</li>
   </ul>
   <div class="page-header">
