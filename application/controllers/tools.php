@@ -33,7 +33,8 @@ class Tools extends CI_Controller {
 		
 		if ($this->upload->do_upload('importFile'))
 		{
-			$json = json_decode(file_get_contents($this->upload->data()['file_path'].$this->upload->data()['file_name']));
+			$uploadData = $this->upload->data();
+			$json = json_decode(file_get_contents($uploadData['file_path'] . $uploadData['file_name']));
 			
 			$this->items_model->delete_items_by_type($json->type);
 			
