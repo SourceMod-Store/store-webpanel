@@ -9,8 +9,8 @@
   <div>
     <h4>Import Store Items</h2>
     <form action="<?php echo base_url('index.php/tools/import'); ?>" enctype="multipart/form-data" method="post">
+		<p>Each JSON file you upload contains items of one type. <strong>All of the items that you currently have under that type name will be deleted.</strong></p>
       <div class="control-group">
-        <label class="control-label" for="importFile">File Upload</label>
         <div class="controls">
           <input id="importFile" type="file" name="importFile">
           <br />
