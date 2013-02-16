@@ -10,7 +10,7 @@
 <body>
 <div class="container">
   <div class="navbar navbar-inverse">
-    <div class="navbar-inner"> <a class="brand" href="dashboard.html">Store Control Panel</a>
+    <div class="navbar-inner"> <a class="brand" href="<?php echo base_url("/");?>">Store Control Panel</a>
       <ul class="nav">
         <li class="<?php if($page == "dashboard"){ echo "active"; }?>"><a href="<?php echo base_url("index.php/dashboard");?>">Dashboard</a></li>
         <li class="dropdown <?php if($page == "categories"){ echo "active"; }?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories <b class="caret"></b></a>

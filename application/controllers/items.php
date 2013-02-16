@@ -5,6 +5,7 @@ class Items extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('items_model');
+		$this->load->helper('url');
     }
     
     public function index(){
@@ -50,13 +51,12 @@ class Items extends CI_Controller {
         
         if($post['action'] == 'edit'){
             $this->items_model->update_item($post);
-        }elseif ($post['action'] == 'add') {
+        } elseif ($post['action'] == 'add') {
             echo "adding item";
             $this->items_model->add_item($post);
         }
-        $this->load->view('parts/header',$data);
-        $this->load->view('pages/items/process',$data);
-        $this->load->view('parts/footer');
+		
+        redirect('/items', 'refresh');
     }
 }
 

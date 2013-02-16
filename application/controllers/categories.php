@@ -43,9 +43,7 @@ class Categories extends CI_Controller {
         }elseif ($post['action'] == 'add') {
             $this->categories_model->add_category($post);
         }
-        $this->load->view('parts/header',$data);
-        $this->load->view('pages/categories/process',$data);
-        $this->load->view('parts/footer');
+        redirect('/items', 'categories');
     }
 }
 
