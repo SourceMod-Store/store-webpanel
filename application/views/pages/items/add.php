@@ -85,6 +85,12 @@
         <input type="text" class="input-small" id="itemPrice" name="is_refundable" value="1">
       </div>
     </div>	
+    <div class="control-group">
+      <label class="control-label" for="itemPrice">Expiry time (in seconds)</label>
+      <div class="controls">
+        <input type="text" class="input-small" id="itemPrice" name="expiry_time">
+      </div>
+    </div>		
     <div class="form-actions">
       <button type="submit" class="btn btn-primary">Save Changes</button>
     </div>

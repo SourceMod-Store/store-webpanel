@@ -57,7 +57,8 @@ class Tools extends CI_Controller {
 													$item->is_buyable,
 													$item->is_tradeable,
 													$item->is_refundable,
-													$category_id);
+													$category_id,
+													$item->expiry_time);
 				}
 			}
 			

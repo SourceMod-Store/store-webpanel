@@ -49,12 +49,13 @@ class Items_Model extends CI_Model{
             'is_buyable'=>$post['is_buyable'],
             'is_tradeable'=>$post['is_tradeable'],
 			'is_refundable'=>$post['is_refundable'],
-			'category_id'=>$post['category_id']
+			'category_id'=>$post['category_id'],
+			'expiry_time'=>$post['expiry_time']
         );
         $DB_Main->update('items',$data);
     }
     
-    function add_item($name, $display_name, $description, $web_description, $type, $loadout_slot, $price, $attrs, $is_buyable, $is_tradeable, $is_refundable, $category_id){
+    function add_item($name, $display_name, $description, $web_description, $type, $loadout_slot, $price, $attrs, $is_buyable, $is_tradeable, $is_refundable, $category_id, $expiry_time){
         $DB_Main = $this->load->database('default', TRUE);
         $data=array(
             'name'=>$name,
@@ -68,7 +69,8 @@ class Items_Model extends CI_Model{
             'is_buyable'=>$is_buyable,
             'is_tradeable'=>$is_tradeable,
 			'is_refundable'=>$is_refundable,
-			'category_id'=>$category_id
+			'category_id'=>$category_id,
+			'expiry_time'=>$expiry_time
         );
         $DB_Main->insert('items',$data);
     }
