@@ -60,10 +60,10 @@
     <div class="control-group">
       <label class="control-label" for="itemCat">Category</label>
       <div class="controls">
-        <select id="itemCat">
-          <option>-- Select Category --</option>
+        <select id="itemCat" name="category_id">
+          <option>-- Select Category --<?=$item_info['category_id']?></option>
           <?php foreach($categories as $category):?>
-          <option <?php if($category['require_plugin'] == $item_info['type']){echo "selected"; }?>><?=$category['display_name']?></option>
+          <option value="<?=$category['id']?>" <?php if($category['id'] == $item_info['category_id']){echo "selected"; }?>><?=$category['display_name']?></option>
           <?php endforeach;?>
         </select>
       </div>
@@ -86,6 +86,12 @@
         <input type="text" class="input-small" id="itemPrice" name="is_tradeable" value="<?=$item_info['is_tradeable']?>">
       </div>
     </div>
+    <div class="control-group">
+      <label class="control-label" for="itemPrice">Is Refundable</label>
+      <div class="controls">
+        <input type="text" class="input-small" id="itemPrice" name="is_refundable" value="<?=$item_info['is_refundable']?>">
+      </div>
+    </div>		
     <div class="form-actions">
       <button type="submit" class="btn btn-primary">Save Changes</button>
     </div>
