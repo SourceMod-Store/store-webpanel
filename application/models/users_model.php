@@ -39,25 +39,13 @@ class Users_Model extends CI_Model {
     
     function get_user_items($user_id){
         $DB_Main = $this->load->database('default', TRUE);
-        $DB_Main->where('user_id',$user_id);
-        $query_users_items = $DB_Main->get('users_items');
-        $array_users_items = $query_users_items->result_array();
+		$DB_Main->select('items.*, users_items.*, categories.display_name AS category_displayname');
+		$DB_Main->from('users_items');
+		$DB_Main->join('items', 'items.id = users_items.item_id');
+		$DB_Main->join('categories', 'categories.id = items.category_id');
+		$DB_Main->where('user_id',$user_id);
         
-        $i=0;
-        foreach($array_users_items as $user_item){
-            $DB_Main->where('id',$user_item['item_id']);
-            $query_item = $DB_Main->get('items');
-            $row_item = $query_item->row_array();
-            $array_users_items[$i]['display_name'] = $row_item['display_name'];
-            
-            $DB_Main->where('require_plugin',$row_item['type']);
-            $query_category = $DB_Main->get('categories');
-            $row_category = $query_category->row_array();
-            $array_users_items[$i]['category_displayname'] = $row_category['display_name'];
-            $i++;
-        }
-        
-        return $array_users_items;
+        return $DB_Main->get()->result_array();
     }
     
     

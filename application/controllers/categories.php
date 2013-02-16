@@ -43,7 +43,7 @@ class Categories extends CI_Controller {
         }elseif ($post['action'] == 'add') {
             $this->categories_model->add_category($post);
         }
-        redirect('/items', 'categories');
+        redirect('/items', 'refresh');
     }
 }
 
