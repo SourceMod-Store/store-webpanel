@@ -5,7 +5,7 @@
   <div class="page-header">
     <h1>Categories</h1>
   </div>
-  <table class="table table-bordered table-striped table-hover">
+  <table id="manageCategories" class="tablesorter table table-bordered table-striped table-hover">
     <thead>
       <tr>
         <th>ID</th>

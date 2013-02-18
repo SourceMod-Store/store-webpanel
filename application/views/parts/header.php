@@ -5,6 +5,8 @@
 <title>Store Control Panel</title>
 <link href="<?php echo base_url("assets/css/bootstrap.min.css");?>" rel="stylesheet" media="screen">
 <link href="<?php echo base_url("assets/css/main.css");?>" rel="stylesheet">
+<script type="text/javascript" src="<?php echo base_url("assets/tablesorter/jquery-latest.js");?>"></script> 
+<script type="text/javascript" src="<?php echo base_url("assets/tablesorter/jquery.tablesorter.js");?>"></script> 
 </head>
 
 <body>

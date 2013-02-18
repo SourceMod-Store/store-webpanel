@@ -36,9 +36,11 @@ class Items extends CI_Controller {
     
     public function edit($slug){
         $data['page'] = 'items';
+        $itemInfo = $this->items_model->get_item_info($slug);
         
-		$itemInfo = $this->items_model->get_item_info($slug);
-		$itemInfo['attrs'] = json_encode(json_decode($itemInfo['attrs']), JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
+        if(PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION >= 4){ // Check if PHP 5.4
+            $itemInfo['attrs'] = json_encode(json_decode($itemInfo['attrs']), JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
+        }
 		
         $data['item_info'] = $itemInfo;
         $data['categories'] = $this->items_model->get_search_categories();
