@@ -23,8 +23,18 @@ class Items_Model extends CI_Model{
         }
         
         $query = $DB_Main->get('items');
+        $item_array = $query->result_array();
         
-        return $query->result_array();
+        $i=0;
+        foreach( $item_array as $item){
+            $DB_Main->where('item_id',$item['id']);
+            $query_item = $DB_Main->get('users_items');
+            $item_array[$i]['amount'] = $query_item->num_rows();
+            
+            $i++;
+        }
+        
+        return $item_array;
     }
     
     function get_item_info($id){
@@ -48,9 +58,9 @@ class Items_Model extends CI_Model{
             'attrs'=>json_encode(json_decode($post['attrs']), JSON_UNESCAPED_SLASHES),
             'is_buyable'=>$post['is_buyable'],
             'is_tradeable'=>$post['is_tradeable'],
-			'is_refundable'=>$post['is_refundable'],
-			'category_id'=>$post['category_id'],
-			'expiry_time'=>$post['expiry_time']
+            'is_refundable'=>$post['is_refundable'],
+            'category_id'=>$post['category_id'],
+            'expiry_time'=>$post['expiry_time']
         );
         $DB_Main->update('items',$data);
     }
@@ -68,9 +78,9 @@ class Items_Model extends CI_Model{
             'attrs'=>$attrs,
             'is_buyable'=>$is_buyable,
             'is_tradeable'=>$is_tradeable,
-			'is_refundable'=>$is_refundable,
-			'category_id'=>$category_id,
-			'expiry_time'=>$expiry_time
+            'is_refundable'=>$is_refundable,
+            'category_id'=>$category_id,
+            'expiry_time'=>$expiry_time
         );
         $DB_Main->insert('items',$data);
     }

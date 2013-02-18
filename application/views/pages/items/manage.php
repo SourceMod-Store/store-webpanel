@@ -50,6 +50,7 @@
         <th>Item Name</th>
         <th>Category</th>
         <th width="15%">Price</th>
+        <th width="15%">Times Buyed</th>
       </tr>
     </thead>
     <tbody>
@@ -59,6 +60,7 @@
         <td><a href="<?php echo base_url('index.php/items/edit').'/'.$item['id'];?>"><?=$item['display_name']?></a></td>
         <td><?=$item['type']?></td>
         <td width="15%"><?=$item['price']?></td>
+        <td width="15%"><?=$item['amount']?></td>
       </tr>
      <?php endforeach;?>
     </tbody>
