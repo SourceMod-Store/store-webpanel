@@ -36,7 +36,14 @@
       </form>
     </div>
   </div>
-  <table class="table table-bordered table-striped table-hover">
+<script type="text/javascript">
+    $(document).ready(function() 
+    { 
+        $("#manageItems").tablesorter(); 
+    } 
+); 
+</script>
+  <table id="manageItems" class="tablesorter table table-bordered table-striped table-hover">
     <thead>
       <tr>
         <th width="5%">ID</th>

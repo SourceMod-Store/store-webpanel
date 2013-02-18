@@ -27,7 +27,14 @@
       </form>
     </div>
   </div>
-  <table class="table table-bordered table-striped table-hover">
+<script type="text/javascript">
+    $(document).ready(function() 
+    { 
+        $("#manageUsers").tablesorter(); 
+    } 
+); 
+</script>
+  <table id="manageUsers" class="tablesorter table table-bordered table-striped table-hover">
     <thead>
       <tr>
         <th>ID</th>

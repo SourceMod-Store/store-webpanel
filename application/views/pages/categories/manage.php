@@ -5,6 +5,13 @@
   <div class="page-header">
     <h1>Categories</h1>
   </div>
+<script type="text/javascript">
+    $(document).ready(function() 
+    { 
+        $("#manageCategories").tablesorter(); 
+    } 
+); 
+</script>
   <table id="manageCategories" class="tablesorter table table-bordered table-striped table-hover">
     <thead>
       <tr>
