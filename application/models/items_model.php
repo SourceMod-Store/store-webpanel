@@ -47,21 +47,40 @@ class Items_Model extends CI_Model{
     function update_item($post){
         $DB_Main = $this->load->database('default', TRUE);
         $DB_Main->where('id',$post['id']);
-        $data=array(
-            'name'=>$post['name'],
-            'display_name'=>$post['display_name'],
-            'description'=>$post['description'],
-            'web_description'=>$post['web_description'],
-            'type'=>$post['type'],
-            'loadout_slot'=>$post['loadout_slot'],
-            'price'=>$post['price'],
-            'attrs'=>json_encode(json_decode($post['attrs']), JSON_UNESCAPED_SLASHES),
-            'is_buyable'=>$post['is_buyable'],
-            'is_tradeable'=>$post['is_tradeable'],
-            'is_refundable'=>$post['is_refundable'],
-            'category_id'=>$post['category_id'],
-            'expiry_time'=>$post['expiry_time']
-        );
+        if(PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION >= 4){ // Check if PHP 5.4
+            $data=array(
+                'name'=>$post['name'],
+                'display_name'=>$post['display_name'],
+                'description'=>$post['description'],
+                'web_description'=>$post['web_description'],
+                'type'=>$post['type'],
+                'loadout_slot'=>$post['loadout_slot'],
+                'price'=>$post['price'],
+                'attrs'=>json_encode(json_decode($post['attrs']), JSON_UNESCAPED_SLASHES),
+                'is_buyable'=>$post['is_buyable'],
+                'is_tradeable'=>$post['is_tradeable'],
+                'is_refundable'=>$post['is_refundable'],
+                'category_id'=>$post['category_id'],
+                'expiry_time'=>$post['expiry_time']
+            );
+        }else{
+            $data=array(
+                'name'=>$post['name'],
+                'display_name'=>$post['display_name'],
+                'description'=>$post['description'],
+                'web_description'=>$post['web_description'],
+                'type'=>$post['type'],
+                'loadout_slot'=>$post['loadout_slot'],
+                'price'=>$post['price'],
+                'attrs'=>json_encode(json_decode($post['attrs'])),
+                'is_buyable'=>$post['is_buyable'],
+                'is_tradeable'=>$post['is_tradeable'],
+                'is_refundable'=>$post['is_refundable'],
+                'category_id'=>$post['category_id'],
+                'expiry_time'=>$post['expiry_time']
+            );
+        }
+
         $DB_Main->update('items',$data);
     }
     
