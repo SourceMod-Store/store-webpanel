@@ -50,7 +50,7 @@
         <th>Item Name</th>
         <th>Category</th>
         <th width="15%">Price</th>
-        <th width="15%">Times Buyed</th>
+        <th width="15%">Times Bought</th>
       </tr>
     </thead>
     <tbody>
