@@ -72,7 +72,7 @@ class Items_Model extends CI_Model{
                 'type'=>$post['type'],
                 'loadout_slot'=>$post['loadout_slot'],
                 'price'=>$post['price'],
-                'attrs'=>json_encode(json_decode($post['attrs'])),
+                'attrs'=>$post['attrs'],
                 'is_buyable'=>$post['is_buyable'],
                 'is_tradeable'=>$post['is_tradeable'],
                 'is_refundable'=>$post['is_refundable'],
