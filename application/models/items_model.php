@@ -47,6 +47,11 @@ class Items_Model extends CI_Model{
     function update_item($post){
         $DB_Main = $this->load->database('default', TRUE);
         $DB_Main->where('id',$post['id']);
+        
+        foreach($post as $key => $value){
+            if($post[$key] == "") $post[$key] = NULL;
+        }
+        
         if(PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION >= 4){ // Check if PHP 5.4
             $data=array(
                 'name'=>$post['name'],
