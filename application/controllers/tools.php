@@ -90,7 +90,7 @@ class Tools extends CI_Controller {
 	{
             $post = $this->input->post();
 
-            if($post['itemType'] != "" && issset($post['itemType'])){
+            if($post['itemType'] != "" && isset($post['itemType'])){
                 $categories = $this->categories_model->get_categories_by_type($post['itemType']);
                 foreach ($categories as &$category)
                 {
