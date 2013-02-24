@@ -48,11 +48,15 @@ class Items_Model extends CI_Model{
         $DB_Main = $this->load->database('default', TRUE);
         $DB_Main->where('id',$post['id']);
         
-        foreach($post as $key => $value){
-            if($post[$key] == "") $post[$key] = NULL;
-        }
-        
         if(PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION >= 4){ // Check if PHP 5.4
+            
+            if($post['attrs'] != ""){
+                $attrs = json_encode(json_decode($post['attrs']), JSON_UNESCAPED_SLASHES);
+                echo "attrs :".$attrs.": ";
+            }else{
+                $attrs = NULL;
+            }
+            
             $data=array(
                 'name'=>$post['name'],
                 'display_name'=>$post['display_name'],
@@ -61,7 +65,7 @@ class Items_Model extends CI_Model{
                 'type'=>$post['type'],
                 'loadout_slot'=>$post['loadout_slot'],
                 'price'=>$post['price'],
-                'attrs'=>json_encode(json_decode($post['attrs']), JSON_UNESCAPED_SLASHES),
+                'attrs'=>$attrs,
                 'is_buyable'=>$post['is_buyable'],
                 'is_tradeable'=>$post['is_tradeable'],
                 'is_refundable'=>$post['is_refundable'],
@@ -85,11 +89,18 @@ class Items_Model extends CI_Model{
                 'expiry_time'=>$post['expiry_time']
             );
         }
+        
+        foreach($data as $key => $value){
+            if($data[$key] == "") $data[$key] = NULL;
+        }
 
         $DB_Main->update('items',$data);
     }
     
     function add_item($name, $display_name, $description, $web_description, $type, $loadout_slot, $price, $attrs, $is_buyable, $is_tradeable, $is_refundable, $category_id, $expiry_time){
+        
+        if($expiry_time == 0) $expiry_time = NULL;
+        
         $DB_Main = $this->load->database('default', TRUE);
         $data=array(
             'name'=>$name,
@@ -106,6 +117,11 @@ class Items_Model extends CI_Model{
             'category_id'=>$category_id,
             'expiry_time'=>$expiry_time
         );
+        
+        foreach($data as $key => $value){
+            if($data[$key] == "") $data[$key] = NULL;
+        }
+        
         $DB_Main->insert('items',$data);
     }
     

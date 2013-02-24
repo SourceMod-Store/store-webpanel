@@ -58,18 +58,25 @@ class Items extends CI_Controller {
             $this->items_model->update_item($post);
         } elseif ($post['action'] == 'add') {
             
-            if($post['expiry_time'] == 0) $post['expiry_time'] = NULL;
-            
             if(PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION >= 4){ // Check if PHP 5.4
                 $itemInfo['attrs'] = json_encode(json_decode($itemInfo['attrs']), JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
-                $this->items_model->add_item($post['name'], $post['display_name'], $post['description'], $post['web_description'], $post['type'], $post['loadout_slot'], $post['price'], json_encode(json_decode($post['attrs']), JSON_UNESCAPED_SLASHES), $post['is_buyable'], $post['is_tradeable'], $post['is_refundable'], $post['category_id'], $post['expiry_time']);
+                
+                if($post['attrs'] != ""){
+                    $attrs = json_encode(json_decode($post['attrs']), JSON_UNESCAPED_SLASHES);
+                    echo "attrs :".$attrs.": ";
+                }else{
+                    $attrs = NULL;
+                }
+
+                
+                $this->items_model->add_item($post['name'], $post['display_name'], $post['description'], $post['web_description'], $post['type'], $post['loadout_slot'], $post['price'], $arrts, $post['is_buyable'], $post['is_tradeable'], $post['is_refundable'], $post['category_id'], $post['expiry_time']);
             }else{
-                $this->items_model->add_item($post['name'], $post['display_name'], $post['description'], $post['web_description'], $post['type'], $post['loadout_slot'], $post['price'], json_encode(json_decode($post['attrs'])), $post['is_buyable'], $post['is_tradeable'], $post['is_refundable'], $post['category_id'], $post['expiry_time']);
+                $this->items_model->add_item($post['name'], $post['display_name'], $post['description'], $post['web_description'], $post['type'], $post['loadout_slot'], $post['price'], $post['attrs'], $post['is_buyable'], $post['is_tradeable'], $post['is_refundable'], $post['category_id'], $post['expiry_time']);
             }
             
         }
 		
-        redirect('/items', 'refresh');
+        //redirect('/items', 'refresh');
     }
 }
 
