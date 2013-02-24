@@ -76,7 +76,7 @@ class Items extends CI_Controller {
             
         }
 		
-        //redirect('/items', 'refresh');
+        redirect('/items', 'refresh');
     }
 }
 
