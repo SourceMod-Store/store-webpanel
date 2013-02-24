@@ -51,16 +51,24 @@
         <th>Category</th>
         <th width="15%">Price</th>
         <th width="15%">Times Bought</th>
+        <th width="10%">Action</th>
       </tr>
     </thead>
     <tbody>
      <?php foreach($items as $item):?>
       <tr>
-        <td width="5%"><?=$item['id']?></td>
+        <td width="5%"><a href="<?php echo base_url('index.php/items/edit').'/'.$item['id'];?>"><?=$item['id']?></a></td>
         <td><a href="<?php echo base_url('index.php/items/edit').'/'.$item['id'];?>"><?=$item['display_name']?></a></td>
         <td><?=$item['type']?></td>
         <td width="15%"><?=$item['price']?></td>
         <td width="15%"><?=$item['amount']?></td>
+        <td>
+            <form action="<?php echo base_url('index.php/items/process')?>" method="post">
+                <input type="image" src="<?php echo base_url('assets/img/remove.png');?>" alt="remove">
+                <input type="hidden" name="action" value="remove">
+                <input type="hidden" name="item_id" value="<?=$item['id']?>">
+            </form> 
+        </td>
       </tr>
      <?php endforeach;?>
     </tbody>

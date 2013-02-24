@@ -42,6 +42,8 @@ class Categories extends CI_Controller {
             $this->categories_model->update_category($post);
         }elseif ($post['action'] == 'add') {
             $this->categories_model->add_category($post['display_name'], $post['description'], $post['require_plugin'], $post['web_description'], $post['web_color']);
+        }elseif($post['action'] == 'remove'){
+            $this->categories_model->remove_category($post['category_id']);
         }
         redirect('/categories', 'refresh');
     }

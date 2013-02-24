@@ -20,6 +20,7 @@
         <th>Description</th>
         <th>Plugin</th>
         <th>Item Count</th>
+        <th width="10%">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -30,6 +31,13 @@
         <td><?=$cat['web_description']?></td>
         <td><?=$cat['require_plugin']?></td>
         <td><?=$cat['count']?></td>
+        <td>
+            <form action="<?php echo base_url('index.php/categories/process')?>" method="post">
+                <input type="image" src="<?php echo base_url('assets/img/remove.png');?>" alt="remove">
+                <input type="hidden" name="action" value="remove">
+                <input type="hidden" name="category_id" value="<?=$cat['id']?>">
+            </form> 
+        </td>
       </tr>
       <?php endforeach; ?>
     </tbody>

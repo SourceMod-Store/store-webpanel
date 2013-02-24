@@ -125,6 +125,11 @@ class Items_Model extends CI_Model{
         $DB_Main->insert('items',$data);
     }
     
+    function remove_item($item_id){
+        $DB_Main = $this->load->database('default', TRUE);
+        $DB_Main->where('id',$item_id);
+        $DB_Main->delete('items');
+    }
     
     function get_storeuserid($store_auth){
         $DB_Main = $this->load->database('default',TRUE);
@@ -183,11 +188,10 @@ class Items_Model extends CI_Model{
         }
     }
 	
-	function delete_items_by_type($type)
-	{
-		$DB_Main = $this->load->database('default',TRUE);
+    function delete_items_by_type($type){
+        $DB_Main = $this->load->database('default',TRUE);
         $DB_Main->where('type',$type);
         $DB_Main->delete('items');		
-	}
+    }
 }
 ?>

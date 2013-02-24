@@ -86,5 +86,12 @@ class Categories_Model extends CI_Model {
 		$DB_Main->insert('categories',$data);
 		return $DB_Main->insert_id();
     }
+
+    function remove_category($category_id){
+        $DB_Main = $this->load->database('default', TRUE);
+        $DB_Main->where('id',$category_id);
+        $DB_Main->delete('categories');
+    }
+    
 }
 ?>

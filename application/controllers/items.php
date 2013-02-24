@@ -74,6 +74,8 @@ class Items extends CI_Controller {
                 $this->items_model->add_item($post['name'], $post['display_name'], $post['description'], $post['web_description'], $post['type'], $post['loadout_slot'], $post['price'], $post['attrs'], $post['is_buyable'], $post['is_tradeable'], $post['is_refundable'], $post['category_id'], $post['expiry_time']);
             }
             
+        }elseif ($post['action'] == 'remove') {
+            $this->items_model->remove_item($post['item_id']);
         }
 		
         redirect('/items', 'refresh');
