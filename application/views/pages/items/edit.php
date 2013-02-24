@@ -6,6 +6,14 @@
   <div class="page-header">
     <h1>Edit "<?=$item_info['display_name']?>" Item</h1>
   </div>
+<!--<style type="text/css" media="screen">
+    #editor { 
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+</style>-->
   <form class="form-horizontal" action="<?php echo base_url('index.php/items/process'); ?>" method="post">
     <input type="hidden" name="action" value="edit">
     <div class="control-group">
@@ -70,6 +78,7 @@
     </div>
     <div class="control-group">
       <label class="control-label" for="itemAttr">Attributes</label>
+<!--      <div class="controls" id="editor">-->
       <div class="controls">
         <textarea id="itemAttr" rows="10" name="attrs" class="input-xxlarge"><?=$item_info['attrs']?></textarea>
       </div>
@@ -102,3 +111,9 @@
       <button type="submit" class="btn btn-primary">Save Changes</button>
     </div>
   </form>
+<!--<script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.getSession().setMode("ace/mode/javascript");
+</script>-->
