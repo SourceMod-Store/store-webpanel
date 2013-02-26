@@ -46,25 +46,25 @@
   <table id="manageItems" class="tablesorter table table-bordered table-striped table-hover">
     <thead>
       <tr>
-        <th width="5%">ID</th>
+        <th>ID</th>
         <th>Item Name</th>
         <th>Category</th>
-        <th width="15%">Price</th>
-        <th width="15%">Times Bought</th>
-        <th width="10%">Action</th>
+        <th>Price</th>
+        <th>Times Bought</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
      <?php foreach($items as $item):?>
       <tr>
-        <td width="5%"><a href="<?php echo base_url('index.php/items/edit').'/'.$item['id'];?>"><?=$item['id']?></a></td>
+        <td><a href="<?php echo base_url('index.php/items/edit').'/'.$item['id'];?>"><?=$item['id']?></a></td>
         <td><a href="<?php echo base_url('index.php/items/edit').'/'.$item['id'];?>"><?=$item['display_name']?></a></td>
         <td><?=$item['type']?></td>
-        <td width="15%"><?=$item['price']?></td>
-        <td width="15%"><?=$item['amount']?></td>
+        <td><?=$item['price']?></td>
+        <td><?=$item['amount']?></td>
         <td>
             <form action="<?php echo base_url('index.php/items/process')?>" method="post">
-                <input type="image" src="<?php echo base_url('assets/img/remove.png');?>" alt="remove">
+                <button class="btn btn-small btn-danger" type="submit"><i class="icon-remove icon-white"></i> Remove</button>
                 <input type="hidden" name="action" value="remove">
                 <input type="hidden" name="item_id" value="<?=$item['id']?>">
             </form> 
