@@ -8,14 +8,14 @@
         <thead>
           <tr>
             <th>Item Name</th>
-            <th width="5%">#</th>
+            <th>#</th>
           </tr>
         </thead>
         <tbody>
           <?php foreach($top_items as $item):?>
           <tr>
             <td><a href="<?php echo base_url('index.php/items/edit')."/".$item["item_id"]?>"><?=$item['display_name']?></a></td>
-            <td width="5%"><?=$item['num']?></td>
+            <td><?=$item['num']?></td>
           </tr>
           <?php endforeach;?>
           </tr>
@@ -28,14 +28,14 @@
         <thead>
           <tr>
             <th>User</th>
-            <th width="10%">Credits</th>
+            <th>Credits</th>
           </tr>
         </thead>
         <tbody>
           <?php foreach($top_users as $user):?>
           <tr>
               <td><a href="<?php echo base_url('index.php/users/edit')."/".$user["id"]?>"><?=$user['name']?></a></td>
-            <td width="10%"><?=$user['credits']?></td>
+            <td><?=$user['credits']?></td>
           </tr>
           <?php endforeach;?>
         </tbody>
