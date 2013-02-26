@@ -20,7 +20,7 @@
         <th>Description</th>
         <th>Plugin</th>
         <th>Item Count</th>
-        <th width="15%">Action</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
