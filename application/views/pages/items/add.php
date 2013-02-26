@@ -68,27 +68,27 @@
       </div>
     </div>
     <div class="control-group">
-      <label class="control-label" for="itemPrice">Is Buyable</label>
+      <label class="control-label" for="itemBuyable">Is Buyable</label>
       <div class="controls">
-        <input type="text" class="input-small" id="itemPrice" name="is_buyable" value="1">
+        <input type="text" class="input-small" id="itemBuyable" name="is_buyable" value="1">
       </div>
     </div>
     <div class="control-group">
-      <label class="control-label" for="itemPrice">Is Tradeable</label>
+      <label class="control-label" for="itemTradeable">Is Tradeable</label>
       <div class="controls">
-        <input type="text" class="input-small" id="itemPrice" name="is_tradeable" value="1">
+        <input type="text" class="input-small" id="itemTradeable" name="is_tradeable" value="1">
       </div>
     </div>
     <div class="control-group">
-      <label class="control-label" for="itemPrice">Is Refundable</label>
+      <label class="control-label" for="itemRefundable">Is Refundable</label>
       <div class="controls">
-        <input type="text" class="input-small" id="itemPrice" name="is_refundable" value="1">
+        <input type="text" class="input-small" id="itemRefundable" name="is_refundable" value="1">
       </div>
-    </div>	
+    </div>  
     <div class="control-group">
-      <label class="control-label" for="itemPrice">Expiry time (in seconds)</label>
+      <label class="control-label" for="itemExpiry">Expiry time (in seconds)</label>
       <div class="controls">
-        <input type="text" class="input-small" id="itemPrice" name="expiry_time">
+        <input type="text" class="input-small" id="itemExpiry" name="expiry_time">
       </div>
     </div>		
     <div class="form-actions">
