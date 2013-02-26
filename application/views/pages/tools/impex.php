@@ -3,11 +3,11 @@
     <li class="active">Import/Export System</li>
   </ul>
   <div class="page-header">
-    <h3>Import/Export System</h1>
+    <h3>Import/Export System</h3>
   </div>
   <p><strong>This is not a backup system.</strong> As always you should perform a full MySQL database backup regularly to ensure data safety.</p>
   <div>
-    <h4>Import Store Items</h2>
+    <h4>Import Store Items</h4>
     <form action="<?php echo base_url('index.php/tools/import'); ?>" enctype="multipart/form-data" method="post">
 		<p>Each JSON file you upload contains items of one type. <strong>All of the items that you currently have under that type name will be deleted.</strong></p>
       <div class="control-group">
@@ -20,7 +20,7 @@
     </form>
   </div>
   <div>
-    <h4>Export Store Items</h2>
+    <h4>Export Store Items</h4>
 	<form  action="<?php echo base_url('index.php/tools/export'); ?>" method="post">
 		<p>This is for plugin developers that want to package items with their plugins.</p>
 		<label class="control-label" for="itemType">Item type</label>
