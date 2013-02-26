@@ -48,34 +48,26 @@
         <table class="table table-bordered table-striped table-hover">
           <thead>
             <tr>
-              <th width="5%">ID</th>
+              <th>ID</th>
               <th>Item Name</th>
               <th>Category</th>
-              <th width="15%"></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
            <?php foreach($user_items as $item):?>
-            <form action="<?php echo base_url('index.php/users/process')?>" method="post">
+              <tr>
+                <td><?=$item['id']?></td>
+                <td><?=$item['display_name']?></td>
+                <td><?=$item['category_displayname']?></td>
+                <td><form action="<?php echo base_url('index.php/users/process')?>" method="post">
               <input type="hidden" name="action" value="remove_item">
               <input type="hidden" name="user_id" value="<?=$user['id']?>">
               <input type="hidden" name="user_name" value="<?=$user['name']?>">
               <input type="hidden" name="useritem_id" value="<?=$item['id']?>">
-              <input type="hidden" name="item_name" value="<?=$item['display_name']?>">
-              <tr>
-                <td width="5%"><?=$item['id']?></td>
-                <td><?=$item['display_name']?></td>
-                <td><?=$item['category_displayname']?></td>
-                <td width="15%"><input type="submit" class="btn btn-mini btn-danger pull-right" value="Remove"></td>
+              <input type="hidden" name="item_name" value="<?=$item['display_name']?>"><button class="btn btn-mini btn-danger pull-right" type="submit"><i class="icon-remove icon-white"></i> Remove</button></form></td>
               </tr>
-            </form>
            <?php endforeach;?>
-<!--            <tr>
-              <td width="5%">442</td>
-              <td>Glasses</td>
-              <td>Miscs</td>
-              <td width="15%"><button class="btn btn-mini btn-danger pull-right" type="button"><i class="icon-remove icon-white"></i> Remove</button></td>
-            </tr>-->
           </tbody>
         </table>
     </div>
