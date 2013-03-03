@@ -11,7 +11,8 @@
 <script type="text/javascript" src="http://jira.sourcedonates.com/s/en_US-rxeqhz-418945332/847/3/1.2.9/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?collectorId=93d33b42"></script>
 <div class="container">
   <div class="navbar navbar-inverse">
-    <div class="navbar-inner"> <a class="brand" href="<?php echo base_url("/");?>">Store Control Panel</a>
+    <div class="navbar-inner">
+	  <a class="brand" href="<?php echo base_url("/");?>"><img src="<?php echo base_url("assets/img/store_logo.png");?>" alt="Store Logo" /></a>
       <ul class="nav">
         <li class="<?php if($page == "dashboard"){ echo "active"; }?>"><a href="<?php echo base_url("index.php/dashboard");?>">Dashboard</a></li>
         <li class="dropdown <?php if($page == "categories"){ echo "active"; }?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories <b class="caret"></b></a>
