@@ -10,7 +10,11 @@ class Users_Model extends CI_Model {
         $DB_Main = $this->load->database('default', TRUE);
         
         if(isset($search)){
-            $DB_Main->like('name', $search);
+            if(strpos($search,"STEAM_" !==false)){
+                $DB_Main->where('auth', steamid_to_auth($search));
+            }else{
+                $DB_Main->like('name', $search);
+            }
         }
         
         $query_users = $DB_Main->get('users');
@@ -65,6 +69,15 @@ class Users_Model extends CI_Model {
         $DB_Main = $this->load->database('default', TRUE);
         $DB_Main->where('id',$post['useritem_id']);
         $DB_Main->delete('users_items');
+    }
+    
+    function steamid_to_auth($steamid){
+        //from https://forums.alliedmods.net/showpost.php?p=1890083&postcount=234
+        $toks = explode(":", $steamid);
+        $odd = (int)$toks[1];
+        $halfAID = (int)$toks[2];
+
+        return ($halfAID*2) + $odd;
     }
 }
 ?>
