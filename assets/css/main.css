@@ -14,3 +14,32 @@ th.headerSortDown,th.headerSortUp {background:#a8a8a8 url(../img/asc.gif) 95% 50
 th.headerSortDown {background-image:url(../img/desc.gif);}
 .table td form {margin-bottom:0!important;}
 .navbar .brand { max-height: 42px; overflow: visible; padding-top: 0; padding-bottom: 0; margin-top: 3px; }
+
+/* Modifications on 16/03/2013 by GRoger */
+table form{margin-bottom: 0;}
+.removeform{
+	margin-right: 0.5em;
+}
+
+.removeform:last-child{
+	margin-right: 0;
+}
+
+.float-left{
+	float: left;
+}
+
+th{
+	cursor: pointer;
+	background: url(../img/asc.gif) 95% 50% no-repeat;
+}
+.headerSortUp,.headerSortDown{
+	background-color: #fff !important;
+}
+th:hover{
+	background: #f8f8f8 url(../img/asc.gif) 95% 50% no-repeat;
+}
+
+.table td{
+	vertical-align: middle;
+}
