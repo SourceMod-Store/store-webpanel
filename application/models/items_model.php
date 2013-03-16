@@ -180,12 +180,12 @@ class Items_Model extends CI_Model {
         //Query item data
         $DB_Main->where('id', $item_id);
         $query_item = $DB_Main->get('items');
-        $row_item = $query_item->row();
+        $row_item = $query_item->row_array();
         
         //Refund the item to the users who are using the item
         $item_users = $this->get_item_users($item_id);
-        foreach($item_users->result() as $row){
-            $this->users_model->add_credits($row->user_id, $row_item->price);
+        foreach($item_users as $row){
+            $this->users_model->add_credits($row['user_id'], $row_item['price']);
         }
         
         //remove the item

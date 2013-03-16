@@ -122,7 +122,9 @@ class Users_Model extends CI_Model {
         
         $result = bcadd(bcadd('76561197960265728', $parts['1']), bcmul($parts['2'], '2')); 
         $remove = strpos($result,".");
-        $result = substr($result,0,strpos($result,"."));
+        if($remove != false){
+            $result = substr($result,0,strpos($result,"."));
+        }
         return $result;
     }
 

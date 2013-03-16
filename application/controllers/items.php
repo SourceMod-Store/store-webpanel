@@ -91,7 +91,7 @@ class Items extends CI_Controller {
             $this->items_model->remove_refund_item($post['item_id']);
         }
 
-        //redirect('/items', 'refresh');
+        redirect('/items', 'refresh');
     }
 
 }
