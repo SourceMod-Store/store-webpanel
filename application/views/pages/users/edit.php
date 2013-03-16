@@ -13,12 +13,12 @@
 <div class="tab-content">
     <div class="tab-pane" id="info">
         <form class="form-horizontal" action="<?php echo base_url('index.php/users/process'); ?>" method="post">
-            <input type="hidden" name="action" value="edit">
+            <input type="hidden" name="id" value="<?= $user['id'] ?>">
+            <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
             <div class="control-group">
                 <label class="control-label" for="userID">ID</label>
                 <div class="controls">
                     <input type="text" id="userID" disabled class="input-mini" value="<?= $user['id'] ?>">
-                    <input type="hidden" name="id" value="<?= $user['id'] ?>">
                 </div>
             </div>
             <div class="control-group">
@@ -52,13 +52,9 @@
                 </div>
             </div>
             <div class="form-actions">
-                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <button type="submit" name="action" value="edit" class="btn btn-primary">Save Changes</button>
+                <button type="submit" name="action" value="remove_user" class="btn btn-primary btn-danger"><i class="icon-remove icon-white"></i> Remove</button>
             </div>
-        </form>
-        <form action="<?php echo base_url('index.php/users/process'); ?>" method="post">
-            <input type="hidden" name="action" value="remove_user">
-            <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
-            <button class="btn btn-small btn-danger" type="submit"><i class="icon-remove icon-white"></i> Remove</button>
         </form>
     </div>
     <div class="tab-pane" id="items">

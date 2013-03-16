@@ -63,15 +63,11 @@
                 <td><?= $item['price'] ?></td>
                 <td><a href="<?php echo base_url('index.php/items/bought_by') . '/' . $item['id']; ?>"><?= $item['amount'] ?></td>
                 <td>
-                    <form action="<?php echo base_url('index.php/items/process') ?>" method="post">
-                        <button class="btn btn-small btn-danger" type="submit"><i class="icon-remove icon-white"></i> Remove</button>
-                        <input type="hidden" name="action" value="remove">
+                    <form class="float-left removeform" action="<?php echo base_url('index.php/items/process') ?>" method="post">
                         <input type="hidden" name="item_id" value="<?= $item['id'] ?>">
-                    </form>
-                    <form action="<?php echo base_url('index.php/items/process') ?>" method="post">
-                        <button class="btn btn-small btn-danger" type="submit"><i class="icon-remove icon-white"></i> Remove + Refund</button>
-                        <input type="hidden" name="action" value="remove_refund">
-                        <input type="hidden" name="item_id" value="<?= $item['id'] ?>">
+                        <button class="btn btn-small btn-danger" name="action" value="remove" type="submit"><i class="icon-remove icon-white"></i> Remove</button>
+                        <button class="btn btn-small btn-danger" name="action" value="remove_refund" type="submit"><i class="icon-remove icon-white"></i> Remove + Refund</button>
+                        
                     </form> 
                 </td>
             </tr>
