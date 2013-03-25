@@ -9,6 +9,11 @@ class Items extends CI_Controller {
         parent::__construct();
         $this->load->model('items_model');
         $this->load->helper('url');
+        
+        if (!$this->ion_auth->logged_in() && $this->config->item('storewebpanel_enable_loginsystem') == 1)
+        {
+                redirect('auth/login');
+        }
     }
 
     public function index() {

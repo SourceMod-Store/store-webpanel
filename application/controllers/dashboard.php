@@ -6,6 +6,11 @@ class Dashboard extends CI_Controller {
         parent::__construct();
         $this->load->model('users_model');
         $this->load->model('items_model');
+        
+        if (!$this->ion_auth->logged_in() && $this->config->item('storewebpanel_enable_loginsystem') == 1)
+        {
+                redirect('auth/login');
+        }
     }
     
     public function index(){
