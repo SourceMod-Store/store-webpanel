@@ -8,7 +8,7 @@ class Items_Model extends CI_Model {
 
     function get_search_categories() {
         $DB_Main = $this->load->database('default', TRUE);
-        $query = $DB_Main->get('categories');
+        $query = $DB_Main->get('store_categories');
         return $query->result_array();
     }
 
@@ -23,25 +23,24 @@ class Items_Model extends CI_Model {
             $DB_Main->like('display_name', $search);
         }
 
-        $query = $DB_Main->get('items');
+        $query = $DB_Main->get('store_items');
         $item_array = $query->result_array();
 
         $i = 0;
         foreach ($item_array as $item) {
             $DB_Main->where('item_id', $item['id']);
-            $query_item = $DB_Main->get('users_items');
+            $query_item = $DB_Main->get('store_users_items');
             $item_array[$i]['amount'] = $query_item->num_rows();
 
             $i++;
         }
-
         return $item_array;
     }
 
     function get_item_info($item_id) {
         $DB_Main = $this->load->database('default', TRUE);
         $DB_Main->where('id', $item_id);
-        $query = $DB_Main->get('items');
+        $query = $DB_Main->get('store_items');
         return $query->row_array();
     }
 
@@ -50,7 +49,7 @@ class Items_Model extends CI_Model {
         $this->load->model("users_model");
         
         $DB_Main->where('item_id', $item_id);
-        $query = $DB_Main->get('users_items');
+        $query = $DB_Main->get('store_users_items');
         $result = $query->result_array();
         $i = 0;
         foreach($result as $useritem){
@@ -58,6 +57,44 @@ class Items_Model extends CI_Model {
             $result[$i]['user_name'] = $user_array['name'];
             $i++;
         }
+        return $result;
+    }
+
+    function get_top_items($num = 5){
+        $DB_Main = $this->load->database('default', TRUE);
+        $query_users_items = $DB_Main->get('store_users_items');
+        
+        $amount = array();
+        $i = 0;
+        
+        foreach($query_users_items->result() as $user_item){
+            if(!isset($amount[$user_item->item_id])){
+                $amount[$user_item->item_id] = 1;
+            }else{
+                $amount[$user_item->item_id] += 1;
+            }
+        }
+        
+        arsort($amount);
+        $i = 0;
+        $result = array();
+        
+        foreach($amount as $key => $value){
+            if($i <= $num){
+                $DB_Main->where('id', $key);
+                $query_items = $DB_Main->get('store_items');
+                
+                foreach($query_items->result() as $item){
+                    $result[$i]['key'] = $key;
+                    $result[$i]['item_id'] = $item->id;
+                    $result[$i]['name'] = $item->name;
+                    $result[$i]['display_name'] = $item->display_name;
+                    $result[$i]['num'] = $value;
+                }
+            }      
+            $i++;
+        }
+        
         return $result;
     }
     
@@ -120,7 +157,7 @@ class Items_Model extends CI_Model {
         //Check for Duplicates
         $DB_Main->where('user_id', $store_userid);
         $DB_Main->where('item_id', $item_id);
-        $query = $DB_Main->get('users_items');
+        $query = $DB_Main->get('store_users_items');
 
         if ($query->num_rows() == 0) {
             $data = array(
@@ -179,7 +216,7 @@ class Items_Model extends CI_Model {
         
         //Query item data
         $DB_Main->where('id', $item_id);
-        $query_item = $DB_Main->get('items');
+        $query_item = $DB_Main->get('store_items');
         $row_item = $query_item->row_array();
         
         //Refund the item to the users who are using the item
@@ -199,7 +236,7 @@ class Items_Model extends CI_Model {
         //Check for Duplicates
         $DB_Main->where('user_id', $store_userid);
         $DB_Main->where('item_id', $item_id);
-        $query = $DB_Main->get('users_items');
+        $query = $DB_Main->get('store_users_items');
 
         if ($query->num_rows() >= 1) {
             $DB_Main->where('useritem_id', $query->id);

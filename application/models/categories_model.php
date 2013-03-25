@@ -12,7 +12,7 @@ class Categories_Model extends CI_Model {
         if($type !== 0){
             $DB_Main->where('require_plugin',$type);
         }    
-        $query_categories = $DB_Main->get('categories');
+        $query_categories = $DB_Main->get('store_categories');
         //Check if there are categories
         if($query_categories->num_rows() >0){
             //Transform result into array
@@ -21,7 +21,7 @@ class Categories_Model extends CI_Model {
             foreach($array_categories as $categorie){
                 //add the items count to the result array
                 $DB_Main->where('category_id',$categorie['id']);
-                $query_items = $DB_Main->get('items');
+                $query_items = $DB_Main->get('store_items');
                 $array_categories[$i]['count'] = $query_items->num_rows();
                 $i++;
             }
@@ -34,7 +34,7 @@ class Categories_Model extends CI_Model {
     function get_category($id_category){
         $DB_Main = $this->load->database('default', TRUE);
         $DB_Main->where("id",$id_category);
-        $query_category = $DB_Main->get('categories');
+        $query_category = $DB_Main->get('store_categories');
         if($query_category->num_rows == 1){
             return $query_category->row_array();
         }else{

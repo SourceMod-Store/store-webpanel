@@ -8,7 +8,7 @@
 </head>
 
 <body>
-<script type="text/javascript" src="http://jira.sourcedonates.com/s/en_US-rxeqhz-418945332/847/3/1.2.9/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?collectorId=93d33b42"></script>
+<!--<script type="text/javascript" src="http://jira.sourcedonates.com/s/en_US-rxeqhz-418945332/847/3/1.2.9/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?collectorId=93d33b42"></script>-->
 <div class="container">
   <div class="navbar navbar-inverse">
     <div class="navbar-inner">

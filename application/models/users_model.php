@@ -18,7 +18,7 @@ class Users_Model extends CI_Model {
         $this->edit_user($data);
     }
 
-    function get_users($search = 0,$order_by = 0) {
+    function get_users($search = 0,$order_by = 0,$num = 0) {
         $DB_Main = $this->load->database('default', TRUE);
         
         if ($search !== 0) {
@@ -33,19 +33,24 @@ class Users_Model extends CI_Model {
             $DB_Main->order_by($order_by);
         }
         
-        $query_users = $DB_Main->get('users');
+        $query_users = $DB_Main->get('store_users');
         if ($query_users->num_rows() > 0) {
             $array_users = $query_users->result_array();
 
             $i = 0;
             foreach ($array_users as $user) {
                 $DB_Main->where('user_id', $user['id']);
-                $query_users_items = $DB_Main->get('users_items');
+                $query_users_items = $DB_Main->get('store_users_items');
                 $array_users[$i]['num_items'] = $query_users_items->num_rows();
                 $i++;
             }
 
             return $array_users;
+            
+            if($num !== 0){
+                $users = array_slice($users,0,$num);
+            }
+            
         }else
             return array();
     }
@@ -53,7 +58,7 @@ class Users_Model extends CI_Model {
     function get_user($user_id) {
         $DB_Main = $this->load->database('default', TRUE);
         $DB_Main->where('id', $user_id);
-        $query_users = $DB_Main->get('users');
+        $query_users = $DB_Main->get('store_users');
         $result = $query_users->row_array();
         $result['steam_id'] = $this->auth_to_steamid($result['auth']);
         $result['community_url'] = $this->steamid_to_community($result["steam_id"]);
@@ -62,20 +67,21 @@ class Users_Model extends CI_Model {
 
     function get_user_items($user_id) {
         $DB_Main = $this->load->database('default', TRUE);
-        $DB_Main->select('items.*, users_items.*, categories.display_name AS category_displayname');
-        $DB_Main->from('users_items');
-        $DB_Main->join('items', 'items.id = users_items.item_id');
-        $DB_Main->join('categories', 'categories.id = items.category_id');
+        $DB_Main->select('store_items.*, store_users_items.*, store_categories.display_name AS category_displayname');
+        $DB_Main->from('store_users_items');
+        $DB_Main->join('store_items', 'store_items.id = store_users_items.item_id');
+        $DB_Main->join('store_categories', 'store_categories.id = store_items.category_id');
         $DB_Main->where('user_id', $user_id);
 
-        return $DB_Main->get()->result_array();
+        $result = $DB_Main->get()->result_array();
+        return $result;
     }
 
     function get_storeuserid($store_auth) {
         $DB_Main = $this->load->database('default', TRUE);
 
         $DB_Main->where('auth', $store_auth);
-        $query = $DB_Main->get('users');
+        $query = $DB_Main->get('store_users');
 
         if ($query->num_rows == 1) {
             $row = $query->row();
