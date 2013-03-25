@@ -6,9 +6,12 @@ class Categories_Model extends CI_Model {
         parent::__construct();
     }
     
-    function get_categories(){
+    function get_categories($type = 0){
         //Query the Categories Table
         $DB_Main = $this->load->database('default', TRUE);
+        if($type !== 0){
+            $DB_Main->where('require_plugin',$type);
+        }    
         $query_categories = $DB_Main->get('categories');
         //Check if there are categories
         if($query_categories->num_rows() >0){
@@ -27,29 +30,7 @@ class Categories_Model extends CI_Model {
             return array();
         }
     }
-	
-    function get_categories_by_type($type){
-        //Query the Categories Table
-        $DB_Main = $this->load->database('default', TRUE);
-		$DB_Main->where('require_plugin',$type);
-        $query_categories = $DB_Main->get('categories');
-        //Check if there are categories
-        if($query_categories->num_rows() > 0){
-            //Transform result into array
-            $array_categories = $query_categories->result_array();
-            $i=0;
-            foreach($array_categories as $categorie){
-                //add the items count to the result array
-                $DB_Main->where('category_id',$categorie['id']);
-                $array_categories[$i]['items'] = $DB_Main->get('items')->result_array();
-                $i++;
-            }
-            return $array_categories;
-        }else{
-            return array();
-        }
-    }
-	
+    
     function get_category($id_category){
         $DB_Main = $this->load->database('default', TRUE);
         $DB_Main->where("id",$id_category);

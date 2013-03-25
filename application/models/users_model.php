@@ -18,17 +18,21 @@ class Users_Model extends CI_Model {
         $this->edit_user($data);
     }
 
-    function get_users($search) {
+    function get_users($search = 0,$order_by = 0) {
         $DB_Main = $this->load->database('default', TRUE);
-
-        if (isset($search)) {
+        
+        if ($search !== 0) {
             if (strpos($search, "STEAM_" !== false)) {
                 $DB_Main->where('auth', steamid_to_auth($search));
             } else {
                 $DB_Main->like('name', $search);
             }
         }
-
+        
+        if($order_by !== 0){
+            $DB_Main->order_by($order_by);
+        }
+        
         $query_users = $DB_Main->get('users');
         if ($query_users->num_rows() > 0) {
             $array_users = $query_users->result_array();

@@ -12,4 +12,4 @@ class Account extends CI_Controller {
 }
 
 /* End of file account.php */
-/* Location: ./application/account/settings.php */
+/* Location: ./application/controllers/account.php */
