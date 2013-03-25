@@ -52,7 +52,7 @@ class Categories_Model extends CI_Model {
             'web_color' => $post['web_color']
         );
         $DB_Main->where('id',$post['id']);
-        $DB_Main->update('categories',$data);
+        $DB_Main->update('store_categories',$data);
     }
     
     function add_category($display_name, $description, $require_plugin, $web_description, $web_color){
@@ -64,14 +64,14 @@ class Categories_Model extends CI_Model {
 			'web_description' => $web_description,
 			'web_color' => $web_color
 		);
-		$DB_Main->insert('categories',$data);
+		$DB_Main->insert('store_categories',$data);
 		return $DB_Main->insert_id();
     }
 
     function remove_category($category_id){
         $DB_Main = $this->load->database('default', TRUE);
         $DB_Main->where('id',$category_id);
-        $DB_Main->delete('categories');
+        $DB_Main->delete('store_categories');
     }
     
 }

@@ -101,21 +101,21 @@ class Users_Model extends CI_Model {
             'name' => $post['name'],
             'credits' => $post['credits']
         );
-        $DB_Main->update('users', $data);
+        $DB_Main->update('store_users', $data);
     }
 
     function remove_useritem($post) {
         $DB_Main = $this->load->database('default', TRUE);
         $DB_Main->where('id', $post['useritem_id']);
-        $DB_Main->delete('users_items');
+        $DB_Main->delete('store_users_items');
     }
 
     function remove_user($post) {
         $DB_Main = $this->load->database('default', TRUE);
         $DB_Main->where('id', $post['user_id']);
-        $DB_Main->delete('users');
+        $DB_Main->delete('store_users');
         $DB_Main->where('user_id', $post['user_id']);
-        $DB_Main->delete('users_items');
+        $DB_Main->delete('store_users_items');
     }
 
     function steamid_to_auth($steamid) {

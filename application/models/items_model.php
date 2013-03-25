@@ -148,7 +148,7 @@ class Items_Model extends CI_Model {
                 $data[$key] = NULL;
         }
 
-        $DB_Main->update('items', $data);
+        $DB_Main->update('store_items', $data);
     }
 
     function add_useritem($store_userid, $item_id) {
@@ -166,7 +166,7 @@ class Items_Model extends CI_Model {
                 'acquire_method' => 'web'
             );
             $DB_Main->set('acquire_date', 'NOW()', FALSE);
-            $DB_Main->insert('users_items', $data);
+            $DB_Main->insert('store_users_items', $data);
         } else {
             log_message('error', 'store-add_useritem, User/Item Combo already exists');
         }
@@ -199,15 +199,15 @@ class Items_Model extends CI_Model {
                 $data[$key] = NULL;
         }
 
-        $DB_Main->insert('items', $data);
+        $DB_Main->insert('store_items', $data);
     }
 
     function remove_item($item_id) {
         $DB_Main = $this->load->database('default', TRUE);
         $DB_Main->where('id', $item_id);
-        $DB_Main->delete('items');
+        $DB_Main->delete('store_items');
         $DB_Main->where('item_id', $item_id);
-        $DB_Main->delete('users_items');
+        $DB_Main->delete('store_users_items');
     }
     
     function remove_refund_item($item_id){
@@ -240,11 +240,11 @@ class Items_Model extends CI_Model {
 
         if ($query->num_rows() >= 1) {
             $DB_Main->where('useritem_id', $query->id);
-            $DB_Main->delete('users_items_loadouts');
+            $DB_Main->delete('store_users_items_loadouts');
 
             $DB_Main->where('user_id', $store_userid);
             $DB_Main->where('item_id', $item_id);
-            $DB_Main->delete('users_items');
+            $DB_Main->delete('store_users_items');
         } else {
             log_message('error', 'store-remove_useritem, User/Item Combo does not exists');
         }
@@ -253,7 +253,7 @@ class Items_Model extends CI_Model {
     function delete_items_by_type($type) {
         $DB_Main = $this->load->database('default', TRUE);
         $DB_Main->where('type', $type);
-        $DB_Main->delete('items');
+        $DB_Main->delete('store_items');
     }
 
 }
