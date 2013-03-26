@@ -80,7 +80,7 @@ class Items_Model extends CI_Model {
         $result = array();
         
         foreach($amount as $key => $value){
-            if($i <= $num){
+            if($i <= $num-1){
                 $DB_Main->where('id', $key);
                 $query_items = $DB_Main->get('store_items');
                 

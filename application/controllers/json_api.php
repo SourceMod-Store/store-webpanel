@@ -47,7 +47,7 @@ class Json_Api extends CI_Controller {
      * 
      * @param int $slug how many items should be returned
      */
-    public function get_items($slug = 10) {
+    public function get_top_items($slug = 10) {
         $items = $this->items_model->get_top_items($slug);
         echo json_encode($items);
     }
