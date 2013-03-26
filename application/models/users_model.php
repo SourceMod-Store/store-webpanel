@@ -47,7 +47,7 @@ class Users_Model extends CI_Model {
 
             
             if($num !== 0){
-                $users = array_slice($users,0,$num);
+                $array_users = array_slice($array_users,0,$num);
             }
             
             return $array_users;
