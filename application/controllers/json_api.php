@@ -27,8 +27,8 @@ class Json_Api extends CI_Controller {
      */
     public function get_richest_users($slug = 10) {
         $users = $this->users_model->get_users(0, 'credits desc', $slug);
-
-
+        
+        
         echo json_encode($users);
     }
 

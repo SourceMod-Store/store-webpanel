@@ -45,12 +45,12 @@ class Users_Model extends CI_Model {
                 $i++;
             }
 
-            return $array_users;
             
             if($num !== 0){
                 $users = array_slice($users,0,$num);
             }
             
+            return $array_users;
         }else
             return array();
     }
