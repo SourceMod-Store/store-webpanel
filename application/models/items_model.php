@@ -230,7 +230,7 @@ class Items_Model extends CI_Model {
         
     }
     
-    function remove_useritem($store_userid, $item_id) {
+    function remove_useritem($store_userid, $item_id, $useritem_id = NULL) {
         $DB_Main = $this->load->database('default', TRUE);
 
         //Check for Duplicates
@@ -238,18 +238,32 @@ class Items_Model extends CI_Model {
         $DB_Main->where('item_id', $item_id);
         $query = $DB_Main->get('store_users_items');
 
-        if ($query->num_rows() >= 1) {
-            $DB_Main->where('useritem_id', $query->id);
-            $DB_Main->delete('store_users_items_loadouts');
+        if($useritem_id == NULL){
+            if ($query->num_rows() >= 1) {
+                $DB_Main->where('useritem_id', $query->id);
+                $DB_Main->delete('store_users_items_loadouts');
 
-            $DB_Main->where('user_id', $store_userid);
-            $DB_Main->where('item_id', $item_id);
+                $DB_Main->where('user_id', $store_userid);
+                $DB_Main->where('item_id', $item_id);
+                $DB_Main->delete('store_users_items');
+            } else {
+                log_message('error', 'store-remove_useritem, User/Item Combo does not exists');
+            }
+        }elseif(isset($useritem_id)){
+            $DB_Main->where('id', $useritem_id);
             $DB_Main->delete('store_users_items');
-        } else {
-            log_message('error', 'store-remove_useritem, User/Item Combo does not exists');
+            $DB_Main->where('useritem_id', $useritem_id);
+            $DB_Main->delete('store_users_items_loadouts');
         }
     }
 
+    function remove_refund_useritem($user_id, $item_id, $item_price, $useritem_id){
+        
+        $this->load->model('users_model');
+        $this->users_model->add_credits($user_id, $item_price);
+        $this->items_model->remove_useritem(NULL, NULL, $useritem_id);
+    }
+    
     function delete_items_by_type($type) {
         $DB_Main = $this->load->database('default', TRUE);
         $DB_Main->where('type', $type);

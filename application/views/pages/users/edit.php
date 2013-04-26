@@ -64,7 +64,7 @@
                     <th>ID</th>
                     <th>Item Name</th>
                     <th>Category</th>
-                    <th></th>
+                    <th width="250"></th>
                 </tr>
             </thead>
             <tbody>
@@ -73,12 +73,18 @@
                         <td><?= $item['id'] ?></td>
                         <td><?= $item['display_name'] ?></td>
                         <td><?= $item['category_displayname'] ?></td>
-                        <td><form action="<?php echo base_url('index.php/users/process') ?>" method="post">
-                                <input type="hidden" name="action" value="remove_item">
+                        <td>
+                            <form action="<?php echo base_url('index.php/users/process') ?>" method="post">
                                 <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
                                 <input type="hidden" name="user_name" value="<?= $user['name'] ?>">
                                 <input type="hidden" name="useritem_id" value="<?= $item['id'] ?>">
-                                <input type="hidden" name="item_name" value="<?= $item['display_name'] ?>"><button class="btn btn-mini btn-danger pull-right" type="submit"><i class="icon-remove icon-white"></i> Remove</button></form></td>
+                                <input type="hidden" name="item_name" value="<?= $item['display_name'] ?>">
+                                <input type="hidden" name="item_id" value="<?= $item['item_id'] ?>">
+                                <input type="hidden" name="item_price" value="<?= $item['price'] ?>">
+                                <button name="action" value="remove_item" class="btn btn-mini btn-danger pull-right" type="submit"><i class="icon-remove icon-white"></i> Remove</button>  
+                                <button name="action" value="remove_refund_item" class="btn btn-mini btn-danger pull-right" type="submit"> <i class="icon-remove icon-white"></i> Remove+Refund</button>
+                            </form>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

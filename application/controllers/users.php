@@ -41,9 +41,16 @@ class Users extends CI_Controller {
         
         if($post['action'] == 'edit'){
             $this->users_model->edit_user($post);
+            
         }elseif($post['action'] == 'remove_item'){
-            $this->users_model->remove_useritem($post);
-        }elseif ($post['action'] == "remove_user") {
+            $this->load->model('items_model');
+            $this->items_model->remove_useritem(NULL,NULL,$post['useritem_id']);
+            
+        }elseif($post['action'] == 'remove_refund_item'){
+            $this->load->model('items_model');
+            $this->items_model->remove_refund_useritem($post["user_id"], $post["item_id"], $post["item_price"], $post['useritem_id']);
+            
+        }elseif ($post['action'] == 'remove_user') {
             $this->users_model->remove_user($post);
         }
         redirect('/users/', 'refresh');
