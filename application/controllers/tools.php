@@ -97,10 +97,10 @@ class Tools extends CI_Controller {
 
             if($post['itemType'] != "" && isset($post['itemType'])){
                 $categories = $this->categories_model->get_categories($post['itemType']);
-                foreach ($categories as &$category)
+                foreach ($categories as $category)
                 {
-                    unset($category['id']);
-                    foreach ($category['items'] as &$item)
+                     unset($category['id']);
+                    foreach ($category['items'] as $item)
                     {
                         unset($item['id']);
                         unset($item['category_id']);

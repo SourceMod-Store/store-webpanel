@@ -14,16 +14,15 @@ class Categories_Model extends CI_Model {
         }    
         $query_categories = $DB_Main->get('store_categories');
         //Check if there are categories
-        if($query_categories->num_rows() >0){
+        if($query_categories->num_rows() > 0){
             //Transform result into array
             $array_categories = $query_categories->result_array();
-            $i=0;
-            foreach($array_categories as $categorie){
+            foreach($array_categories as $key=>$category){
                 //add the items count to the result array
-                $DB_Main->where('category_id',$categorie['id']);
+                $DB_Main->where('category_id',$category['id']);
                 $query_items = $DB_Main->get('store_items');
-                $array_categories[$i]['count'] = $query_items->num_rows();
-                $i++;
+                $array_categories[$key]['count'] = $query_items->num_rows();
+                $array_categories[$key]['items'] = $query_items->result_array();
             }
             return $array_categories;
         }else{
