@@ -35,7 +35,12 @@
             <li><a href="http://confluence.sourcedonates.com/x/KgAI" target="_blank">Help</a></li>
           </ul>
         </li>
-        <!--<li class="<?php if($page == "settings"){ echo "active"; }?>"><a href="<?php echo base_url("index.php/settings");?>">Settings</a></li>-->
+        <li class="dropdown <?php if($page == "redeem"){ echo "active"; }?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Redeem System <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="<?php echo base_url("index.php/redeem");?>">Manage</a></li>
+            <li><a href="<?php echo base_url("index.php/redeem/logs");?>">View Logs</a></li>
+          </ul>
+        </li>
         <li class="dropdown <?php if($page == "auth"){ echo "active"; }?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Auth <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="<?php echo base_url("index.php/auth");?>">Manage</a></li>
