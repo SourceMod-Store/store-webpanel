@@ -1,3 +1,11 @@
+<ul class="breadcrumb">
+    <li><a href="<?php echo base_url("/"); ?>">Home</a> <span class="divider">/</span></li>
+    <li class="active">Redeem System <span class="divider">/</span></li>
+    <li class="active">Manage</li>
+</ul>
+<div class="page-header">
+    <h3>Redeem System - Redeem Code Overview</h3>
+</div>
 <script type="text/javascript">
 $(document).ready(function() {
     $('#manageRedeem').dataTable();
