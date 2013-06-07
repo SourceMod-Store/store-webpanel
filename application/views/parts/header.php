@@ -5,6 +5,8 @@
 <title>Store Control Panel</title>
 <link href="<?php echo base_url("assets/css/bootstrap.min.css");?>" rel="stylesheet" media="screen">
 <link href="<?php echo base_url("assets/css/main.css");?>" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+<script src="<?php echo base_url("assets/js/jquery.dataTables.js");?>"></script>
 </head>
 
 <body>
@@ -38,6 +40,7 @@
         <li class="dropdown <?php if($page == "redeem"){ echo "active"; }?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Redeem System <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="<?php echo base_url("index.php/redeem");?>">Manage</a></li>
+            <li><a href="<?php echo base_url("index.php/redeem/add");?>">Add Redeem Code</a></li>
             <li><a href="<?php echo base_url("index.php/redeem/logs");?>">View Logs</a></li>
           </ul>
         </li>

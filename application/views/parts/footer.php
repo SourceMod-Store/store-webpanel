@@ -4,8 +4,7 @@
     <p>WebPanel Version 0.6.2 Go to <a href="http://jira.sourcedonates.com/browse/STWPAN" target="_blank"><strong>Jira</strong></a> to report Bugs and request Features.</p>
   </footer>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-<script src="<?php echo base_url("assets/tablesorter/jquery.tablesorter.js");?>"></script> 
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>-->
 <script src="<?php echo base_url("assets/js/bootstrap.min.js")?>"></script> 
 <script src="<?php echo base_url("assets/js/main.js")?>"></script>
 </body>

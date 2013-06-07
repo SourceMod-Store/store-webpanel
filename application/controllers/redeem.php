@@ -41,14 +41,27 @@ class Redeem extends CI_Controller
     public function process()
     {
         $post = $this->input->post();
+        var_dump($post);
         $data['post'] = $post;
+        $data['page'] = 'redeem';
+        
 
         if ($post['action'] == 'createcode')
         {
-            $this->redeem_model->add_code($post['code'], $post['itemids'], $post['credits'], $post['redeem_times_total'], $post['redeem_times_user'], $post['expire_time=NULL']);
+            $this->redeem_model->add_code($post['code'], $post['items'], $post['credits'], $post['timesUser'], $post['timesTotal'], $post['expire']);
             echo "Created Redeem code with </br>";
-            var_dump($post);
+            
         }
+    }
+    
+    public function logs()
+    {
+        $data['page'] = 'redeem';
+        $data['logs'] = $this->redeem_model->get_logs();
+        
+        $this->load->view('parts/header', $data);
+        $this->load->view('pages/redeem/logs', $data);
+        $this->load->view('parts/footer');
     }
 
 }

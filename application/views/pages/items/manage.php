@@ -5,17 +5,17 @@
 <div class="page-header">
     <h1>Items</h1>
 </div>
-<div class="row">
+<!--<div class="row">
     <div class="span6">
         <div class="pagination scp-pagination">
-            <!--        <ul>
+                    <ul>
                       <li><a href="#">Prev</a></li>
                       <li><a href="#">1</a></li>
                       <li><a href="#">2</a></li>
                       <li><a href="#">3</a></li>
                       <li><a href="#">4</a></li>
                       <li><a href="#">Next</a></li>
-                    </ul>-->
+                    </ul>
         </div>
     </div>
     <div class="span3">
@@ -35,15 +35,21 @@
             </div>
         </form>
     </div>
-</div>
-<script type="text/javascript">
+</div>-->
+<!--<script type="text/javascript">
     $(document).ready(function() 
     { 
         $("#manageItems").tablesorter(); 
     } 
 ); 
+</script>-->
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#manageItems').dataTable();
+} );
 </script>
-<table id="manageItems" class="tablesorter table table-bordered table-striped table-hover">
+<!--<table id="manageItems" class="tablesorter table table-bordered table-striped table-hover">-->
+<table id="manageItems" class="table table-bordered table-striped table-hover">
     <thead>
         <tr>
             <th>ID</th>

@@ -8,7 +8,7 @@
 </div>
 <div>
     <h4>Create a redeem code</h4>
-    <form action="<?php echo base_url('index.php/redeem/roger'); ?>" method="post">
+    <form action="<?php echo base_url('index.php/redeem/process'); ?>" method="post">
         <p>Create a redeem code with the following form</p>
         <input type="hidden" name="action" value="createcode">
         <div class="control-group">
