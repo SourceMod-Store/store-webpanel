@@ -5,6 +5,8 @@
 <title>Store Control Panel</title>
 <link href="<?php echo base_url("assets/css/bootstrap.min.css");?>" rel="stylesheet" media="screen">
 <link href="<?php echo base_url("assets/css/main.css");?>" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+<script src="<?php echo base_url("assets/js/jquery.dataTables.js");?>"></script>
 </head>
 
 <body>
@@ -35,7 +37,13 @@
             <li><a href="http://confluence.sourcedonates.com/x/KgAI" target="_blank">Help</a></li>
           </ul>
         </li>
-        <!--<li class="<?php if($page == "settings"){ echo "active"; }?>"><a href="<?php echo base_url("index.php/settings");?>">Settings</a></li>-->
+        <li class="dropdown <?php if($page == "redeem"){ echo "active"; }?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Redeem System <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="<?php echo base_url("index.php/redeem");?>">Manage</a></li>
+            <li><a href="<?php echo base_url("index.php/redeem/add");?>">Add Redeem Code</a></li>
+            <li><a href="<?php echo base_url("index.php/redeem/log");?>">View Log</a></li>
+          </ul>
+        </li>
         <li class="dropdown <?php if($page == "auth"){ echo "active"; }?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Auth <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="<?php echo base_url("index.php/auth");?>">Manage</a></li>

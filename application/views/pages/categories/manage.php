@@ -6,13 +6,11 @@
     <h1>Categories</h1>
   </div>
 <script type="text/javascript">
-    $(document).ready(function() 
-    { 
-        $("#manageCategories").tablesorter(); 
-    } 
-); 
+$(document).ready(function() {
+    $('#manageCategories').dataTable();
+} );
 </script>
-  <table id="manageCategories" class="tablesorter table table-bordered table-striped table-hover">
+  <table id="manageCategories" class="table table-bordered table-striped table-hover">
     <thead>
       <tr>
         <th>ID</th>
