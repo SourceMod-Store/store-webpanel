@@ -53,13 +53,13 @@ class Redeem extends CI_Controller
         }
     }
 
-    public function logs()
+    public function log()
     {
         $data['page'] = 'redeem';
         $data['logs'] = $this->redeem_model->get_logs();
 
         $this->load->view('parts/header', $data);
-        $this->load->view('pages/redeem/logs', $data);
+        $this->load->view('pages/redeem/log', $data);
         $this->load->view('parts/footer');
     }
 

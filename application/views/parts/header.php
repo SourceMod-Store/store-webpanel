@@ -41,7 +41,7 @@
           <ul class="dropdown-menu">
             <li><a href="<?php echo base_url("index.php/redeem");?>">Manage</a></li>
             <li><a href="<?php echo base_url("index.php/redeem/add");?>">Add Redeem Code</a></li>
-            <li><a href="<?php echo base_url("index.php/redeem/logs");?>">View Logs</a></li>
+            <li><a href="<?php echo base_url("index.php/redeem/log");?>">View Log</a></li>
           </ul>
         </li>
         <li class="dropdown <?php if($page == "auth"){ echo "active"; }?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Auth <b class="caret"></b></a>

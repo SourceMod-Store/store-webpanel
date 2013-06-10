@@ -2,7 +2,7 @@
 <html>
     <form action="<?php echo base_url("/index.php/pub/redeem_process"); ?>" method="post" accept-charset="ISO-8859-1">
         <p>SteamID:<br><input id="steamid" name="steamid" placeholder="STEAM_0:1:0000000"  size="40"></p>
-        <p>Redeem Code:<br><input  name="redeem_code" placeholder="The Code you have got" size="40"></p>
+        <p>Redeem Code:<br><input  name="code" placeholder="The Code you have got" size="40"></p>
         <p><input id="name" name="name" disabled placeholder="Name got from steam" size="40"></p>
         <p><img id="steamid-avatar" width="50" height="50" src="<?php echo base_url("/assets/img/id_cache/avatar.jpg"); ?>"></p>
         <input type="submit">

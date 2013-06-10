@@ -22,6 +22,91 @@ class pub extends CI_Controller
     function redeem_process()
     {
         $data[''] = '';
+        $error_num = 0;
+        $error_string = 'Error String: \n';
+        $post = $this->input->post();
+        $code = $post['code'];
+        print_r($post);
+        $this->load->model('users_model');
+        $auth = $this->users_model->steamid_to_auth($post['steamid']);
+
+        $code_data = $this->redeem_model->get_code($code);
+        //Check for errors & generate the error string
+        //Check if a valid code
+        if ($code_data != 0)
+        {
+            //Check if the code is expired
+            if ($code_data['expire_time'] > time())
+            {
+                $error_num += 1;
+                $error_string += 'The code you want to use is expired\n';
+                echo 1;
+            }
+
+            //Check if the number of redeem times is limited; Only run if no errors are detected
+            if ($code_data['redeem_times_total'] != 0 && $error_num == 0)
+            {
+                if ($this->redeem_model->get_redeemed_times_total($code) >= $code_data['redeem_times_total'])
+                {
+                    $error_num += 1;
+                    $error_string += 'The code you want to use has been used to often\n';
+                    echo 2;
+                }
+            }
+
+            //Check if the number of times a single user can redeem a code is limited
+            if ($code_data['redeem_times_user'] != 0 && $error_num == 0)
+            {
+                if ($this->redeem_model->get_redeemed_times_user($code, $auth) >= $code_data['redeem_times_user'])
+                {
+                    $error_num += 1;
+                    $error_string += 'You have used this code to often\n';
+                    echo 3;
+                }
+            }
+
+            $credits = $code_data['credits'];
+            $item_array = explode(',', $code_data['itemids']);
+            echo 4;
+        }
+        else
+        {
+            $error_num += 1; //Add error count;
+            $error_string += 'This code doesnt exist\n';
+            echo 5;
+        }
+
+        //Check if no errors have been found
+        if ($error_num != 0)
+        {
+            echo 6;
+            $user_id = $this->users_model->get_storeuserid($auth);
+
+            if ($credits != 0)
+            {
+                $this->users_model->add_credits($user_id, $credits);
+                echo 7;
+            }
+
+            if ($item_array != 0)
+            {
+                $this->load->model('items_model');
+                foreach ($item_array as $item)
+                {
+                    $this->items_model->add_useritem($user_id, $item);
+                    echo 8;
+                }
+            }
+            $data['status'] = "Successfully processed the code";
+        }
+        else
+        {
+            echo 9;
+            $data['status'] = nl2br($error_string);
+        }
+        
+        echo $error_string;
+
         $this->load->view('pages/redeem/redeem_code_process', $data);
     }
 
@@ -50,7 +135,7 @@ class pub extends CI_Controller
         $pos = strpos($friend_id, ".");
         if ($pos !== false)
         {
-            $friend_id = substr($friend_id, 0,$pos);
+            $friend_id = substr($friend_id, 0, $pos);
         }
         //echo $friend_id;
         $player_url = "http://steamcommunity.com/profiles/" . $friend_id . "";
