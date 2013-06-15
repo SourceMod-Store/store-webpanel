@@ -314,5 +314,4 @@ class Items_Model extends CI_Model
     }
 
 }
-
 ?>

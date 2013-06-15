@@ -50,6 +50,21 @@ class Redeem_Model extends CI_Model
         return $DB_Main->get('store_redeem_log');
     }
 
+    function add_log($code, $auth, $time = 0)
+    {
+        $DB_Main = $this->load->database('default', TRUE);
+        if ($time = 0)
+        {
+            $time = time();
+        }
+        $data = array(
+            "code"=>$code,
+            "auth"=>$auth,
+            "time"=>$time
+        );
+        $DB_Main->insert('store_redeem_log', $data);
+    }
+
     function get_redeemed_times_total($code)
     {
         $DB_Main = $this->load->database('default', TRUE);

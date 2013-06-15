@@ -1,12 +1,15 @@
 <?php
 
-class Users_Model extends CI_Model {
+class Users_Model extends CI_Model
+{
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
     }
 
-    function add_credits($user_id, $credits) {
+    function add_credits($user_id, $credits)
+    {
         $row_user = $this->get_user($user_id);
         $new_credits = $row_user['credits'] + $credits;
         $data = array(
@@ -18,44 +21,54 @@ class Users_Model extends CI_Model {
         $this->edit_user($data);
     }
 
-    function get_users($search = 0,$order_by = 0,$num = 0) {
+    function get_users($search = 0, $order_by = 0, $num = 0)
+    {
         $DB_Main = $this->load->database('default', TRUE);
-        
-        if ($search !== 0) {
-            if (strpos($search, "STEAM_" !== false)) {
+
+        if ($search !== 0)
+        {
+            if (strpos($search, "STEAM_" !== false))
+            {
                 $DB_Main->where('auth', steamid_to_auth($search));
-            } else {
+            }
+            else
+            {
                 $DB_Main->like('name', $search);
             }
         }
-        
-        if($order_by !== 0){
+
+        if ($order_by !== 0)
+        {
             $DB_Main->order_by($order_by);
         }
-        
+
         $query_users = $DB_Main->get('store_users');
-        if ($query_users->num_rows() > 0) {
+        if ($query_users->num_rows() > 0)
+        {
             $array_users = $query_users->result_array();
 
             $i = 0;
-            foreach ($array_users as $user) {
+            foreach ($array_users as $user)
+            {
                 $DB_Main->where('user_id', $user['id']);
                 $query_users_items = $DB_Main->get('store_users_items');
                 $array_users[$i]['num_items'] = $query_users_items->num_rows();
                 $i++;
             }
 
-            
-            if($num !== 0){
-                $array_users = array_slice($array_users,0,$num);
+
+            if ($num !== 0)
+            {
+                $array_users = array_slice($array_users, 0, $num);
             }
-            
+
             return $array_users;
         }else
             return array();
     }
 
-    function get_user($user_id) {
+    function get_user($user_id)
+    {
         $DB_Main = $this->load->database('default', TRUE);
         $DB_Main->where('id', $user_id);
         $query_users = $DB_Main->get('store_users');
@@ -65,7 +78,8 @@ class Users_Model extends CI_Model {
         return $result;
     }
 
-    function get_user_items($user_id) {
+    function get_user_items($user_id)
+    {
         $DB_Main = $this->load->database('default', TRUE);
         $DB_Main->select('store_items.*, store_users_items.*, store_categories.display_name AS category_displayname');
         $DB_Main->from('store_users_items');
@@ -77,23 +91,28 @@ class Users_Model extends CI_Model {
         return $result;
     }
 
-    function get_storeuserid($store_auth) {
+    function get_storeuserid($store_auth)
+    {
         $DB_Main = $this->load->database('default', TRUE);
 
         $DB_Main->where('auth', $store_auth);
         $query = $DB_Main->get('store_users');
 
-        if ($query->num_rows == 1) {
+        if ($query->num_rows == 1)
+        {
             $row = $query->row();
             return $row->id;
-        } else {
+        }
+        else
+        {
             echo "User does not exist in store DB";
             log_message('error', 'User does not exist in the Store DB');
             return NULL;
         }
     }
 
-    function edit_user($post) {
+    function edit_user($post)
+    {
         $DB_Main = $this->load->database('default', TRUE);
         $DB_Main->where('id', $post['id']);
         $data = array(
@@ -104,13 +123,15 @@ class Users_Model extends CI_Model {
         $DB_Main->update('store_users', $data);
     }
 
-    function remove_useritem($post) {
+    function remove_useritem($post)
+    {
         $DB_Main = $this->load->database('default', TRUE);
         $DB_Main->where('id', $post['useritem_id']);
         $DB_Main->delete('store_users_items');
     }
 
-    function remove_user($post) {
+    function remove_user($post)
+    {
         $DB_Main = $this->load->database('default', TRUE);
         $DB_Main->where('id', $post['user_id']);
         $DB_Main->delete('store_users');
@@ -118,7 +139,8 @@ class Users_Model extends CI_Model {
         $DB_Main->delete('store_users_items');
     }
 
-    function steamid_to_auth($steamid) {
+    function steamid_to_auth($steamid)
+    {
         //from https://forums.alliedmods.net/showpost.php?p=1890083&postcount=234
         $toks = explode(":", $steamid);
         $odd = (int) $toks[1];
@@ -127,24 +149,30 @@ class Users_Model extends CI_Model {
         return ($halfAID * 2) + $odd;
     }
 
-    function steamid_to_community($steamid) {
-        $parts = explode(':', str_replace('STEAM_', '' ,$steamid)); 
-        
-        $result = bcadd(bcadd('76561197960265728', $parts['1']), bcmul($parts['2'], '2')); 
-        $remove = strpos($result,".");
-        if($remove != false){
-            $result = substr($result,0,strpos($result,"."));
+    function steamid_to_community($steamid)
+    {
+        $parts = explode(':', str_replace('STEAM_', '', $steamid));
+
+        $result = bcadd(bcadd('76561197960265728', $parts['1']), bcmul($parts['2'], '2'));
+        $remove = strpos($result, ".");
+        if ($remove != false)
+        {
+            $result = substr($result, 0, strpos($result, "."));
         }
         return $result;
     }
 
-    function auth_to_steamid($authid) {
+    function auth_to_steamid($authid)
+    {
         $steam = array();
         $steam[0] = "STEAM_0";
 
-        if ($authid % 2 == 0) {
+        if ($authid % 2 == 0)
+        {
             $steam[1] = 0;
-        } else {
+        }
+        else
+        {
             $steam[1] = 1;
             $authid -= 1;
         }
