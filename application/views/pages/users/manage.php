@@ -5,36 +5,12 @@
 <div class="page-header">
     <h1>Users</h1>
 </div>
-<div class="row">
-    <div class="span6">
-        <div class="pagination scp-pagination">
-            <!--        <ul>
-                      <li><a href="#">Prev</a></li>
-                      <li><a href="#">1</a></li>
-                      <li><a href="#">2</a></li>
-                      <li><a href="#">3</a></li>
-                      <li><a href="#">4</a></li>
-                      <li><a href="#">Next</a></li>
-                    </ul>-->
-        </div>
-    </div>
-    <div class="span6">
-        <form class="form-search pull-right" action ="<?php echo base_url("index.php/users"); ?>" method="get">
-            <div class="input-append">
-                <input type="text" class="span2 search-query" name="s" value="<?= $search ?>">
-                <button type="submit" class="btn">Search</button>
-            </div>
-        </form>
-    </div>
-</div>
 <script type="text/javascript">
-    $(document).ready(function() 
-    { 
-        $("#manageUsers").tablesorter(); 
-    } 
-); 
+$(document).ready(function() {
+    $('#manageUsers').dataTable();
+} );
 </script>
-<table id="manageUsers" class="tablesorter table table-bordered table-striped table-hover">
+<table id="manageUsers" class="table table-bordered table-striped table-hover">
     <thead>
         <tr>
             <th>ID</th>

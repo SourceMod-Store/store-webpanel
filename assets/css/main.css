@@ -43,3 +43,41 @@ th:hover{
 .table td{
 	vertical-align: middle;
 }
+
+#manageItems_filter{
+	float: right;
+}
+#manageItems_length{
+	float: left;
+}
+
+#manageUsers_filter{
+	float: right;
+}
+#manageUsers_length{
+	float: left;
+}
+
+#manageCategories_filter{
+	float: right;
+}
+#manageCategories_length{
+	float: left;
+}
+
+#manageRedeem_filter{
+	float: right;
+}
+#manageRedeem_length{
+	float: left;
+}
+
+.dataTables_paginate a{
+	display: inline-block;
+	padding: 1em;
+	cursor: pointer;
+}
+
+.dataTables_paginate a:first-child{
+	padding-left: 0;
+}

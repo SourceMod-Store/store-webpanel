@@ -23,4 +23,15 @@
         <input type="submit" value="back to User">
     </form>
     </p>
+<?php elseif ($post['action'] == 'remove_item'): ?>
+    <p>User ID: <?= $post['user_id'] ?></p>
+    <p>Item ID: <?= $post['item_id'] ?></p>
+    <p>
+    <form action="<?php echo base_url('index.php/users'); ?>" method="post">
+        <input type="submit" value="back to overview">
+    </form>
+    <form action="<?php echo base_url('index.php/users/edit') . '/' . $post['user_id']; ?>" method="post">
+        <input type="submit" value="back to User">
+    </form>
+    </p>
 <?php endif; ?>

@@ -35,7 +35,7 @@
     <div class="control-group">
       <label class="control-label" for="catColor">Web Color</label>
       <div class="controls">
-        <input type="text" id="catColor" class="input-small" name="web_color">
+        <input type="color" id="catColor" class="input-small" name="web_color">
       </div>
     </div>
     <div class="form-actions">
