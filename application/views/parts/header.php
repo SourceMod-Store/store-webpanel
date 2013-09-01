@@ -34,7 +34,7 @@
           <ul class="dropdown-menu">
             <li><a href="<?php echo base_url("index.php/tools/impex");?>">Import/Export System</a></li>
             <li><a href="<?php echo base_url("index.php/tools/json_check");?>">JSON Checker</a></li>
-            <!--<li><a href="<?php echo base_url("index.php/tools/update");?>">Update Checker</a></li>-->
+            <li><a href="<?php echo base_url("index.php/tools/update");?>">Update Checker</a></li>
             <li><a href="http://wiki.sourcedonates.com/x/DgAF" target="_blank">Help</a></li>
           </ul>
         </li>

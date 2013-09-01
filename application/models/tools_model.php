@@ -26,6 +26,32 @@ class Tools_Model extends CI_Model
         }
     }
 
+    function get_current_version()
+    {
+        return file_get_contents("http://sourcedonates.com/version.html");
+    }
+
+    function get_installed_version()
+    {
+        return "1.2.0-dev";
+    }
+
+    function check_version($webpanel_version_current, $webpanel_version_installed)
+    {
+        if (strpos($webpanel_version_installed, "-dev") !== false)
+        {
+            return "dev-version";
+        }
+        elseif ($webpanel_version_current == $webpanel_version_installed)
+        {
+            return "up2date";
+        }
+        else
+        {
+            return "outofdate";
+        }
+    }
+
 }
 
 ?>

@@ -6,6 +6,7 @@ class Users extends CI_Controller {
         parent::__construct();
         $this->load->model('users_model');
         $this->load->model('items_model');
+        $this->load->model('tools_model');
         
         if (!$this->ion_auth->logged_in() && $this->config->item('storewebpanel_enable_loginsystem') == 1)
         {
@@ -15,6 +16,7 @@ class Users extends CI_Controller {
     
     public function index(){
         $data['page'] = 'users';
+        $data['version'] = $this->tools_model->get_installed_version();
         $search = $this->input->get('s');
         
         $data['users'] = $this->users_model->get_users($search);
@@ -27,6 +29,7 @@ class Users extends CI_Controller {
     
     public function edit($slug){
         $data['page'] = 'users';
+        $data['version'] = $this->tools_model->get_installed_version();
         
         $data['user'] = $this->users_model->get_user($slug);
         $data['user_items'] = $this->users_model->get_user_items($slug);
@@ -38,6 +41,7 @@ class Users extends CI_Controller {
     
     public function process(){
         $data['page'] = 'users';
+        $data['version'] = $this->tools_model->get_installed_version();
         $post = $this->input->post();
         $data['post'] = $post;
         

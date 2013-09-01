@@ -35,7 +35,7 @@ class Tools extends CI_Controller
         $this->load->view('pages/tools/json_check', $data);
         $this->load->view('parts/footer');
     }
-    
+
     public function check_process()
     {
         $this->tools_model->check_json();
@@ -44,6 +44,14 @@ class Tools extends CI_Controller
     public function update()
     {
         $data['page'] = 'tools';
+
+        $webpanel_version_installed = $this->tools_model->get_installed_version();
+        $webpanel_version_current = $this->tools_model->get_current_version();
+
+        $data['webpanel_version_installed'] = $webpanel_version_installed;
+        $data['webpanel_version_current'] = $webpanel_version_current;
+        $data['webpanel_version_match'] = $this->tools_model->check_version($webpanel_version_current, $webpanel_version_installed);
+
 
         $this->load->view('parts/header', $data);
         $this->load->view('pages/tools/update', $data);
