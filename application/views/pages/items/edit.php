@@ -124,6 +124,12 @@
             <input type="text" class="input-small" id="itemExpiry" name="expiry_time" value="<?= $item_info['expiry_time'] ?>">
         </div>
     </div>	
+    <div class="control-group">
+      <label class="control-label" for="itemFlags">Flags</label>
+      <div class="controls">
+        <input type="text" class="input-small" id="itemFlags" name="flags" value="<?=$item_info['flags']?>">
+      </div>
+    </div>
     <div class="form-actions">
         <button type="submit" class="btn btn-primary">Save Changes</button>
     </div>
