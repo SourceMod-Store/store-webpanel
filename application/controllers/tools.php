@@ -11,6 +11,7 @@ class Tools extends CI_Controller
         parent::__construct();
         $this->load->model('categories_model');
         $this->load->model('items_model');
+        $this->load->model('tools_model');
 
         if (!$this->ion_auth->logged_in() && $this->config->item('storewebpanel_enable_loginsystem') == 1)
         {
@@ -25,6 +26,19 @@ class Tools extends CI_Controller
         $this->load->view('parts/header', $data);
         $this->load->view('pages/tools/impex', $data);
         $this->load->view('parts/footer');
+    }
+
+    public function json_check()
+    {
+        $data['page'] = 'tools';
+        $this->load->view('parts/header', $data);
+        $this->load->view('pages/tools/json_check', $data);
+        $this->load->view('parts/footer');
+    }
+    
+    public function check_process()
+    {
+        $this->tools_model->check_json();
     }
 
     public function update()
@@ -57,11 +71,11 @@ class Tools extends CI_Controller
                 {
                     if (PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION >= 4)
                     {
-                        $this->items_model->add_item($item->name, $item->display_name, $item->description, $item->web_description, $item->type, $item->loadout_slot, $item->price, json_encode($item->attrs, JSON_UNESCAPED_SLASHES), $item->is_buyable, $item->is_tradeable, $item->is_refundable, $category_id, $item->expiry_time,$item->flags=NULL);
+                        $this->items_model->add_item($item->name, $item->display_name, $item->description, $item->web_description, $item->type, $item->loadout_slot, $item->price, json_encode($item->attrs, JSON_UNESCAPED_SLASHES), $item->is_buyable, $item->is_tradeable, $item->is_refundable, $category_id, $item->expiry_time, $item->flags = NULL);
                     }
                     else
                     {
-                        $this->items_model->add_item($item->name, $item->display_name, $item->description, $item->web_description, $item->type, $item->loadout_slot, $item->price, json_encode($item->attrs), $item->is_buyable, $item->is_tradeable, $item->is_refundable, $category_id, $item->expiry_time,$item->flags=NULL);
+                        $this->items_model->add_item($item->name, $item->display_name, $item->description, $item->web_description, $item->type, $item->loadout_slot, $item->price, json_encode($item->attrs), $item->is_buyable, $item->is_tradeable, $item->is_refundable, $category_id, $item->expiry_time, $item->flags = NULL);
                     }
                 }
             }

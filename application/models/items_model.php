@@ -22,14 +22,12 @@ class Items_Model extends CI_Model
         $query = $DB_Main->get('store_items');
         $item_array = $query->result_array();
 
-        $i = 0;
-        foreach ($item_array as $item)
+        foreach ($item_array as $key => $item)
         {
             $DB_Main->where('item_id', $item['id']);
             $query_item = $DB_Main->get('store_users_items');
-            $item_array[$i]['amount'] = $query_item->num_rows();
+            $item_array[$key]['amount'] = $query_item->num_rows();
 
-            $i++;
         }
         return $item_array;
     }
