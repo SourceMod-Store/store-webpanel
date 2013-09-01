@@ -10,7 +10,6 @@ class Json_Api extends CI_Controller {
         $this->load->model('categories_model');
         $this->load->model('items_model');
         $this->load->model('users_model');
-        $this->load->model('dashboard_model');
     }
 
     /**

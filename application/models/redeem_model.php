@@ -17,8 +17,7 @@ class Redeem_Model extends CI_Model
             'credits' => $credits,
             'redeem_times_total' => $redeem_times_total,
             'redeem_times_user' => $redeem_times_user,
-            'expire_time' => $expire_time,
-            'sm_groupid' => $sm_groupid
+            'expire_time' => $expire_time
         );
         $DB_Main->insert('store_redeem_codes', $data);
     }

@@ -41,7 +41,7 @@ class Redeem extends CI_Controller
     public function process()
     {
         $post = $this->input->post();
-        var_dump($post);
+        
         $data['post'] = $post;
         $data['page'] = 'redeem';
 
@@ -51,6 +51,7 @@ class Redeem extends CI_Controller
             $this->redeem_model->add_code($post['code'], $post['items'], $post['credits'], $post['timesUser'], $post['timesTotal'], $post['expire']);
             echo "Created Redeem code with </br>";
         }
+        var_dump($post);
     }
 
     public function log()

@@ -21,7 +21,6 @@ $(document).ready(function() {
             <th>Redeem Times - User</th>
             <th>Redeem Times - Total</th>
             <th>Expire Time (Unixtime)</th>
-            <th>SM Group ID (restriction)</th>
         </tr>
     </thead>
     <?php foreach($codes->result() as $row):?>
@@ -34,7 +33,6 @@ $(document).ready(function() {
             <td><?php echo $row->redeem_times_user;?></td>
             <td><?php echo $row->redeem_times_total;?></td>
             <td><?php echo $row->expire_time;?></td>
-            <td><?php echo $row->sm_groupid;?></td>
         </tr>
     </tbody>
     <?php endforeach;?>
