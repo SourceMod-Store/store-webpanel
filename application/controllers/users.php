@@ -5,6 +5,7 @@ class Users extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('users_model');
+        $this->load->model('items_model');
         
         if (!$this->ion_auth->logged_in() && $this->config->item('storewebpanel_enable_loginsystem') == 1)
         {
@@ -29,6 +30,7 @@ class Users extends CI_Controller {
         
         $data['user'] = $this->users_model->get_user($slug);
         $data['user_items'] = $this->users_model->get_user_items($slug);
+        $data['items'] = $this->items_model->get_items();
         $this->load->view('parts/header',$data);
         $this->load->view('pages/users/edit',$data);
         $this->load->view('parts/footer');
@@ -43,15 +45,17 @@ class Users extends CI_Controller {
             $this->users_model->edit_user($post);
             
         }elseif($post['action'] == 'remove_item'){
-            $this->load->model('items_model');
             $this->items_model->remove_useritem(NULL,NULL,$post['useritem_id']);
             
         }elseif($post['action'] == 'remove_refund_item'){
-            $this->load->model('items_model');
             $this->items_model->remove_refund_useritem($post["user_id"], $post["item_id"], $post["item_price"], $post['useritem_id']);
             
         }elseif ($post['action'] == 'remove_user') {
             $this->users_model->remove_user($post);
+            
+        }elseif ($post['action'] == 'add_item') {
+            $this->items_model->add_useritem($post["user_id"], $post["item_id"]);
+            
         }
         redirect('/users/', 'refresh');
     }

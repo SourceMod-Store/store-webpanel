@@ -146,7 +146,8 @@ class Items_Model extends CI_Model
                 'is_tradeable' => $post['is_tradeable'],
                 'is_refundable' => $post['is_refundable'],
                 'category_id' => $post['category_id'],
-                'expiry_time' => $post['expiry_time']
+                'expiry_time' => $post['expiry_time'],
+                'flags' => $post['flags']
             );
         }
         else
@@ -164,7 +165,8 @@ class Items_Model extends CI_Model
                 'is_tradeable' => $post['is_tradeable'],
                 'is_refundable' => $post['is_refundable'],
                 'category_id' => $post['category_id'],
-                'expiry_time' => $post['expiry_time']
+                'expiry_time' => $post['expiry_time'],
+                'flags' => $post['flags']
             );
         }
 
@@ -202,8 +204,7 @@ class Items_Model extends CI_Model
         }
     }
 
-    function add_item($name, $display_name, $description, $web_description, $type, $loadout_slot, $price, $attrs, $is_buyable, $is_tradeable, $is_refundable, $category_id, $expiry_time)
-    {
+    function add_item($name, $display_name, $description, $web_description, $type, $loadout_slot, $price, $attrs, $is_buyable, $is_tradeable, $is_refundable, $category_id, $expiry_time, $flags) {
 
         if ($expiry_time == 0)
             $expiry_time = NULL;
@@ -222,7 +223,8 @@ class Items_Model extends CI_Model
             'is_tradeable' => $is_tradeable,
             'is_refundable' => $is_refundable,
             'category_id' => $category_id,
-            'expiry_time' => $expiry_time
+            'expiry_time' => $expiry_time,
+            'flags' => $flags
         );
 
         foreach ($data as $key => $value)

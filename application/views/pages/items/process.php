@@ -14,6 +14,8 @@
 <p>Attrs: <?=$post['attrs']?></p>
 <p>Is Buyable: <?=$post['is_buyable']?></p>
 <p>Is Tradeable: <?=$post['is_tradeable']?></p>
+<p>Expiry: <?=$post['expiry_time']?></p>
+<p>Flags: <?=$post['flags']?></p>
 <form action="<?php echo base_url('index.php/items');?>" method="post">
     <p><input type="submit" value="back to overview"></p>
 </form>
@@ -28,6 +30,8 @@
 <p>Attrs: <?=$post['attrs']?></p>
 <p>Is Buyable: <?=$post['is_buyable']?></p>
 <p>Is Tradeable: <?=$post['is_tradeable']?></p>
+<p>Expiry: <?=$post['expiry_time']?></p>
+<p>Flags: <?=$post['flags']?></p>
 <p>
 <form action="<?php echo base_url('index.php/items');?>" method="post">
     <input type="submit" value="back to overview">

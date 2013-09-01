@@ -9,6 +9,7 @@
 <ul class="nav nav-tabs" id="userTabs">
     <li><a href="#info" data-toggle="tab">Info</a></li>
     <li><a href="#items" data-toggle="tab">Items</a></li>
+    <li><a href="#add" data-toggle="tab">Add</a></li>
 </ul>
 <div class="tab-content">
     <div class="tab-pane" id="info">
@@ -89,5 +90,16 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
+    </div>
+    <div class="tab-pane" id="add">
+       <form action="<?php echo base_url('index.php/users/process') ?>" method="post">
+         <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
+         <select name="item_id">
+          <?php foreach ($items as $item): ?>
+          <option value="<?= $item['id'] ?>"><?= $item['display_name'] ?></option>
+          <?php endforeach; ?>
+         </select>
+         <button name="action" value="add_item" class="btn btn-primary" type="submit">Add</button>  
+       </form>
     </div>
 </div>
