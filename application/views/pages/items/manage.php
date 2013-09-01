@@ -16,6 +16,7 @@ $(document).ready(function() {
             <th>ID</th>
             <th>Item Name</th>
             <th>Category</th>
+            <th>Loadout Slot</th>
             <th>Price</th>
             <th>Times Bought</th>
             <th>Action</th>
@@ -24,14 +25,15 @@ $(document).ready(function() {
     <tbody>
         <?php foreach ($items as $item): ?>
             <tr>
-                <td><a href="<?php echo base_url('index.php/items/edit') . '/' . $item['id']; ?>"><?= $item['id'] ?></a></td>
-                <td><a href="<?php echo base_url('index.php/items/edit') . '/' . $item['id']; ?>"><?= $item['display_name'] ?></a></td>
-                <td><?= $item['type'] ?></td>
-                <td><?= $item['price'] ?></td>
-                <td><a href="<?php echo base_url('index.php/items/bought_by') . '/' . $item['id']; ?>"><?= $item['amount'] ?></td>
+                <td><a href="<?php echo base_url('index.php/items/edit') . '/' . $item['id']; ?>"><?php echo $item['id'] ?></a></td>
+                <td><a href="<?php echo base_url('index.php/items/edit') . '/' . $item['id']; ?>"><?php echo $item['display_name'] ?></a></td>
+                <td><?php echo $item['type'] ?></td>
+                <td><?php echo $item['loadout_slot']?>
+                <td><?php echo $item['price'] ?></td>
+                <td><a href="<?php echo base_url('index.php/items/bought_by') . '/' . $item['id']; ?>"><?php echo $item['amount'] ?></td>
                 <td>
                     <form class="float-left removeform" action="<?php echo base_url('index.php/items/process') ?>" method="post">
-                        <input type="hidden" name="item_id" value="<?= $item['id'] ?>">
+                        <input type="hidden" name="item_id" value="<?php echo $item['id'] ?>">
                         <button class="btn btn-small btn-danger" name="action" value="remove" type="submit"><i class="icon-remove icon-white"></i> Remove</button>
                         <button class="btn btn-small btn-danger" name="action" value="remove_refund" type="submit"><i class="icon-remove icon-white"></i> Remove + Refund</button>
                         

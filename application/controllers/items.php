@@ -20,12 +20,9 @@ class Items extends CI_Controller {
         $this->load->model('categories_model');
 
         $data['page'] = 'items';
-        $category = $this->input->get('c');
-        $search = $this->input->get('s');
 
-        $data['items'] = $this->items_model->get_items($search, $category);
+        $data['items'] = $this->items_model->get_items();
         $data['categories'] = $this->items_model->get_search_categories();
-        $data['search'] = $search;
 
 
         $this->load->view('parts/header', $data);

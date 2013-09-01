@@ -15,19 +15,9 @@ class Items_Model extends CI_Model
         return $query->result_array();
     }
 
-    function get_items($search = 0, $category = 0)
+    function get_items()
     {
         $DB_Main = $this->load->database('default', TRUE);
-
-        if ($category !== 0)
-        {
-            $DB_Main->where('type', $category);
-        }
-
-        if ($search !== 0)
-        {
-            $DB_Main->like('display_name', $search);
-        }
 
         $query = $DB_Main->get('store_items');
         $item_array = $query->result_array();
