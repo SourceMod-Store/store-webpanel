@@ -22,7 +22,8 @@ class Tools extends CI_Controller
     public function impex()
     {
         $data['page'] = 'tools';
-
+        $data['version'] = $this->tools_model->get_installed_version();
+        
         $this->load->view('parts/header', $data);
         $this->load->view('pages/tools/impex', $data);
         $this->load->view('parts/footer');
@@ -31,6 +32,8 @@ class Tools extends CI_Controller
     public function json_check()
     {
         $data['page'] = 'tools';
+        $data['version'] = $this->tools_model->get_installed_version();
+        
         $this->load->view('parts/header', $data);
         $this->load->view('pages/tools/json_check', $data);
         $this->load->view('parts/footer');
@@ -44,7 +47,8 @@ class Tools extends CI_Controller
     public function update()
     {
         $data['page'] = 'tools';
-
+        $data['version'] = $this->tools_model->get_installed_version();
+        
         $webpanel_version_installed = $this->tools_model->get_installed_version();
         $webpanel_version_current = $this->tools_model->get_current_version();
 
