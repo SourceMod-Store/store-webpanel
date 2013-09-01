@@ -34,7 +34,7 @@
           <ul class="dropdown-menu">
             <li><a href="<?php echo base_url("index.php/tools/impex");?>">Import/Export System</a></li>
             <!--<li><a href="<?php echo base_url("index.php/tools/update");?>">Update Checker</a></li>-->
-            <li><a href="http://confluence.sourcedonates.com/x/KgAI" target="_blank">Help</a></li>
+            <li><a href="http://wiki.sourcedonates.com/x/DgAF" target="_blank">Help</a></li>
           </ul>
         </li>
         <li class="dropdown <?php if($page == "redeem"){ echo "active"; }?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Redeem System <b class="caret"></b></a>

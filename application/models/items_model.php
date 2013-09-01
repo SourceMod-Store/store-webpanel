@@ -194,7 +194,7 @@ class Items_Model extends CI_Model
         }
     }
 
-    function add_item($name, $display_name, $description, $web_description, $type, $loadout_slot, $price, $attrs, $is_buyable, $is_tradeable, $is_refundable, $category_id, $expiry_time, $flags) {
+    function add_item($name, $display_name, $description, $web_description, $type, $loadout_slot, $price, $attrs, $is_buyable=1, $is_tradeable=1, $is_refundable=1, $category_id, $expiry_time = NULL, $flags = NULL) {
 
         if ($expiry_time == 0)
             $expiry_time = NULL;
