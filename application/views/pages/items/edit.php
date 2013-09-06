@@ -1,18 +1,3 @@
-<script src="<?php echo base_url("assets/js/ace/ace.js") ?>"></script> 
-<script>
-    var editor = ace.edit("editor");
-    editor.setTheme("ace/theme/monokai");
-    editor.getSession().setMode("ace/mode/json");
-</script>
-<style type="text/css" media="screen">
-    #editor { 
-/*        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;*/
-    }
-</style>
 <ul class="breadcrumb">
     <li><a href="<?php echo base_url("/"); ?>">Home</a> <span class="divider">/</span></li>
     <li><a href="<?php echo site_url("/items"); ?>">Items</a> <span class="divider">/</span></li>
@@ -91,13 +76,8 @@
     <div class="control-group">
         <label class="control-label" for="itemAttr">Attributes</label>
         <div class="controls">
-            <div id="editor">
-                <textarea id="itemAttr" rows="10" name="attrs" class="input-xxlarge">
-            
-                    <?= $item_info['attrs'] ?>
-                </textarea>
-            </div>   
-
+            <textarea id="itemAttr" name="attrs" rows="10" class="input-xxlarge"><?= $item_info['attrs'] ?></textarea>
+            <div id="editor"></div>
         </div>
     </div>
     <div class="control-group">
@@ -134,3 +114,20 @@
         <button type="submit" class="btn btn-primary">Save Changes</button>
     </div>
 </form>
+<script src="<?php echo base_url("assets/js/ace/ace.js") ?>"></script> 
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/github");
+    editor.getSession().setMode("ace/mode/json");
+    var attrs = $('textarea[name="attrs"]').hide();
+    editor.getSession().setValue(attrs.val());
+    editor.getSession().on("change", function (){
+        attrs.val(editor.getSession().getValue());
+    });
+</script>
+<style type="text/css" media="screen">
+    #editor { 
+        width: 600px;
+        height: 120px;
+    }
+</style>
