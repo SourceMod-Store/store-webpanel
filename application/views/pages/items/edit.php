@@ -128,6 +128,6 @@
 <style type="text/css" media="screen">
     #editor { 
         width: 600px;
-        height: 120px;
+        height: 200px;
     }
 </style>
