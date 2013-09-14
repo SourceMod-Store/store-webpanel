@@ -5,3 +5,4 @@
 */cache/*
 */cache/!index.html
 sftp-config.json
+.svn*
