@@ -1,7 +1,11 @@
 */config/development
 */config/database.php
+*/config/config.php
+*/installer/*
 */logs/log-*.php
 */logs/!index.html
 */cache/*
 */cache/!index.html
 sftp-config.json
+.svn*
+installer/
