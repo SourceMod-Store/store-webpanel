@@ -33,7 +33,7 @@ class Tools_Model extends CI_Model
 
     function get_installed_version()
     {
-        return "1.2.1";
+        return "1.2.1-dev";
     }
 
     function check_version($webpanel_version_current, $webpanel_version_installed)
