@@ -11,38 +11,38 @@
     <div class="control-group">
       <label class="control-label" for="catID">ID</label>
       <div class="controls">
-        <input type="text" disabled class="input-mini" id="catID" name="id" value="<?=$category["id"]?>">
-        <input type="hidden" name="id" value="<?=$category["id"]?>">
+        <input type="text" disabled class="input-mini" id="catID" name="id" value="<?php echo $category["id"]; ?>">
+        <input type="hidden" name="id" value="<?php echo $category["id"]; ?>">
       </div>
     </div>
     <div class="control-group">
       <label class="control-label" for="catName">Display Name</label>
       <div class="controls">
-        <input type="text" id="catName" name="display_name" value="<?=$category["display_name"]?>">
+        <input type="text" id="catName" name="display_name" value="<?php echo $category["display_name"]; ?>">
       </div>
     </div>
     <div class="control-group">
       <label class="control-label" for="catDesc">Description</label>
       <div class="controls">
-        <textarea id="catDesc" rows="3" name="description"><?=$category["description"]?></textarea>
+        <textarea id="catDesc" rows="3" name="description"><?php echo $category["description"]; ?></textarea>
       </div>
     </div>
     <div class="control-group">
       <label class="control-label" for="catPlugin">Required Plugin</label>
       <div class="controls">
-        <input type="text" id="catPlugin" name="require_plugin" value="<?=$category["require_plugin"]?>">
+        <input type="text" id="catPlugin" name="require_plugin" value="<?php echo $category["require_plugin"]; ?>">
       </div>
     </div>
     <div class="control-group">
       <label class="control-label" for="catWebDesc">Web Description</label>
       <div class="controls">
-        <textarea id="catWebDesc" name="web_description" rows="3"><?=$category["web_description"]?></textarea>
+        <textarea id="catWebDesc" name="web_description" rows="3"><?php echo $category["web_description"]; ?></textarea>
       </div>
     </div>
     <div class="control-group">
       <label class="control-label" for="catColor">Web Color</label>
       <div class="controls">
-        <input type="text" class="input-small" id="catColor" name="web_color" value="<?=$category["web_color"]?>">
+        <input type="text" class="input-small" id="catColor" name="web_color" value="<?php echo $category["web_color"]; ?>">
       </div>
     </div>
     <div class="form-actions">

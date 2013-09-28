@@ -24,16 +24,16 @@ $(document).ready(function() {
     <tbody>
       <?php foreach($query_categories as $cat): ?>
       <tr>
-        <td><?=$cat['id']?></td>
-        <td><a href="<?php echo base_url('index.php/categories/edit')."/".$cat['id']?>"><?=$cat['display_name']?></a></td>
-        <td><?=$cat['web_description']?></td>
-        <td><?=$cat['require_plugin']?></td>
-        <td><?=$cat['count']?></td>
+        <td><?php echo $cat['id']; ?></td>
+        <td><a href="<?php echo base_url('index.php/categories/edit')."/".$cat['id']?>"><?php echo $cat['display_name']; ?></a></td>
+        <td><?php echo $cat['web_description']; ?></td>
+        <td><?php echo $cat['require_plugin']; ?></td>
+        <td><?php echo $cat['count']; ?></td>
         <td>
             <form action="<?php echo base_url('index.php/categories/process')?>" method="post">
                 <button class="btn btn-small btn-danger" type="submit"><i class="icon-remove icon-white"></i> Remove</button>
                 <input type="hidden" name="action" value="remove">
-                <input type="hidden" name="category_id" value="<?=$cat['id']?>">
+                <input type="hidden" name="category_id" value="<?php echo $cat['id']; ?>">
             </form> 
         </td>
       </tr>
