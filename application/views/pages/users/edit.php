@@ -4,7 +4,7 @@
     <li class="active">Edit User</li>
 </ul>
 <div class="page-header">
-    <h1>Edit "<?= $user['name'] ?>"</h1>
+    <h1>Edit "<?php echo $user['name']; ?>"</h1>
 </div>
 <ul class="nav nav-tabs" id="userTabs">
     <li><a href="#info" data-toggle="tab">Info</a></li>
@@ -14,42 +14,42 @@
 <div class="tab-content">
     <div class="tab-pane" id="info">
         <form class="form-horizontal" action="<?php echo base_url('index.php/users/process'); ?>" method="post">
-            <input type="hidden" name="id" value="<?= $user['id'] ?>">
-            <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
+            <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
+            <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
             <div class="control-group">
                 <label class="control-label" for="userID">ID</label>
                 <div class="controls">
-                    <input type="text" id="userID" disabled class="input-mini" value="<?= $user['id'] ?>">
+                    <input type="text" id="userID" disabled class="input-mini" value="<?php echo $user['id']; ?>">
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="userName">UserName</label>
                 <div class="controls">
-                    <input type="text" id="userName" name="name" value="<?= $user['name'] ?>">
+                    <input type="text" id="userName" name="name" value="<?php echo $user['name']; ?>">
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="userSteamID">Auth</label>
                 <div class="controls">
-                    <input type="text" id="userSteamID" class="input-medium" name="auth" value="<?= $user['auth'] ?>">
+                    <input type="text" id="userSteamID" class="input-medium" name="auth" value="<?php echo $user['auth']; ?>">
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="communityProfileUrl">Community URL</label>
                 <div class="controls">
-                    <a href="http://steamcommunity.com/profiles/<?= $user['community_url'] ?>" target="_blank">Steam Community Profile</a>
+                    <a href="http://steamcommunity.com/profiles/<?php echo $user['community_url']; ?>" target="_blank">Steam Community Profile</a>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="userSteamID">SteamID</label>
                 <div class="controls">
-                    <input type="text" id="userSteamID" disabled class="input-medium" name="steamid" value="<?= $user['steam_id'] ?>">
+                    <input type="text" id="userSteamID" disabled class="input-medium" name="steamid" value="<?php echo $user['steam_id']; ?>">
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="userCredits">Credits</label>
                 <div class="controls">
-                    <input type="text" id="userCredits" class="input-medium" name="credits" value="<?= $user['credits'] ?>">
+                    <input type="text" id="userCredits" class="input-medium" name="credits" value="<?php echo $user['credits']; ?>">
                 </div>
             </div>
             <div class="form-actions">
@@ -71,17 +71,17 @@
             <tbody>
                 <?php foreach ($user_items as $item): ?>
                     <tr>
-                        <td><?= $item['id'] ?></td>
-                        <td><?= $item['display_name'] ?></td>
-                        <td><?= $item['category_displayname'] ?></td>
+                        <td><?php echo $item['id']; ?></td>
+                        <td><?php echo $item['display_name']; ?></td>
+                        <td><?php echo $item['category_displayname']; ?></td>
                         <td>
                             <form action="<?php echo base_url('index.php/users/process') ?>" method="post">
-                                <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
-                                <input type="hidden" name="user_name" value="<?= $user['name'] ?>">
-                                <input type="hidden" name="useritem_id" value="<?= $item['id'] ?>">
-                                <input type="hidden" name="item_name" value="<?= $item['display_name'] ?>">
-                                <input type="hidden" name="item_id" value="<?= $item['item_id'] ?>">
-                                <input type="hidden" name="item_price" value="<?= $item['price'] ?>">
+                                <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
+                                <input type="hidden" name="user_name" value="<?php echo $user['name']; ?>">
+                                <input type="hidden" name="useritem_id" value="<?php echo $item['id']; ?>">
+                                <input type="hidden" name="item_name" value="<?php echo $item['display_name']; ?>">
+                                <input type="hidden" name="item_id" value="<?php echo $item['item_id']; ?>">
+                                <input type="hidden" name="item_price" value="<?php echo $item['price']; ?>">
                                 <button name="action" value="remove_item" class="btn btn-mini btn-danger pull-right" type="submit"><i class="icon-remove icon-white"></i> Remove</button>  
                                 <button name="action" value="remove_refund_item" class="btn btn-mini btn-danger pull-right" type="submit"> <i class="icon-remove icon-white"></i> Remove+Refund</button>
                             </form>
@@ -93,10 +93,10 @@
     </div>
     <div class="tab-pane" id="add">
        <form action="<?php echo base_url('index.php/users/process') ?>" method="post">
-         <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
+         <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
          <select name="item_id">
           <?php foreach ($items as $item): ?>
-          <option value="<?= $item['id'] ?>"><?= $item['display_name'] ?></option>
+          <option value="<?php echo $item['id']; ?>"><?php echo $item['display_name']; ?></option>
           <?php endforeach; ?>
          </select>
          <button name="action" value="add_item" class="btn btn-primary" type="submit">Add</button>  
