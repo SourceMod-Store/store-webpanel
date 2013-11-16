@@ -137,6 +137,28 @@ class Tools extends CI_Controller
             echo "You have not entered a category to export";
         }
     }
+    
+    public function json_shrink()
+    {
+        $data['page'] = 'tools';
+        $data['version'] = $this->tools_model->get_installed_version();
+        
+        $this->load->view('parts/header', $data);
+        $this->load->view('pages/tools/shrink_json', $data);
+        $this->load->view('parts/footer');
+    }
+    
+    public function json_shrink_process()
+    {
+        $items = $this->items_model->get_items();
+        
+        foreach ($items as $key => $item)
+        {
+            $item['attrs'] = $this->tools_model->shrink_json($items[$key]['attrs']);
+            $this->items_model->update_item($item);
+            echo "updated Item: ".$item['id']. "<hr>";
+        }
+    }
 
 }
 
