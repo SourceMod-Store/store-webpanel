@@ -26,31 +26,124 @@ class Tools_Model extends CI_Model
         }
     }
 
-    function get_current_version()
+    function get_stable_version() //Get current stable version
     {
-        return file_get_contents("http://sourcedonates.com/version.html");
+        $version = json_decode(file_get_contents("http://sourcedonates.com/store-webpanel/webpanel_version.json"));
+        return $version->webpanel->stable->version_number;
     }
 
-    function get_installed_version()
+    function get_beta_version() //Get current beta version
     {
-        return "1.2.3";
+        $version = json_decode(file_get_contents("http://sourcedonates.com/store-webpanel/webpanel_version.json"));
+        return $version->webpanel->beta->version_number;
     }
 
-    function check_version($webpanel_version_current, $webpanel_version_installed)
+    function get_nightly_version() //Get current nightly version
     {
-        if (strpos($webpanel_version_installed, "-dev") !== false)
-        {
-            return "dev-version";
-        }
-        elseif ($webpanel_version_current == $webpanel_version_installed)
-        {
-            return "up2date";
-        }
-        else
-        {
-            return "outofdate";
-        }
+        $version = json_decode(file_get_contents("http://sourcedonates.com/store-webpanel/webpanel_version.json"));
+        return $version->webpanel->nightly->version_number;
     }
+
+    function get_installed_version() //Get the installed version
+    {
+        $version = json_decode(file_get_contents("./application/config/webpanel_version.json"));
+        return $version->version_number ." - ". $version->version_details->type;
+    }
+
+    function check_version() //Check if the version is up2date and return a code that indicates the status
+    {
+        //return code:
+        //
+        //First Digit:
+        //  0: Version is up2date
+        //  1XX: Running outdated Stable
+        //  2XX: Running outdated Beta
+        //  4XX: Running outdated Nightly
+        //  9XX: Error
+        //
+        //Second Digit:
+        //  X1X: A newer stable version is available
+        //  X2X: A newer beta version is available
+        //  X4X: A newer nightly version is available
+        //  X8X: Unknown Version
+        //  X9X: Internal Version-Check-Error
+        //
+        //Thrid Digit:
+        //  XX0: The requirements havnt changed
+        //  XX1: A newer database version is required
+        //  XX2: A newer plugin version is required
+        //  XX3: A newer plugin and database version is required
+        //
+        $installed_version = json_decode(file_get_contents("./application/config/webpanel_version.json"));
+        $available_version = json_decode(file_get_contents("http://sourcedonates.com/store-webpanel/webpanel_version.json"));
+
+        $version_data = array(); //data returned to the view
+        $return_code = 900;
+        $update_commit = "";
+
+        //get the running version type
+        $installed_version_type = $installed_version->version_details->type;
+
+        //check if there is a newer version type available
+        switch($installed_version_type){
+            case 'stable': //if a stable version is available only 
+                if ($installed_version->version_number == $available_version->webpanel->stable->version_number) // check if the stable version is up2date with the available stable version
+                {
+                   $return_code = 0; //version is up2date
+                }
+                else
+                {
+                    $return_code = 110; //version is outdated
+                    $update_commit = $available_version->webpanel->stable->version_details->commit;
+                }
+                break;
+            case 'beta':
+                if ($installed_version->version_number == $available_version->webpanel->beta->version_number) // check if the stable version is up2date with the available stable version
+                {
+                   $return_code = 0; //beta version is up2date, but check if there is a newer stable
+
+                   if ($installed_version->version_details->major < $available_version->webpanel->stable->version_details->major ||
+                        $installed_version->version_details->minor < $available_version->webpanel->stable->version_details->minor ||
+                        $installed_version->version_details->patch < $available_version->webpanel->stable->version_details->patch)
+                   {
+                        $return_code = 210;
+                        $update_commit = $available_version->webpanel->stable->version_details->commit;
+                   }
+                }
+                else
+                {
+                    $return_code = $return_code = 220;
+                    $update_commit = $available_version->webpanel->beta->version_details->commit;
+                }
+                break;
+            case 'nightly':
+                if ($installed_version->version_number == $available_version->webpanel->nightly->version_number) // check if the stable version is up2date with the available stable version
+                {
+                   $return_code = 0; // nightly version is up2date, but check if there is a newer beta
+
+                   //check if a newer nightly version is available
+                   if ($installed_version->version_details->major < $available_version->webpanel->beta->version_details->major ||
+                        $installed_version->version_details->minor < $available_version->webpanel->beta->version_details->minor ||
+                        $installed_version->version_details->patch < $available_version->webpanel->beta->version_details->patch)
+                   {
+                        $return_code = 420;
+                        $update_commit = $available_version->webpanel->beta->version_details->commit;
+                   }
+                }
+                else
+                {
+                    $return_code = $return_code = 440;
+                    $update_commit = $available_version->webpanel->nightly->version_details->commit;
+                }
+                break;
+            default:
+                $return_code = 980;
+
+        }
+
+        $version_data["return_code"] = $return_code; // return code
+        $version_data["update_commit"] = $update_commit; // commit
+        return $version_data;    }
 
     function shrink_json($json)
     {

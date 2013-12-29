@@ -1,0 +1,20 @@
+{
+    "version_name": "",
+    "version_number": "1.2.3",
+    "version_details": {
+        "major": "1",
+        "minor": "2",
+        "patch": "3",
+        "type": "stable"
+    },
+    "requirements": {
+        "store-version": {
+            "store_version_name": "1.2-dev",
+            "store_version_commit": "2999784fb36fa6e06ff2c3f151aab2ce49e0ec0f"
+        },
+        "database-version": {
+            "database_version_name": "3",
+            "database_version_commit": "1d927422242be3c69629b7dc979816bc85c79934"
+        }
+    }
+}
