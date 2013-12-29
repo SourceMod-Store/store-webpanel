@@ -50,11 +50,15 @@ class Tools extends CI_Controller
         $data['version'] = $this->tools_model->get_installed_version();
         
         $webpanel_version_installed = $this->tools_model->get_installed_version();
-        $webpanel_version_current = $this->tools_model->get_current_version();
+        $webpanel_version_stable = $this->tools_model->get_stable_version();
+        $webpanel_version_beta = $this->tools_model->get_beta_version();
+        $webpanel_version_nightly = $this->tools_model->get_nightly_version();
 
         $data['webpanel_version_installed'] = $webpanel_version_installed;
-        $data['webpanel_version_current'] = $webpanel_version_current;
-        $data['webpanel_version_match'] = $this->tools_model->check_version($webpanel_version_current, $webpanel_version_installed);
+        $data['webpanel_version_stable'] = $webpanel_version_stable;
+        $data['webpanel_version_beta'] = $webpanel_version_beta;
+        $data['webpanel_version_nightly'] = $webpanel_version_nightly;
+        $data['webpanel_version_data'] = $this->tools_model->check_version();
 
 
         $this->load->view('parts/header', $data);
