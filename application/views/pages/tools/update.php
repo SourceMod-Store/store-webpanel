@@ -6,6 +6,7 @@
     <h1>Update Checker</h1>
 </div>
 <h3>Store Control Panel</h3>
+<!--
 <?php if ($webpanel_version_match == "dev-version"): ?>
 <div class="alert alert-error"><strong>Be Aware!</strong> You're currently using a development version of the webpanel. The Update checker does not work for dev versions.</div>
 <?php elseif ($webpanel_version_match == "outofdate"): ?>
@@ -13,8 +14,12 @@
 <?php elseif ($webpanel_version_match == "up2date"): ?>
 <div class="alert alert-success"><strong>Congrats !</strong> You are running the latest version of the Webpanel!</div>
 <?php endif; ?>
-<p>Your Version: <?php echo $webpanel_version_installed; ?><br>
-    Current Version: <strong><?php echo $webpanel_version_current; ?></strong></p>
+-->
+<p>Your Version: <?php echo $webpanel_version_installed; ?></p>
+<p>Current Stable Version: <strong><?php echo $webpanel_version_stable; ?></strong></p>
+<p>Current Beta Version <?php echo $webpanel_version_beta; ?></p>
+<p>Current Nightly Version <?php echo $webpanel_version_nightly; ?></p>
+<p>Update Code: <?php echo $webpanel_version_data['return_code']?></p>
 <!--
 <h3>Store Plugin</h3>
 <div class="alert alert-error"><strong>Oh No!</strong> One or more of your servers is running an old version!</div>
