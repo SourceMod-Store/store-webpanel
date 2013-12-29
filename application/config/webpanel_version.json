@@ -5,8 +5,7 @@
         "major": "1",
         "minor": "2",
         "patch": "3",
-        "type": "beta",
-        "commit": "33df85a8651d0845d9059a947e21479a6a16bd82"
+        "type": "stable"
     },
     "requirements": {
         "store-version": {

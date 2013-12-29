@@ -79,6 +79,7 @@ class Tools_Model extends CI_Model
 
         $version_data = array(); //data returned to the view
         $return_code = 900;
+        $update_commit = "";
 
         //get the running version type
         $installed_version_type = $installed_version->version_details->type;
@@ -93,6 +94,7 @@ class Tools_Model extends CI_Model
                 else
                 {
                     $return_code = 110; //version is outdated
+                    $update_commit = $available_version->webpanel->stable->version_details->commit;
                 }
                 break;
             case 'beta':
@@ -105,11 +107,13 @@ class Tools_Model extends CI_Model
                         $installed_version->version_details->patch < $available_version->webpanel->stable->version_details->patch)
                    {
                         $return_code = 210;
+                        $update_commit = $available_version->webpanel->stable->version_details->commit;
                    }
                 }
                 else
                 {
                     $return_code = $return_code = 220;
+                    $update_commit = $available_version->webpanel->beta->version_details->commit;
                 }
                 break;
             case 'nightly':
@@ -123,11 +127,13 @@ class Tools_Model extends CI_Model
                         $installed_version->version_details->patch < $available_version->webpanel->beta->version_details->patch)
                    {
                         $return_code = 420;
+                        $update_commit = $available_version->webpanel->beta->version_details->commit;
                    }
                 }
                 else
                 {
                     $return_code = $return_code = 440;
+                    $update_commit = $available_version->webpanel->nightly->version_details->commit;
                 }
                 break;
             default:
@@ -135,10 +141,9 @@ class Tools_Model extends CI_Model
 
         }
 
-        $version_data["return_code"] = $return_code;
-        return $version_data;
-
-    }
+        $version_data["return_code"] = $return_code; // return code
+        $version_data["update_commit"] = $update_commit; // commit
+        return $version_data;    }
 
     function shrink_json($json)
     {
