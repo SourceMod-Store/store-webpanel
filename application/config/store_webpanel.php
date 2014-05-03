@@ -9,3 +9,5 @@ if (!defined('BASEPATH'))
   | If the new login system should be enabled
  */
 $config['storewebpanel_enable_loginsystem'] = 1;
+
+$config['storewebpanel_api_key'] = 'testapikey';

@@ -6,30 +6,35 @@
     <h1>Users</h1>
 </div>
 <script type="text/javascript">
-$(document).ready(function() {
-    $('#manageUsers').dataTable();
-} );
+    $(document).ready(function() {
+        $('#manageUsers').dataTable({
+            "bProcessing": true,
+            "bServerSide": true,
+            "aoColumns": [
+                null,
+                null,
+                null,
+                null,
+                {"bSortable": false }
+            ],
+            "sAjaxSource": "<?php echo base_url('/'); ?>index.php/users/server_process"
+        });
+    });
 </script>
 <table id="manageUsers" class="table table-bordered table-striped table-hover">
     <thead>
         <tr>
             <th>ID</th>
-            <th>User</th>
             <th>Auth</th>
+            <th>Name</th>
             <th>Credits</th>
-            <th>Item Count</th>
+            <th>User Items</th>
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($users as $user): ?>
-            <tr>
-                <td><?= $user['id'] ?></td>
-                <td><a href="<?php echo base_url('index.php/users/edit') . '/' . $user['id'] ?>"><?= $user['name'] ?></a></td>
-                <td><?= $user['auth'] ?></td>
-                <td><?= $user['credits'] ?></td>
-                <td><?= $user['num_items'] ?></td>
-            </tr>
-        <?php endforeach; ?>
+        <tr>
+            <td colspan="5" class="dataTables_empty">Loading data from server</td>
+        </tr>
     </tbody>
 </table>
 <div class="pagination">
