@@ -6,13 +6,20 @@
     <h1>Users</h1>
 </div>
 <script type="text/javascript">
-$(document).ready(function() {
-    $('#manageUsers').dataTable({
-        "bProcessing": true,
-        "bServerSide": true,
-        "sAjaxSource": "<?php echo base_url('/'); ?>index.php/users/server_process"
+    $(document).ready(function() {
+        $('#manageUsers').dataTable({
+            "bProcessing": true,
+            "bServerSide": true,
+            "aoColumns": [
+                null,
+                null,
+                null,
+                null,
+                {"bSortable": false }
+            ],
+            "sAjaxSource": "<?php echo base_url('/'); ?>index.php/users/server_process"
+        });
     });
-} );
 </script>
 <table id="manageUsers" class="table table-bordered table-striped table-hover">
     <thead>
@@ -21,12 +28,13 @@ $(document).ready(function() {
             <th>Auth</th>
             <th>Name</th>
             <th>Credits</th>
+            <th>User Items</th>
         </tr>
     </thead>
     <tbody>
-    <tr>
+        <tr>
             <td colspan="5" class="dataTables_empty">Loading data from server</td>
-    </tr>
+        </tr>
     </tbody>
 </table>
 <div class="pagination">

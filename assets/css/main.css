@@ -81,3 +81,11 @@ th:hover{
 .dataTables_paginate a:first-child{
 	padding-left: 0;
 }
+
+.floatleft,.dataTables_info{
+	float: left;
+}
+
+.dataTables_paginate{
+	float: right;
+}

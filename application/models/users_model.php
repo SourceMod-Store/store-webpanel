@@ -50,9 +50,7 @@ class Users_Model extends CI_Model
             $i = 0;
             foreach ($array_users as $user)
             {
-                $DB_Main->where('user_id', $user['id']);
-                $query_users_items = $DB_Main->get('store_users_items');
-                $array_users[$i]['num_items'] = $query_users_items->num_rows();
+                $array_users[$i]['num_items'] = $this->get_user_items($user['id']);
                 $i++;
             }
 
@@ -67,6 +65,15 @@ class Users_Model extends CI_Model
             return array();
     }
 
+    function get_user_items_count($user_id)
+    {
+        $DB_Main = $this->load->database('default', TRUE);
+        $DB_Main->where('user_id', $user_id);
+        $query_users_items = $DB_Main->get('store_users_items');
+        return $query_users_items->num_rows();
+    }
+    
+    
     function get_user($user_id)
     {
         $DB_Main = $this->load->database('default', TRUE);
