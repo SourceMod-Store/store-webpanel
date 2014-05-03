@@ -2,6 +2,7 @@
 */config/database.php
 */config/config.php
 */installer/*
+*/installer_old/*
 */logs/log-*.php
 */logs/!index.html
 */cache/*
