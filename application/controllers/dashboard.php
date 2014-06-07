@@ -24,8 +24,18 @@ class Dashboard extends CI_Controller
         $data['page'] = 'dashboard';
         $data['version'] = $this->tools_model->get_installed_version();
 
-        $data['top_users'] = $this->users_model->get_users(0, 'credits desc', 5);
-        $data['top_items'] = $this->items_model->get_top_items(5);
+        if ($this->config->item('storewebpanel_dashboard_lite') == 0)
+        {
+            $data['top_users'] = $this->users_model->get_users(0, 'credits desc', 5);
+            $data['top_items'] = $this->items_model->get_top_items(5);
+        }
+        elseif ($this->config->item('storewebpanel_dashboard_lite') == 1)
+        {
+            $data['top_users'] = array();
+            $data['top_items'] = array();
+        }
+
+
 
         $this->load->view('parts/header', $data);
         $this->load->view('pages/dashboard/dashboard', $data);
