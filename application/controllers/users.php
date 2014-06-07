@@ -190,7 +190,7 @@ class Users extends CI_Controller {
             for ($i = 0; $i < count($aColumns); $i++) {
                 if ($aColumns[$i] == "id") {
                     /* Link id column to user edit page */
-                    $row[] = "<a href=\"".base_url("/index.php/users/edit/").$aRow[$aColumns[$i]]."\">".$aRow[$aColumns[$i]]."</a>";
+                    $row[] = "<a href=\"".base_url("/index.php/users/edit")."/".$aRow[$aColumns[$i]]."\">".$aRow[$aColumns[$i]]."</a>";
                 } else if ($aColumns[$i] != ' ') {
                     /* General output */
                     $row[] = $aRow[$aColumns[$i]];
