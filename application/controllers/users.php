@@ -79,7 +79,7 @@ class Users extends CI_Controller {
         /*
          * MySQL connection
          */
-        $gaSql['link'] = mysql_pconnect($gaSql['server'], $gaSql['user'], $gaSql['password']) or
+        $gaSql['link'] = @mysql_pconnect($gaSql['server'], $gaSql['user'], $gaSql['password']) or
                 die('Could not open connection to server');
 
         mysql_select_db($gaSql['db'], $gaSql['link']) or

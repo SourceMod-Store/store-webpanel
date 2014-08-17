@@ -114,7 +114,7 @@ class Items_Model extends CI_Model
             if ($post['attrs'] != "")
             {
                 $attrs = json_encode(json_decode($post['attrs']), JSON_UNESCAPED_SLASHES);
-                echo "attrs :" . $attrs . ": ";
+                //echo "attrs :" . $attrs . ": ";
             }
             else
             {

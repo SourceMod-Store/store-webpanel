@@ -36,16 +36,9 @@
             <li><a href="<?php echo base_url("index.php/tools/json_check");?>">JSON Checker</a></li>
             <li><a href="<?php echo base_url("index.php/tools/json_shrink");?>">JSON Shrinker</a></li>
             <li><a href="<?php echo base_url("index.php/tools/update");?>">Update Checker</a></li>
-            <li><a href="http://wiki.sourcedonates.com/x/DgAF" target="_blank">Help</a></li>
+            <li><a href="http://github.com/arrow768/store-webpanel" target="_blank">Help</a></li>
           </ul>
         </li>
-        <!--<li class="dropdown <?php if($page == "redeem"){ echo "active"; }?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Redeem System <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="<?php echo base_url("index.php/redeem");?>">Manage</a></li>
-            <li><a href="<?php echo base_url("index.php/redeem/add");?>">Add Redeem Code</a></li>
-            <li><a href="<?php echo base_url("index.php/redeem/log");?>">View Log</a></li>
-          </ul>
-        </li>-->
         <li class="dropdown <?php if($page == "auth"){ echo "active"; }?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Auth <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="<?php echo base_url("index.php/auth");?>">Manage</a></li>
