@@ -8,7 +8,7 @@
   <p><strong>This is not a backup system.</strong> As always you should perform a full MySQL database backup regularly to ensure data safety.</p>
   <div>
     <h4>Import Store Items</h4>
-    <form action="<?php echo base_url('index.php/tools/import'); ?>" enctype="multipart/form-data" method="post">
+    <form action="<?php echo base_url('index.php/tools/confirm_import'); ?>" enctype="multipart/form-data" method="post">
 		<p>Each JSON file you upload contains items of one type. <strong>All of the items that you currently have under that type name will be deleted.</strong></p>
       <div class="control-group">
         <div class="controls">

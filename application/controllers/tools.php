@@ -23,7 +23,7 @@ class Tools extends CI_Controller
     {
         $data['page'] = 'tools';
         $data['version'] = $this->tools_model->get_installed_version();
-        
+
         $this->load->view('parts/header', $data);
         $this->load->view('pages/tools/impex', $data);
         $this->load->view('parts/footer');
@@ -33,7 +33,7 @@ class Tools extends CI_Controller
     {
         $data['page'] = 'tools';
         $data['version'] = $this->tools_model->get_installed_version();
-        
+
         $this->load->view('parts/header', $data);
         $this->load->view('pages/tools/json_check', $data);
         $this->load->view('parts/footer');
@@ -48,7 +48,7 @@ class Tools extends CI_Controller
     {
         $data['page'] = 'tools';
         $data['version'] = $this->tools_model->get_installed_version();
-        
+
         $webpanel_version_installed = $this->tools_model->get_installed_version();
         $webpanel_version_stable = $this->tools_model->get_stable_version();
         $webpanel_version_beta = $this->tools_model->get_beta_version();
@@ -66,41 +66,69 @@ class Tools extends CI_Controller
         $this->load->view('parts/footer');
     }
 
-    public function import()
+    public function confirm_import()
     {
         $config['upload_path'] = './uploads/';
         $config['allowed_types'] = 'json';
+        $data['page'] = 'tools';
+        $data['version'] = $this->tools_model->get_installed_version();
 
         $this->load->library('upload', $config);
 
         if ($this->upload->do_upload('importFile'))
         {
             $uploadData = $this->upload->data();
-            $json = json_decode(file_get_contents($uploadData['file_path'] . $uploadData['file_name']));
+            $json_string = file_get_contents($uploadData['file_path'] . $uploadData['file_name']);
+            $json = json_decode($json_string);
 
-            $this->items_model->delete_items_by_type($json->type);
+            $json_categories = "";
 
             foreach ($json->categories as $category)
             {
-                $category_id = $this->categories_model->add_category($category->display_name, $category->description, $category->require_plugin, $category->web_description, $category->web_color);
-                foreach ($category->items as $item)
-                {
-                    if (PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION >= 4)
-                    {
-                        $this->items_model->add_item($item->name, $item->display_name, $item->description, $item->web_description, $item->type, $item->loadout_slot, $item->price, json_encode($item->attrs, JSON_UNESCAPED_SLASHES), $item->is_buyable, $item->is_tradeable, $item->is_refundable, $category_id, $item->expiry_time, $item->flags = NULL);
-                    }
-                    else
-                    {
-                        $this->items_model->add_item($item->name, $item->display_name, $item->description, $item->web_description, $item->type, $item->loadout_slot, $item->price, json_encode($item->attrs), $item->is_buyable, $item->is_tradeable, $item->is_refundable, $category_id, $item->expiry_time, $item->flags = NULL);
-                    }
-                }
+                $json_categories .= $category->display_name;
+                $json_categories .= ";";
             }
+            
+            $effected_item_count = $this->items_model->get_item_count_by_type($json->type);
+            
+            $data['json_type'] = $json->type;
+            $data['json_categories'] = $json_categories;
+            $data['json_string'] = $this->tools_model->shrink_json($json_string);
+            $data['effected_item_count'] = $effected_item_count;
 
-            redirect('/items', 'refresh');
+            $this->load->view('parts/header', $data);
+            $this->load->view('pages/tools/confirm_import', $data);
+            $this->load->view('parts/footer');
         }
         else
         {
-            print_r($this->upload->display_errors());
+            $data['errors'] = $this->upload->display_errors();
+            $this->load->view('parts/header', $data);
+            $this->load->view('pages/tools/confirm_import', $data);
+            $this->load->view('parts/footer');
+        }
+    }
+
+    public function import()
+    {
+        $json = json_decode($this->input->post('json'));
+        
+        $this->items_model->delete_items_by_type($json->type);
+
+        foreach ($json->categories as $category)
+        {
+            $category_id = $this->categories_model->add_category($category->display_name, $category->description, $category->require_plugin, $category->web_description, $category->web_color);
+            foreach ($category->items as $item)
+            {
+                if (PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION >= 4)
+                {
+                    $this->items_model->add_item($item->name, $item->display_name, $item->description, $item->web_description, $item->type, $item->loadout_slot, $item->price, json_encode($item->attrs, JSON_UNESCAPED_SLASHES), $item->is_buyable, $item->is_tradeable, $item->is_refundable, $category_id, $item->expiry_time, $item->flags = NULL);
+                }
+                else
+                {
+                    $this->items_model->add_item($item->name, $item->display_name, $item->description, $item->web_description, $item->type, $item->loadout_slot, $item->price, json_encode($item->attrs), $item->is_buyable, $item->is_tradeable, $item->is_refundable, $category_id, $item->expiry_time, $item->flags = NULL);
+                }
+            }
         }
     }
 
@@ -141,26 +169,26 @@ class Tools extends CI_Controller
             echo "You have not entered a category to export";
         }
     }
-    
+
     public function json_shrink()
     {
         $data['page'] = 'tools';
         $data['version'] = $this->tools_model->get_installed_version();
-        
+
         $this->load->view('parts/header', $data);
         $this->load->view('pages/tools/shrink_json', $data);
         $this->load->view('parts/footer');
     }
-    
+
     public function json_shrink_process()
     {
         $items = $this->items_model->get_items();
-        
+
         foreach ($items as $key => $item)
         {
             $item['attrs'] = $this->tools_model->shrink_json($items[$key]['attrs']);
             $this->items_model->update_item($item);
-            echo "updated Item: ".$item['id']. "<hr>";
+            echo "updated Item: " . $item['id'] . "<hr>";
         }
     }
 
