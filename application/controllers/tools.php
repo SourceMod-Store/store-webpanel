@@ -88,9 +88,9 @@ class Tools extends CI_Controller
                 $json_categories .= $category->display_name;
                 $json_categories .= ";";
             }
-            
+
             $effected_item_count = $this->items_model->get_item_count_by_type($json->type);
-            
+
             $data['json_type'] = $json->type;
             $data['json_categories'] = $json_categories;
             $data['json_string'] = $this->tools_model->shrink_json($json_string);
@@ -111,8 +111,8 @@ class Tools extends CI_Controller
 
     public function import()
     {
-        $json = json_decode($this->input->post('json'));
-        
+        $json = json_decode(urldecode($this->input->post('json')));
+
         $this->items_model->delete_items_by_type($json->type);
 
         foreach ($json->categories as $category)
@@ -130,6 +130,7 @@ class Tools extends CI_Controller
                 }
             }
         }
+        redirect('items');
     }
 
     public function export()

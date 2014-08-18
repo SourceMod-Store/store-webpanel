@@ -24,12 +24,12 @@
     <div>
         <h4>Summary</h4>
         <p>All Items of the following type are going to be deleted: <?php echo $json_type; ?></p>
-        <p>The category contains <?php echo $effected_item_count; ?> item(s)</p>
+        <p><?php if($effected_item_count > 0 ) echo "<strong>"; ?>The category contains <?php echo $effected_item_count; ?> item(s)<?php if($effected_item_count > 0 ) echo "</strong>"; ?></p>
         <p>The following categories will be created: <?php echo $json_categories; ?></p>
         <form action="<?php echo base_url('index.php/tools/import'); ?>" enctype="multipart/form-data" method="post">
             <div class="control-group">
                 <div class="controls">
-                    <input type="hidden" name="json" value="<?php echo $json_string; ?>">
+                    <input type="hidden" name="json" value="<?php echo urlencode($json_string); ?>">
                     <button type="submit" class="btn btn-danger">Continue with the Import</button>
                 </div>
             </div>
