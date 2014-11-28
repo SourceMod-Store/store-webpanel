@@ -18,7 +18,7 @@ class Users extends CI_Controller {
 
     public function index() {
         $data['page'] = 'users';
-        $data['version'] = $this->tools_model->get_installed_version();
+        //$data['version'] = $this->tools_model->get_installed_version();
         $search = $this->input->get('s');
 
         //$data['users'] = $this->users_model->get_users($search);
@@ -31,7 +31,7 @@ class Users extends CI_Controller {
 
     public function edit($slug) {
         $data['page'] = 'users';
-        $data['version'] = $this->tools_model->get_installed_version();
+        //$data['version'] = $this->tools_model->get_installed_version();
 
         $data['user'] = $this->users_model->get_user($slug);
         $data['user_items'] = $this->users_model->get_user_items($slug);
