@@ -9,7 +9,7 @@ class pub extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model('redeem_model');
+        //$this->load->model('redeem_model');
         $this->load->helper('url');
     }
 
@@ -31,17 +31,16 @@ class pub extends CI_Controller
         $auth = $this->users_model->steamid_to_auth($post['steamid']);
 
         $code_data = $this->redeem_model->get_code($code);
-        
-        //Check for errors & generate the error string
 
+        //Check for errors & generate the error string
         //Check if the user exists in the DB
         $store_userid = $this->users_model->get_storeuserid($auth);
-        if ( !is_int($store_userid))
+        if (!is_int($store_userid))
         {
             $error_num += 1;
             $error_string += 'The user doesnt exist in the DB </br>';
         }
-        
+
         //Check if a valid code
         if ($code_data != 0 && $error_num = 0)
         {
@@ -92,7 +91,7 @@ class pub extends CI_Controller
         {
             //echo 6;
             $this->redeem_model->add_log($code, $auth);
-            
+
             if ($credits != 0)
             {
                 $this->users_model->add_credits($store_userid, $credits);
@@ -115,7 +114,7 @@ class pub extends CI_Controller
             //echo 9;
             $data['status'] = $error_string;
         }
-        
+
 
         $this->load->view('pages/redeem/redeem_code_process', $data);
     }
@@ -126,14 +125,15 @@ class pub extends CI_Controller
         $error_image = base_url("/assets/img/id_cache/avatar.jpg");
         $steam_id = $_POST["sendValue"];
         $friend_id = $this->GetFriendID($steam_id);
-
-
-        $url = "http://steamcommunity.com/profiles/" . $friend_id . "?xml=1";
-        $xml = @simplexml_load_string(file_get_contents($url));
-        $avatar_url = $xml->avatarMedium;
-        $player_name = $xml->steamID;
-        file_put_contents($path_to_cache . $friend_id . ".jpg", file_get_contents($avatar_url));
-        file_put_contents($path_to_cache . $friend_id . ".txt", $player_name);
+        if ($friend_id != 0)
+        {
+            $url = "http://steamcommunity.com/profiles/" . $friend_id . "?xml=1";
+            $xml = @simplexml_load_string(file_get_contents($url));
+            $avatar_url = $xml->avatarMedium;
+            $player_name = $xml->steamID;
+            file_put_contents($path_to_cache . $friend_id . ".jpg", file_get_contents($avatar_url));
+            file_put_contents($path_to_cache . $friend_id . ".txt", $player_name);
+        }
     }
 
     function get_img()
@@ -149,7 +149,7 @@ class pub extends CI_Controller
         }
         //echo $friend_id;
         $player_url = "http://steamcommunity.com/profiles/" . $friend_id . "";
-        if (!isset($friend_id))
+        if (!isset($friend_id) || $friend_id == 0)
         {
             echo json_encode(array("returnValue" => '' . $error_image . ''));
             exit;
@@ -216,6 +216,11 @@ class pub extends CI_Controller
     function test_redeem()
     {
         //$this->load->view('pages/redeem/test_code');
+    }
+
+    function bot_process()
+    {
+        
     }
 
 }

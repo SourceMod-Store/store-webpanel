@@ -61,7 +61,8 @@ class Users_Model extends CI_Model
             }
 
             return $array_users;
-        }else
+        }
+        else
             return array();
     }
 
@@ -72,8 +73,7 @@ class Users_Model extends CI_Model
         $query_users_items = $DB_Main->get('store_users_items');
         return $query_users_items->num_rows();
     }
-    
-    
+
     function get_user($user_id)
     {
         $DB_Main = $this->load->database('default', TRUE);

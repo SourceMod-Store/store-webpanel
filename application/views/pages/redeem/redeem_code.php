@@ -24,8 +24,11 @@
                     $.post("<?php echo base_url("/index.php/pub/get_img"); ?>",{ sendValue: str },
 
                     function(data){
+                        //$('#steamid-avatar').wrap("<a target='_blank' class='generated_link' href='"+data.player_url+"'></a>");
                         
-                        $('#steamid-avatar').wrap("<a target='_blank' class='generated_link' href='"+data.player_url+"'></a>");
+                        var steamlink = document.getElementById('steam-link');
+                        steamlink.setAttribute('href',data.player_url)
+                        
                         $('#steamid-avatar').fadeIn(500).attr('src', ''+data.returnValue+'');
                         $('#name').attr('value', ''+data.playerName+'');
                         console.log(data);
@@ -46,12 +49,13 @@
                 $form_inputs.bind('focus', function(){
                     $rainbow_and_border.addClass('end').removeClass('unfocus start');
                 });
+                /*
                 $form_inputs.bind('blur', function(){
                     $rainbow_and_border.addClass('unfocus start').removeClass('end');
                 });
                 $form_inputs.first().delay(800).queue(function() {
                     $(this).focus();
-                });
+                }); */
             });
         </script>
         <style>
@@ -228,7 +232,9 @@
                     <label for="name">Your Name</label>
                     <input id="name" name="name" disabled placeholder="Filled out Automatically" size="40">
                     <label for="steamid-avatar">Your SteamImage</label>
-                    <img id="steamid-avatar" width="50" height="50" src="<?php echo base_url("/assets/img/id_cache/avatar.jpg"); ?>">
+                    <a id="steam-link" href="#" target="_blank">
+                        <img id="steamid-avatar" width="50" height="50" src="<?php echo base_url("/assets/img/id_cache/avatar.jpg"); ?>">
+                    </a>                    
                     <input type="submit" value="Submit"/>
                 </form>
             </div>
