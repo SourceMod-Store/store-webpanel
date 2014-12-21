@@ -63,9 +63,26 @@ class Users_Model extends CI_Model
             return $array_users;
         }
         else
+        {
             return array();
+        }
     }
 
+    function get_userid_by_auth($auth)
+    {
+        $DB_Main = $this->load->database('default', TRUE);
+        $query_user = $DB_Main->get('store_users')->where('auth',$auth);
+        if($query_user->num_rows() == 1)
+        {
+            $row_user = $query_user->row();
+            return $row_user->id;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
     function get_user_items_count($user_id)
     {
         $DB_Main = $this->load->database('default', TRUE);
@@ -167,6 +184,23 @@ class Users_Model extends CI_Model
             $result = substr($result, 0, strpos($result, "."));
         }
         return $result;
+    }
+
+    function communityid_to_steam($i64friendID)
+    {
+        $tmpfriendID = $i64friendID;
+        $iServer = "1";
+        if (bcmod($i64friendID, "2") == "0")
+        {
+            $iServer = "0";
+        }
+        $tmpfriendID = bcsub($tmpfriendID, $iServer);
+        if (bccomp("76561197960265728", $tmpfriendID) == -1)
+        {
+            $tmpfriendID = bcsub($tmpfriendID, "76561197960265728");
+        }
+        $tmpfriendID = bcdiv($tmpfriendID, "2");
+        return ("STEAM_0:" . $iServer . ":" . $tmpfriendID);
     }
 
     function auth_to_steamid($authid)

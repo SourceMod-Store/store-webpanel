@@ -220,7 +220,59 @@ class pub extends CI_Controller
 
     function bot_process()
     {
-        
+        //Status:
+        //0: New Item
+        //10: Item being processed
+        //20: No Itemvalue associated
+        //30: User doesnt exist
+        //99: Credits awarded
+        $this->load->model('users_model');
+        $this->load->model('bot_model');
+
+        //Get all outstanding donations from the db
+        $DB_Main = $this->load->database('default', TRUE);
+        $query_botdonations = $DB_Main->get('bot_donations');
+
+        //*LOOP*
+        foreach ($query_botdonations->result() as $botdonation)
+        {
+            //Check if the donation has the status 1 with a new query
+            $item_status = $this->bot_model->get_donationstatus($botdonation->id);
+            if ($item_status == 0)
+            {
+                //Set the donation status to 10
+                $this->bot_model->set_donationstatus($botdonation->id, 10);
+
+                //Check if the use who donated the item exists --> If not set status to 30    
+                $auth = $this->users_model->steamid_to_auth(communityid_to_steam($botdonation->steamId));
+                $user_id = $this->users_model->get_userid_by_auth($auth);
+                if ($user_id != false)
+                {
+                    //Get the itemvalue for the donation
+                    $itemvalue = $this->bot_model->get_itemvalue($botdonation->itemId);
+
+                    if ($itemvalue != false)
+                    {
+                        //Award the credits to the user
+                        $this->users_model->add_credits($user_id, $itemvalue);
+
+                        //Set the status to 99
+                        $this->bot_model->set_donationstatus($botdonation->id, 99);
+                    }
+                    else
+                    {
+                        //No Value associated with the item
+                        $this->bot_model->set_donationstatus($botdonation->id, 20);
+                    }
+                }
+                else
+                {
+                    //User doesnt exit
+                    $this->bot_model->set_donationstatus($botdonation->id, 30);
+                }
+            }
+        }
+        //*END LOOP*
     }
 
 }

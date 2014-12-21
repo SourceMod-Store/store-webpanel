@@ -41,27 +41,26 @@
         <li class="dropdown <?php if($page == "bot"){ echo "active"; }?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Trade Bot <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="<?php echo base_url("index.php/bot");?>">Bot Overview</a></li>
-            <li><a href="<?php echo base_url("index.php/bot/show_itemvalue");?>">Item Values</a></li>
-            <li><a href="<?php echo base_url("index.php/bot/donations");?>">Received Items</a></li>
-            <li><a href="http://github.com/arrow768/store-webpanel" target="_blank">Help</a></li>
+            <li><a href="<?php echo base_url("index.php/bot/show_itemvalues");?>">Item Values</a></li>
+            <li><a href="<?php echo base_url("index.php/bot/show_itemdonations");?>">Received Items</a></li>
           </ul>
         </li>
-        <li class="dropdown <?php if($page == "auth"){ echo "active"; }?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Auth <b class="caret"></b></a>
+        <!--<li class="dropdown <?php if($page == "auth"){ echo "active"; }?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Auth <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="<?php echo base_url("index.php/auth");?>">Manage</a></li>
             <li><a href="<?php echo base_url("index.php/auth/logout");?>">Logout</a></li>
           </ul>
-        </li>
+        </li>-->
       </ul>
-<!--      <ul class="nav pull-right">
+     <ul class="nav pull-right">
         <li class="divider-vertical"></li>
-        <li class="dropdown <?php if($page == "account"){ echo "active"; }?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
+        <li class="dropdown <?php if($page == "auth"){ echo "active"; }?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="<?php echo base_url("index.php/account");?>">Edit Account</a></li>
+            <li><a href="<?php echo base_url("index.php/auth");?>">Edit Account</a></li>
             <li class="divider"></li>
-            <li><a href="index.html">Logout</a></li>
+            <li><a href="index.php/auth/logout">Logout</a></li>
           </ul>
         </li>
-      </ul>-->
+      </ul>
     </div>
   </div>
