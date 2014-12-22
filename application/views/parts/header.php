@@ -28,14 +28,9 @@
             <li><a href="<?php echo base_url("index.php/items/add");?>">Add New Item</a></li>
           </ul>
         </li>
-        <li class="<?php if($page == "users"){ echo "active"; }?>"><a href="<?php echo base_url("index.php/users");?>">Users</a></li>
-        <li class="dropdown <?php if($page == "tools"){ echo "active"; }?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools <b class="caret"></b></a>
+        <li class="dropdown <?php if($page == "users"){ echo "active"; }?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Users <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="<?php echo base_url("index.php/tools/impex");?>">Import/Export System</a></li>
-            <li><a href="<?php echo base_url("index.php/tools/json_check");?>">JSON Checker</a></li>
-            <li><a href="<?php echo base_url("index.php/tools/json_shrink");?>">JSON Shrinker</a></li>
-            <li><a href="<?php echo base_url("index.php/tools/update");?>">Update Checker</a></li>
-            <li><a href="http://github.com/arrow768/store-webpanel" target="_blank">Help</a></li>
+            <li><a href="<?php echo base_url("index.php/users");?>">BManage</a></li>
           </ul>
         </li>
         <li class="dropdown <?php if($page == "bot"){ echo "active"; }?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Trade Bot <b class="caret"></b></a>
@@ -43,6 +38,22 @@
             <li><a href="<?php echo base_url("index.php/bot");?>">Bot Overview</a></li>
             <li><a href="<?php echo base_url("index.php/bot/show_itemvalues");?>">Item Values</a></li>
             <li><a href="<?php echo base_url("index.php/bot/show_itemdonations");?>">Received Items</a></li>
+          </ul>
+        </li>
+        <li class="dropdown <?php if($page == "redeem"){ echo "active"; }?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Redeem System <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="<?php echo base_url("index.php/redeem/codes");?>">Code Management</a></li>
+            <li><a href="<?php echo base_url("index.php/redeem/add_code");?>">Add Code</a></li>
+            <li><a href="<?php echo base_url("index.php/redeem/logs");?>">Log Management</a></li>
+          </ul>
+        </li>
+        <li class="dropdown <?php if($page == "tools"){ echo "active"; }?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="<?php echo base_url("index.php/tools/impex");?>">Import/Export System</a></li>
+            <li><a href="<?php echo base_url("index.php/tools/json_check");?>">JSON Checker</a></li>
+            <li><a href="<?php echo base_url("index.php/tools/json_shrink");?>">JSON Shrinker</a></li>
+            <li><a href="<?php echo base_url("index.php/tools/update");?>">Update Checker</a></li>
+            <li><a href="http://github.com/arrow768/store-webpanel" target="_blank">Help</a></li>
           </ul>
         </li>
         <!--<li class="dropdown <?php if($page == "auth"){ echo "active"; }?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Auth <b class="caret"></b></a>

@@ -20,19 +20,19 @@ $(document).ready(function() {
             <th>Credits</th>
             <th>Redeem Times - User</th>
             <th>Redeem Times - Total</th>
-            <th>Expire Time (Unixtime)</th>
+            <th>Expire Time </th>
         </tr>
     </thead>
-    <?php foreach($codes->result() as $row):?>
+    <?php foreach($codes as $code):?>
     <tbody>
         <tr>
-            <td><?php echo $row->id;?></td>
-            <td><?php echo $row->code;?></td>
-            <td><?php echo $row->itemids;?></td>
-            <td><?php echo $row->credits;?></td>
-            <td><?php echo $row->redeem_times_user;?></td>
-            <td><?php echo $row->redeem_times_total;?></td>
-            <td><?php echo $row->expire_time;?></td>
+            <td><?php echo $code->id;?></td>
+            <td><?php echo $code->code;?></td>
+            <td><?php echo $code->itemids;?></td>
+            <td><?php echo $code->credits;?></td>
+            <td><?php echo $code->redeem_times_user;?></td>
+            <td><?php echo $code->redeem_times_total;?></td>
+            <td><?php echo $code->expire_time;?></td>
         </tr>
     </tbody>
     <?php endforeach;?>

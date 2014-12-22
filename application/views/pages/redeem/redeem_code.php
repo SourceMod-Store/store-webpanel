@@ -20,7 +20,7 @@
 
                 function sendValue(str){
                     // $.post("php/get_image.php",{ sendValue: str },
-                    $('#steamid-avatar').fadeOut(500);
+                    // $('#steamid-avatar').fadeOut(500);
                     $.post("<?php echo base_url("/index.php/pub/get_img"); ?>",{ sendValue: str },
 
                     function(data){
@@ -29,7 +29,8 @@
                         var steamlink = document.getElementById('steam-link');
                         steamlink.setAttribute('href',data.player_url)
                         
-                        $('#steamid-avatar').fadeIn(500).attr('src', ''+data.returnValue+'');
+                        //$('#steamid-avatar').fadeIn(500).attr('src', ''+data.returnValue+'');
+                        $('#steamid-avatar').attr('src', ''+data.returnValue+'');
                         $('#name').attr('value', ''+data.playerName+'');
                         console.log(data);
                     }, "json");

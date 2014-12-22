@@ -59,7 +59,9 @@ class pub extends CI_Controller
             //Check if the number of redeem times is limited; Only run if no errors are detected
             if ($code_data['redeem_times_total'] != 0 && $error_num == 0)
             {
-                if ($this->redeem_model->get_redeemed_times_total($code) >= $code_data['redeem_times_total'])
+                $times_total = $this->redeem_model->get_redeemed_times_total($code);
+                echo "times_total:".$times_total.";";
+                if ($times_total >= $code_data['redeem_times_total'])
                 {
                     $error_num += 1;
                     $error_string .= 'The code you want to use has been used to often </br>';
@@ -70,11 +72,13 @@ class pub extends CI_Controller
             //Check if the number of times a single user can redeem a code is limited
             if ($code_data['redeem_times_user'] != 0 && $error_num == 0)
             {
-                if ($this->redeem_model->get_redeemed_times_user($code, $auth) >= $code_data['redeem_times_user'])
+                $times_user = $this->redeem_model->get_redeemed_times_user($code, $auth);
+                echo "times_user:".$times_user.";";
+                if ($times_user >= $code_data['redeem_times_user'])
                 {
                     $error_num += 1;
                     $error_string .= 'You have used this code too often </br>';
-                    //echo 3;
+                    echo 3;
                 }
             }
 

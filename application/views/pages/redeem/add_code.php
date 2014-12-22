@@ -42,7 +42,7 @@
             </div>
         </div>
         <div class="control-group">
-            <label class="control-label" for="redeemExpire">Expire Date (Unixtime)</label>
+            <label class="control-label" for="redeemExpire">Expire Date</label>
             <div class="controls">
                 <input type="text" id="redeemExpire" name="expire">
             </div>

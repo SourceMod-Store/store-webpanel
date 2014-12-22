@@ -23,11 +23,18 @@ class Redeem_Model extends CI_Model
         }
     }
     
+    public function get_codes()
+    {
+        $DB_Main = $this->load->database('default', TRUE);
+        $query_codes = $DB_Main->get('store_redeem_codes');
+        return $query_codes->result();
+    }
+    
     public function get_redeemed_times_total($code)
     {
         $DB_Main = $this->load->database('default',TRUE);
-        
-        $query_times = $DB_Main->get('store_redeem_log')->where('code',$code);
+        $DB_Main->where('code',$code);
+        $query_times = $DB_Main->get('store_redeem_log');
         
         return $query_times->num_rows();
     }
@@ -35,8 +42,9 @@ class Redeem_Model extends CI_Model
     public function get_redeemed_times_user($code, $auth)
     {
         $DB_Main = $this->load->database('default',TRUE);
-        
-        $query_times = $DB_Main->get('store_redeem_log')->where('code',$code)->where('auth',$auth);
+        $DB_Main->where('code',$code);
+        $DB_Main->where('auth',$auth);
+        $query_times = $DB_Main->get('store_redeem_log');
         
         return $query_times->num_rows();
     }
