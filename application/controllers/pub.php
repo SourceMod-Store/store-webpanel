@@ -21,13 +21,17 @@ class pub extends CI_Controller
 
     function redeem_process()
     {
+        $this->load->model('users_model');
+        $this->load->model('redeem_model');
         $data[''] = '';
         $error_num = 0;
         $error_string = '';
+        
         $post = $this->input->post();
         $code = $post['code'];
         print_r($post);
-        $this->load->model('users_model');
+        
+        
         $auth = $this->users_model->steamid_to_auth($post['steamid']);
 
         $code_data = $this->redeem_model->get_code($code);
@@ -35,32 +39,31 @@ class pub extends CI_Controller
         //Check for errors & generate the error string
         //Check if the user exists in the DB
         $store_userid = $this->users_model->get_storeuserid($auth);
-        if (!is_int($store_userid))
+        
+        if ($store_userid == NULL)
         {
             $error_num += 1;
-            $error_string += 'The user doesnt exist in the DB </br>';
+            $error_string .= 'The user doesnt exist in the DB </br>';
         }
 
-        //Check if a valid code
-        if ($code_data != 0 && $error_num = 0)
+        //Check if code is valid
+        if ($code_data != NULL && $error_num == 0)
         {
             //Check if the code is expired
             if ($code_data['expire_time'] > time())
             {
                 $error_num += 1;
-                $error_string += 'The code you want to use is expired </br>';
-                //echo 1;
+                $error_string .= 'The code you want to use is expired </br>';
             }
 
             //Check if the number of redeem times is limited; Only run if no errors are detected
             if ($code_data['redeem_times_total'] != 0 && $error_num == 0)
             {
-                //echo "2_1";
                 if ($this->redeem_model->get_redeemed_times_total($code) >= $code_data['redeem_times_total'])
                 {
                     $error_num += 1;
-                    $error_string += 'The code you want to use has been used to often </br>';
-                    //echo 2;
+                    $error_string .= 'The code you want to use has been used to often </br>';
+                    echo 2;
                 }
             }
 
@@ -70,32 +73,34 @@ class pub extends CI_Controller
                 if ($this->redeem_model->get_redeemed_times_user($code, $auth) >= $code_data['redeem_times_user'])
                 {
                     $error_num += 1;
-                    $error_string += 'You have used this code to often </br>';
+                    $error_string .= 'You have used this code too often </br>';
                     //echo 3;
                 }
             }
 
             $credits = $code_data['credits'];
             $item_array = explode(',', $code_data['itemids']);
-            //echo 4;
+            echo 4;
         }
         else
         {
-            $error_num += 1; //Add error count;
-            $error_string += 'This code doesnt exist </br>';
-            //echo 5;
+            if($code_data == NULL)
+            {
+                $error_num += 1; //Add error count;
+                $error_string .= 'This code doesnt exist </br>';
+            }
         }
 
         //Check if no errors have been found
         if ($error_num == 0)
         {
-            //echo 6;
+            echo 6;
             $this->redeem_model->add_log($code, $auth);
 
             if ($credits != 0)
             {
                 $this->users_model->add_credits($store_userid, $credits);
-                //echo 7;
+                echo 7;
             }
 
             if ($item_array != 0)
@@ -104,19 +109,21 @@ class pub extends CI_Controller
                 foreach ($item_array as $item)
                 {
                     $this->items_model->add_useritem($store_userid, $item);
-                    //echo 8;
+                    echo 8;
                 }
             }
             $data['status'] = "Successfully processed the code";
+            $this->load->view('pages/redeem/redeem_code_process', $data);
         }
         else
         {
-            //echo 9;
+            echo 9;
             $data['status'] = $error_string;
+            $this->load->view('pages/redeem/redeem_code_process', $data);
         }
 
 
-        $this->load->view('pages/redeem/redeem_code_process', $data);
+        
     }
 
     function refresh_img()

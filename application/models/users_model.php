@@ -129,8 +129,7 @@ class Users_Model extends CI_Model
         }
         else
         {
-            echo "User does not exist in store DB";
-            log_message('error', 'User does not exist in the Store DB');
+            log_message('error', 'User with auth: '.$auth.' does not exist in the Store DB');
             return NULL;
         }
     }
