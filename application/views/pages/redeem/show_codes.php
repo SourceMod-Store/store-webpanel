@@ -8,10 +8,10 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#manageRedeem').dataTable();
+    $('#redeemManage').dataTable();
 } );
 </script>
-<table id="manageRedeem" class="table table-bordered table-striped table-hover">
+<table id="redeemManage" class="table table-bordered table-striped table-hover">
     <thead>
         <tr>
             <th>ID</th>
@@ -23,8 +23,8 @@ $(document).ready(function() {
             <th>Expire Time </th>
         </tr>
     </thead>
-    <?php foreach($codes as $code):?>
     <tbody>
+        <?php foreach($codes as $code):?>
         <tr>
             <td><?php echo $code->id;?></td>
             <td><?php echo $code->code;?></td>
@@ -34,6 +34,6 @@ $(document).ready(function() {
             <td><?php echo $code->redeem_times_total;?></td>
             <td><?php echo $code->expire_time;?></td>
         </tr>
+        <?php endforeach;?>
     </tbody>
-    <?php endforeach;?>
 </table>

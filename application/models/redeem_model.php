@@ -49,6 +49,13 @@ class Redeem_Model extends CI_Model
         return $query_times->num_rows();
     }
     
+    public function get_logs()
+    {
+        $DB_Main = $this->load->database('default',TRUE);
+        $query_logs = $DB_Main->get('store_redeem_log');
+        return $query_logs->result();
+    }
+    
     public function add_log($code,$auth,$timestamp=NULL)
     {
         $DB_Main = $this->load->database('default', TRUE);
@@ -56,6 +63,11 @@ class Redeem_Model extends CI_Model
         $data=array("code"=>$code,"auth"=>$auth);
         
         $DB_Main->insert('store_redeem_log',$data);
+    }
+    
+    public function add_code($code,$itemids=NULL,$credits=NULL,$times_total=NULL,$times_user=NULL,$expire_time=NULL)
+    {
+        
     }
     
 }

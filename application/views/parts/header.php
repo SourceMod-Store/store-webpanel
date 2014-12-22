@@ -12,8 +12,9 @@
 <body>
 <div class="container">
   <div class="navbar navbar-inverse">
+      <?php if($this->ion_auth->logged_in()):?>
     <div class="navbar-inner">
-	  <a class="brand" href="<?php echo base_url("/");?>"><img src="<?php echo base_url("assets/img/store_logo.png");?>" alt="Store Logo" /></a>
+      <a class="brand" href="<?php echo base_url("/");?>"><img src="<?php echo base_url("assets/img/store_logo.png");?>" alt="Store Logo" /></a>
       <ul class="nav">
         <li class="<?php if($page == "dashboard"){ echo "active"; }?>"><a href="<?php echo base_url("index.php/dashboard");?>">Dashboard</a></li>
         <li class="dropdown <?php if($page == "categories"){ echo "active"; }?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories <b class="caret"></b></a>
@@ -30,7 +31,7 @@
         </li>
         <li class="dropdown <?php if($page == "users"){ echo "active"; }?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Users <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="<?php echo base_url("index.php/users");?>">BManage</a></li>
+            <li><a href="<?php echo base_url("index.php/users");?>">Manage</a></li>
           </ul>
         </li>
         <li class="dropdown <?php if($page == "bot"){ echo "active"; }?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Trade Bot <b class="caret"></b></a>
@@ -69,9 +70,10 @@
           <ul class="dropdown-menu">
             <li><a href="<?php echo base_url("index.php/auth");?>">Edit Account</a></li>
             <li class="divider"></li>
-            <li><a href="index.php/auth/logout">Logout</a></li>
+            <li><a href="<?php echo base_url("index.php/auth/logout");?>">Logout</a></li>
           </ul>
         </li>
       </ul>
     </div>
+      <?php endif;?>
   </div>

@@ -34,8 +34,7 @@ class Redeem extends CI_Controller
     {
         $data['page'] = 'redeem';
         $data['version'] = $this->tools_model->get_installed_version();
-        $data['codes'] = $this->redeem_model->get_codes();
-
+        
         $this->load->view('parts/header', $data);
         $this->load->view('pages/redeem/add_code', $data);
         $this->load->view('parts/footer');
@@ -45,8 +44,8 @@ class Redeem extends CI_Controller
     {
         $data['page'] = 'redeem';
         $data['version'] = $this->tools_model->get_installed_version();
-        $data['codes'] = $this->redeem_model->get_codes();
-
+        $data['logs'] = $this->redeem_model->get_logs();
+        
         $this->load->view('parts/header', $data);
         $this->load->view('pages/redeem/show_logs', $data);
         $this->load->view('parts/footer');
@@ -54,7 +53,10 @@ class Redeem extends CI_Controller
 
     public function process()
     {
-        
+        if ($this->input->post('action') == "createcode")
+        {
+            
+        }
     }
 
 }

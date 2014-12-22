@@ -57,7 +57,7 @@ class pub extends CI_Controller
             }
 
             //Check if the number of redeem times is limited; Only run if no errors are detected
-            if ($code_data['redeem_times_total'] != 0 && $error_num == 0)
+            if ($code_data['redeem_times_total'] != 0 && $code_data['redeem_times_total'] != NULL && $error_num == 0)
             {
                 $times_total = $this->redeem_model->get_redeemed_times_total($code);
                 echo "times_total:".$times_total.";";
@@ -65,12 +65,11 @@ class pub extends CI_Controller
                 {
                     $error_num += 1;
                     $error_string .= 'The code you want to use has been used to often </br>';
-                    echo 2;
                 }
             }
 
             //Check if the number of times a single user can redeem a code is limited
-            if ($code_data['redeem_times_user'] != 0 && $error_num == 0)
+            if ($code_data['redeem_times_user'] != 0 && $code_data['redeem_times_user'] != NULL &&$error_num == 0)
             {
                 $times_user = $this->redeem_model->get_redeemed_times_user($code, $auth);
                 echo "times_user:".$times_user.";";
@@ -78,13 +77,11 @@ class pub extends CI_Controller
                 {
                     $error_num += 1;
                     $error_string .= 'You have used this code too often </br>';
-                    echo 3;
                 }
             }
 
             $credits = $code_data['credits'];
             $item_array = explode(',', $code_data['itemids']);
-            echo 4;
         }
         else
         {
@@ -98,22 +95,19 @@ class pub extends CI_Controller
         //Check if no errors have been found
         if ($error_num == 0)
         {
-            echo 6;
             $this->redeem_model->add_log($code, $auth);
 
-            if ($credits != 0)
+            if ($credits != 0 && $credits != NULL)
             {
                 $this->users_model->add_credits($store_userid, $credits);
-                echo 7;
             }
 
-            if ($item_array != 0)
+            if ($item_array != 0 && $item_array != NULL)
             {
                 $this->load->model('items_model');
                 foreach ($item_array as $item)
                 {
                     $this->items_model->add_useritem($store_userid, $item);
-                    echo 8;
                 }
             }
             $data['status'] = "Successfully processed the code";
@@ -121,7 +115,6 @@ class pub extends CI_Controller
         }
         else
         {
-            echo 9;
             $data['status'] = $error_string;
             $this->load->view('pages/redeem/redeem_code_process', $data);
         }
