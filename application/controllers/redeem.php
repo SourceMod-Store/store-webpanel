@@ -39,6 +39,17 @@ class Redeem extends CI_Controller
         $this->load->view('pages/redeem/add_code', $data);
         $this->load->view('parts/footer');
     }
+    
+    public function edit_code($slug)
+    {
+        $data['page'] = 'redeem';
+        $data['version'] = $this->tools_model->get_installed_version();
+        $data['code'] = $this->redeem_model->get_code_by_id($slug);
+        
+        $this->load->view('parts/header', $data);
+        $this->load->view('pages/redeem/edit_code', $data);
+        $this->load->view('parts/footer');
+    }
 
     public function logs()
     {
@@ -55,7 +66,20 @@ class Redeem extends CI_Controller
     {
         if ($this->input->post('action') == "createcode")
         {
-            
+            $this->redeem_model->add_code($this->input->post('code'), $this->input->post('items'), $this->input->post('credits'), $this->input->post('timesTotal'), $this->input->post('timesUser'), $this->input->post('expire'));
+            redirect('/redeem/codes', 'refresh');
+        }
+        
+        if($this->input->post('action') == "editcode")
+        {
+            $this->redeem_model->edit_code($this->input->post('id'), $this->input->post('code'), $this->input->post('items'), $this->input->post('credits'), $this->input->post('timesTotal'), $this->input->post('timesUser'), $this->input->post('expire'));
+            redirect('/redeem/codes', 'refresh');
+        }
+        
+        if ($this->input->post('action') == "removecode")
+        {
+            $this->redeem_model->remove_code($this->input->post('code_id'));
+            redirect('/redeem/codes', 'refresh');
         }
     }
 

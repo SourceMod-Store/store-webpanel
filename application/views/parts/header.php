@@ -34,6 +34,7 @@
             <li><a href="<?php echo base_url("index.php/users");?>">Manage</a></li>
           </ul>
         </li>
+        <?php if($this->config->item('storewebpanel_show_botmenu') == 1):?>
         <li class="dropdown <?php if($page == "bot"){ echo "active"; }?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Trade Bot <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="<?php echo base_url("index.php/bot");?>">Bot Overview</a></li>
@@ -41,6 +42,8 @@
             <li><a href="<?php echo base_url("index.php/bot/show_itemdonations");?>">Received Items</a></li>
           </ul>
         </li>
+        <?php endif;?>
+        <?php if($this->config->item('storewebpanel_show_redeemmenu') == 1):?>
         <li class="dropdown <?php if($page == "redeem"){ echo "active"; }?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Redeem System <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="<?php echo base_url("index.php/redeem/codes");?>">Code Management</a></li>
@@ -48,6 +51,7 @@
             <li><a href="<?php echo base_url("index.php/redeem/logs");?>">Log Management</a></li>
           </ul>
         </li>
+        <?php endif;?>
         <li class="dropdown <?php if($page == "tools"){ echo "active"; }?>"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="<?php echo base_url("index.php/tools/impex");?>">Import/Export System</a></li>

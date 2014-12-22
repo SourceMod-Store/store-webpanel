@@ -129,7 +129,7 @@ class Users_Model extends CI_Model
         }
         else
         {
-            log_message('error', 'User with auth: '.$auth.' does not exist in the Store DB');
+            log_message('error', 'User with auth: '.$store_auth.' does not exist in the Store DB');
             return NULL;
         }
     }
@@ -164,6 +164,8 @@ class Users_Model extends CI_Model
 
     function steamid_to_auth($steamid)
     {
+        if(substr_count($steamid,":") != 2) return 0;
+        
         //from https://forums.alliedmods.net/showpost.php?p=1890083&postcount=234
         $toks = explode(":", $steamid);
         $odd = (int) $toks[1];

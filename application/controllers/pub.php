@@ -25,16 +25,12 @@ class pub extends CI_Controller
         $this->load->model('redeem_model');
         $data[''] = '';
         $error_num = 0;
-        $error_string = '';
+        $error_string = array();
         
         $post = $this->input->post();
-        $code = $post['code'];
-        print_r($post);
-        
-        
-        $auth = $this->users_model->steamid_to_auth($post['steamid']);
-
+        $code = $post['code'];        
         $code_data = $this->redeem_model->get_code($code);
+        $auth = $this->users_model->steamid_to_auth($post['steamid']);
 
         //Check for errors & generate the error string
         //Check if the user exists in the DB
@@ -43,7 +39,7 @@ class pub extends CI_Controller
         if ($store_userid == NULL)
         {
             $error_num += 1;
-            $error_string .= 'The user doesnt exist in the DB </br>';
+            $error_string[] = 'The user doesnt exist in the DB';
         }
 
         //Check if code is valid
@@ -53,7 +49,7 @@ class pub extends CI_Controller
             if ($code_data['expire_time'] > time())
             {
                 $error_num += 1;
-                $error_string .= 'The code you want to use is expired </br>';
+                $error_string[] = 'The code you want to use is expired';
             }
 
             //Check if the number of redeem times is limited; Only run if no errors are detected
@@ -64,7 +60,7 @@ class pub extends CI_Controller
                 if ($times_total >= $code_data['redeem_times_total'])
                 {
                     $error_num += 1;
-                    $error_string .= 'The code you want to use has been used to often </br>';
+                    $error_string[] = 'The code you want to use has been used to often';
                 }
             }
 
@@ -76,7 +72,7 @@ class pub extends CI_Controller
                 if ($times_user >= $code_data['redeem_times_user'])
                 {
                     $error_num += 1;
-                    $error_string .= 'You have used this code too often </br>';
+                    $error_string[] = 'You have used this code too often';
                 }
             }
 
@@ -88,7 +84,7 @@ class pub extends CI_Controller
             if($code_data == NULL)
             {
                 $error_num += 1; //Add error count;
-                $error_string .= 'This code doesnt exist </br>';
+                $error_string[] = 'This code doesnt exist';
             }
         }
 
@@ -110,12 +106,14 @@ class pub extends CI_Controller
                     $this->items_model->add_useritem($store_userid, $item);
                 }
             }
-            $data['status'] = "Successfully processed the code";
+            $data['status'] = "success";
+            $data['errors'] = $error_string;
             $this->load->view('pages/redeem/redeem_code_process', $data);
         }
         else
         {
-            $data['status'] = $error_string;
+            $data['status'] = "error";
+            $data['errors'] = $error_string;
             $this->load->view('pages/redeem/redeem_code_process', $data);
         }
 

@@ -25,3 +25,19 @@ $config['storewebpanel_api_key'] = 'testapikey';
   | 1 if the Dashboard Lite should be enabled
  */
 $config['storewebpanel_dashboard_lite'] = 0;
+
+/*
+  |--------------------------------------------------------------------------
+  | Bot Menu
+  |--------------------------------------------------------------------------
+  | 1 if the Bot Menu should be shown
+ */
+$config['storewebpanel_show_botmenu'] = 0;
+
+/*
+  |--------------------------------------------------------------------------
+  | Redeem Menu
+  |--------------------------------------------------------------------------
+  | 1 if the Redeem Menu should be shown
+ */
+$config['storewebpanel_show_redeemmenu'] = 1;
