@@ -9,7 +9,7 @@ class pub extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model('redeem_model');
+        //$this->load->model('redeem_model');
         $this->load->helper('url');
     }
 
@@ -21,103 +21,117 @@ class pub extends CI_Controller
 
     function redeem_process()
     {
+        $this->load->model('users_model');
+        $this->load->model('redeem_model');
         $data[''] = '';
         $error_num = 0;
-        $error_string = '';
+        $error_string = array();
+        $data['credits'] = 0;
+        $data['items'] = 0;
+
         $post = $this->input->post();
         $code = $post['code'];
-        print_r($post);
-        $this->load->model('users_model');
+        $code_data = $this->redeem_model->get_code($code);
         $auth = $this->users_model->steamid_to_auth($post['steamid']);
 
-        $code_data = $this->redeem_model->get_code($code);
-        
         //Check for errors & generate the error string
-
         //Check if the user exists in the DB
         $store_userid = $this->users_model->get_storeuserid($auth);
-        if ( !is_int($store_userid))
+
+        if ($store_userid == NULL)
         {
             $error_num += 1;
-            $error_string += 'The user doesnt exist in the DB </br>';
+            $error_string[] = 'The user doesnt exist in the DB';
         }
-        
-        //Check if a valid code
-        if ($code_data != 0 && $error_num = 0)
+
+        //Check if code is valid
+        if ($code_data != NULL && $error_num == 0)
         {
             //Check if the code is expired
             if ($code_data['expire_time'] > time())
             {
                 $error_num += 1;
-                $error_string += 'The code you want to use is expired </br>';
-                //echo 1;
+                $error_string[] = 'The code you want to use is expired';
             }
 
             //Check if the number of redeem times is limited; Only run if no errors are detected
-            if ($code_data['redeem_times_total'] != 0 && $error_num == 0)
+            if ($code_data['redeem_times_total'] != 0 && $code_data['redeem_times_total'] != NULL && $error_num == 0)
             {
-                //echo "2_1";
-                if ($this->redeem_model->get_redeemed_times_total($code) >= $code_data['redeem_times_total'])
+                $times_total = $this->redeem_model->get_redeemed_times_total($code);
+                //echo "times_total:".$times_total.";";
+                if ($times_total >= $code_data['redeem_times_total'])
                 {
                     $error_num += 1;
-                    $error_string += 'The code you want to use has been used to often </br>';
-                    //echo 2;
+                    $error_string[] = 'The code you want to use has been used to often';
                 }
             }
 
             //Check if the number of times a single user can redeem a code is limited
-            if ($code_data['redeem_times_user'] != 0 && $error_num == 0)
+            if ($code_data['redeem_times_user'] != 0 && $code_data['redeem_times_user'] != NULL && $error_num == 0)
             {
-                if ($this->redeem_model->get_redeemed_times_user($code, $auth) >= $code_data['redeem_times_user'])
+                $times_user = $this->redeem_model->get_redeemed_times_user($code, $auth);
+                //echo "times_user:".$times_user.";";
+                if ($times_user >= $code_data['redeem_times_user'])
                 {
                     $error_num += 1;
-                    $error_string += 'You have used this code to often </br>';
-                    //echo 3;
+                    $error_string[] = 'You have used this code too often';
                 }
             }
 
             $credits = $code_data['credits'];
             $item_array = explode(',', $code_data['itemids']);
-            //echo 4;
         }
         else
         {
-            $error_num += 1; //Add error count;
-            $error_string += 'This code doesnt exist </br>';
-            //echo 5;
+            if ($code_data == NULL)
+            {
+                $error_num += 1; //Add error count;
+                $error_string[] = 'This code doesnt exist';
+            }
         }
 
         //Check if no errors have been found
         if ($error_num == 0)
         {
-            //echo 6;
             $this->redeem_model->add_log($code, $auth);
-            
-            if ($credits != 0)
+
+            if ($credits != 0 && $credits != NULL)
             {
                 $this->users_model->add_credits($store_userid, $credits);
-                //echo 7;
+                $data["credits"] = $credits;
             }
 
-            if ($item_array != 0)
+            if ($item_array != 0 && $item_array != NULL)
             {
+                $itemnames = array();
                 $this->load->model('items_model');
                 foreach ($item_array as $item)
                 {
-                    $this->items_model->add_useritem($store_userid, $item);
-                    //echo 8;
+                    $item_info = NULL;
+                    $item_info = $this->items_model->get_item_info($item);
+
+                    if ($item_info != NULL)
+                    {
+                        $this->items_model->add_useritem($store_userid, $item);
+                        $itemnames[] = $item_info['display_name'];
+                    }
+                    else
+                    {
+                        $error_string[] = "Item with id ".$item." could not be redeemed because it doesnt exist";
+                    }
                 }
+                $data["items"] = $itemnames;
             }
-            $data['status'] = "Successfully processed the code";
+            $data['status'] = "success";
+            $data['errors'] = $error_string;
+            $this->load->view('pages/redeem/redeem_code_process', $data);
         }
         else
         {
-            //echo 9;
-            $data['status'] = $error_string;
+            $data['status'] = "error";
+            $data['errors'] = $error_string;
+            $this->load->view('pages/redeem/redeem_code_process', $data);
         }
-        
-
-        $this->load->view('pages/redeem/redeem_code_process', $data);
     }
 
     function refresh_img()
@@ -126,14 +140,15 @@ class pub extends CI_Controller
         $error_image = base_url("/assets/img/id_cache/avatar.jpg");
         $steam_id = $_POST["sendValue"];
         $friend_id = $this->GetFriendID($steam_id);
-
-
-        $url = "http://steamcommunity.com/profiles/" . $friend_id . "?xml=1";
-        $xml = @simplexml_load_string(file_get_contents($url));
-        $avatar_url = $xml->avatarMedium;
-        $player_name = $xml->steamID;
-        file_put_contents($path_to_cache . $friend_id . ".jpg", file_get_contents($avatar_url));
-        file_put_contents($path_to_cache . $friend_id . ".txt", $player_name);
+        if ($friend_id != 0)
+        {
+            $url = "http://steamcommunity.com/profiles/" . $friend_id . "?xml=1";
+            $xml = @simplexml_load_string(file_get_contents($url));
+            $avatar_url = $xml->avatarMedium;
+            $player_name = $xml->steamID;
+            file_put_contents($path_to_cache . $friend_id . ".jpg", file_get_contents($avatar_url));
+            file_put_contents($path_to_cache . $friend_id . ".txt", $player_name);
+        }
     }
 
     function get_img()
@@ -149,7 +164,7 @@ class pub extends CI_Controller
         }
         //echo $friend_id;
         $player_url = "http://steamcommunity.com/profiles/" . $friend_id . "";
-        if (!isset($friend_id))
+        if (!isset($friend_id) || $friend_id == 0)
         {
             echo json_encode(array("returnValue" => '' . $error_image . ''));
             exit;
@@ -216,6 +231,63 @@ class pub extends CI_Controller
     function test_redeem()
     {
         //$this->load->view('pages/redeem/test_code');
+    }
+
+    function bot_process()
+    {
+        //Status:
+        //0: New Item
+        //10: Item being processed
+        //20: No Itemvalue associated
+        //30: User doesnt exist
+        //99: Credits awarded
+        $this->load->model('users_model');
+        $this->load->model('bot_model');
+
+        //Get all outstanding donations from the db
+        $DB_Main = $this->load->database('default', TRUE);
+        $query_botdonations = $DB_Main->get('bot_donations');
+
+        //*LOOP*
+        foreach ($query_botdonations->result() as $botdonation)
+        {
+            //Check if the donation has the status 1 with a new query
+            $item_status = $this->bot_model->get_donationstatus($botdonation->id);
+            if ($item_status == 0)
+            {
+                //Set the donation status to 10
+                $this->bot_model->set_donationstatus($botdonation->id, 10);
+
+                //Check if the use who donated the item exists --> If not set status to 30    
+                $auth = $this->users_model->steamid_to_auth(communityid_to_steam($botdonation->steamId));
+                $user_id = $this->users_model->get_userid_by_auth($auth);
+                if ($user_id != false)
+                {
+                    //Get the itemvalue for the donation
+                    $itemvalue = $this->bot_model->get_itemvalue($botdonation->itemId);
+
+                    if ($itemvalue != false)
+                    {
+                        //Award the credits to the user
+                        $this->users_model->add_credits($user_id, $itemvalue);
+
+                        //Set the status to 99
+                        $this->bot_model->set_donationstatus($botdonation->id, 99);
+                    }
+                    else
+                    {
+                        //No Value associated with the item
+                        $this->bot_model->set_donationstatus($botdonation->id, 20);
+                    }
+                }
+                else
+                {
+                    //User doesnt exit
+                    $this->bot_model->set_donationstatus($botdonation->id, 30);
+                }
+            }
+        }
+        //*END LOOP*
     }
 
 }

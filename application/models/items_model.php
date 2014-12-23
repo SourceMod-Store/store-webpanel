@@ -27,7 +27,6 @@ class Items_Model extends CI_Model
             $DB_Main->where('item_id', $item['id']);
             $query_item = $DB_Main->get('store_users_items');
             $item_array[$key]['amount'] = $query_item->num_rows();
-
         }
         return $item_array;
     }
@@ -102,6 +101,14 @@ class Items_Model extends CI_Model
         }
 
         return $result;
+    }
+
+    function get_item_count_by_type($type)
+    {
+        $DB_Main = $this->load->database('default', TRUE);
+        $DB_Main->where('type', $type);
+        $query = $DB_Main->get('store_items');
+        return $query->num_rows();
     }
 
     function update_item($post)
@@ -192,7 +199,8 @@ class Items_Model extends CI_Model
         }
     }
 
-    function add_item($name, $display_name, $description, $web_description, $type, $loadout_slot, $price, $attrs, $is_buyable=1, $is_tradeable=1, $is_refundable=1, $category_id, $expiry_time = NULL, $flags = NULL) {
+    function add_item($name, $display_name, $description, $web_description, $type, $loadout_slot, $price, $attrs, $is_buyable = 1, $is_tradeable = 1, $is_refundable = 1, $category_id, $expiry_time = NULL, $flags = NULL)
+    {
 
         if ($expiry_time == 0)
             $expiry_time = NULL;
@@ -304,4 +312,5 @@ class Items_Model extends CI_Model
     }
 
 }
+
 ?>

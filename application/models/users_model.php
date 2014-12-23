@@ -61,10 +61,28 @@ class Users_Model extends CI_Model
             }
 
             return $array_users;
-        }else
+        }
+        else
+        {
             return array();
+        }
     }
 
+    function get_userid_by_auth($auth)
+    {
+        $DB_Main = $this->load->database('default', TRUE);
+        $query_user = $DB_Main->get('store_users')->where('auth',$auth);
+        if($query_user->num_rows() == 1)
+        {
+            $row_user = $query_user->row();
+            return $row_user->id;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
     function get_user_items_count($user_id)
     {
         $DB_Main = $this->load->database('default', TRUE);
@@ -72,8 +90,7 @@ class Users_Model extends CI_Model
         $query_users_items = $DB_Main->get('store_users_items');
         return $query_users_items->num_rows();
     }
-    
-    
+
     function get_user($user_id)
     {
         $DB_Main = $this->load->database('default', TRUE);
@@ -112,8 +129,7 @@ class Users_Model extends CI_Model
         }
         else
         {
-            echo "User does not exist in store DB";
-            log_message('error', 'User does not exist in the Store DB');
+            log_message('error', 'User with auth: '.$store_auth.' does not exist in the Store DB');
             return NULL;
         }
     }
@@ -148,6 +164,8 @@ class Users_Model extends CI_Model
 
     function steamid_to_auth($steamid)
     {
+        if(substr_count($steamid,":") != 2) return 0;
+        
         //from https://forums.alliedmods.net/showpost.php?p=1890083&postcount=234
         $toks = explode(":", $steamid);
         $odd = (int) $toks[1];
@@ -167,6 +185,23 @@ class Users_Model extends CI_Model
             $result = substr($result, 0, strpos($result, "."));
         }
         return $result;
+    }
+
+    function communityid_to_steam($i64friendID)
+    {
+        $tmpfriendID = $i64friendID;
+        $iServer = "1";
+        if (bcmod($i64friendID, "2") == "0")
+        {
+            $iServer = "0";
+        }
+        $tmpfriendID = bcsub($tmpfriendID, $iServer);
+        if (bccomp("76561197960265728", $tmpfriendID) == -1)
+        {
+            $tmpfriendID = bcsub($tmpfriendID, "76561197960265728");
+        }
+        $tmpfriendID = bcdiv($tmpfriendID, "2");
+        return ("STEAM_0:" . $iServer . ":" . $tmpfriendID);
     }
 
     function auth_to_steamid($authid)
