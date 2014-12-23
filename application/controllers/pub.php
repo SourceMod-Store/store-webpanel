@@ -26,16 +26,18 @@ class pub extends CI_Controller
         $data[''] = '';
         $error_num = 0;
         $error_string = array();
-        
+        $data['credits'] = 0;
+        $data['items'] = 0;
+
         $post = $this->input->post();
-        $code = $post['code'];        
+        $code = $post['code'];
         $code_data = $this->redeem_model->get_code($code);
         $auth = $this->users_model->steamid_to_auth($post['steamid']);
 
         //Check for errors & generate the error string
         //Check if the user exists in the DB
         $store_userid = $this->users_model->get_storeuserid($auth);
-        
+
         if ($store_userid == NULL)
         {
             $error_num += 1;
@@ -56,7 +58,7 @@ class pub extends CI_Controller
             if ($code_data['redeem_times_total'] != 0 && $code_data['redeem_times_total'] != NULL && $error_num == 0)
             {
                 $times_total = $this->redeem_model->get_redeemed_times_total($code);
-                echo "times_total:".$times_total.";";
+                //echo "times_total:".$times_total.";";
                 if ($times_total >= $code_data['redeem_times_total'])
                 {
                     $error_num += 1;
@@ -65,10 +67,10 @@ class pub extends CI_Controller
             }
 
             //Check if the number of times a single user can redeem a code is limited
-            if ($code_data['redeem_times_user'] != 0 && $code_data['redeem_times_user'] != NULL &&$error_num == 0)
+            if ($code_data['redeem_times_user'] != 0 && $code_data['redeem_times_user'] != NULL && $error_num == 0)
             {
                 $times_user = $this->redeem_model->get_redeemed_times_user($code, $auth);
-                echo "times_user:".$times_user.";";
+                //echo "times_user:".$times_user.";";
                 if ($times_user >= $code_data['redeem_times_user'])
                 {
                     $error_num += 1;
@@ -81,7 +83,7 @@ class pub extends CI_Controller
         }
         else
         {
-            if($code_data == NULL)
+            if ($code_data == NULL)
             {
                 $error_num += 1; //Add error count;
                 $error_string[] = 'This code doesnt exist';
@@ -96,15 +98,29 @@ class pub extends CI_Controller
             if ($credits != 0 && $credits != NULL)
             {
                 $this->users_model->add_credits($store_userid, $credits);
+                $data["credits"] = $credits;
             }
 
             if ($item_array != 0 && $item_array != NULL)
             {
+                $itemnames = array();
                 $this->load->model('items_model');
                 foreach ($item_array as $item)
                 {
-                    $this->items_model->add_useritem($store_userid, $item);
+                    $item_info = NULL;
+                    $item_info = $this->items_model->get_item_info($item);
+
+                    if ($item_info != NULL)
+                    {
+                        $this->items_model->add_useritem($store_userid, $item);
+                        $itemnames[] = $item_info['display_name'];
+                    }
+                    else
+                    {
+                        $error_string[] = "Item with id ".$item." could not be redeemed because it doesnt exist";
+                    }
                 }
+                $data["items"] = $itemnames;
             }
             $data['status'] = "success";
             $data['errors'] = $error_string;
@@ -116,9 +132,6 @@ class pub extends CI_Controller
             $data['errors'] = $error_string;
             $this->load->view('pages/redeem/redeem_code_process', $data);
         }
-
-
-        
     }
 
     function refresh_img()
