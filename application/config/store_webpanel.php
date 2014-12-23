@@ -16,7 +16,7 @@ $config['storewebpanel_enable_loginsystem'] = 1;
   |--------------------------------------------------------------------------
   | The api key for the WebPanel API
  */
-$config['storewebpanel_api_key'] = 'testapikey';
+$config['storewebpanel_api_key'] = '';
 
 /*
   |--------------------------------------------------------------------------
