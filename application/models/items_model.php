@@ -127,43 +127,24 @@ class Items_Model extends CI_Model
             {
                 $attrs = NULL;
             }
-
-            $data = array(
-                'name' => $post['name'],
-                'display_name' => $post['display_name'],
-                'description' => $post['description'],
-                'web_description' => $post['web_description'],
-                'type' => $post['type'],
-                'loadout_slot' => $post['loadout_slot'],
-                'price' => $post['price'],
-                'attrs' => $attrs,
-                'is_buyable' => $post['is_buyable'],
-                'is_tradeable' => $post['is_tradeable'],
-                'is_refundable' => $post['is_refundable'],
-                'category_id' => $post['category_id'],
-                'expiry_time' => $post['expiry_time'],
-                'flags' => $post['flags']
-            );
         }
-        else
-        {
-            $data = array(
-                'name' => $post['name'],
-                'display_name' => $post['display_name'],
-                'description' => $post['description'],
-                'web_description' => $post['web_description'],
-                'type' => $post['type'],
-                'loadout_slot' => $post['loadout_slot'],
-                'price' => $post['price'],
-                'attrs' => $post['attrs'],
-                'is_buyable' => $post['is_buyable'],
-                'is_tradeable' => $post['is_tradeable'],
-                'is_refundable' => $post['is_refundable'],
-                'category_id' => $post['category_id'],
-                'expiry_time' => $post['expiry_time'],
-                'flags' => $post['flags']
-            );
-        }
+        $data = array(
+            'priority' => $post['priority'],
+            'name' => $post['name'],
+            'display_name' => $post['display_name'],
+            'description' => $post['description'],
+            'web_description' => $post['web_description'],
+            'type' => $post['type'],
+            'loadout_slot' => $post['loadout_slot'],
+            'price' => $post['price'],
+            'attrs' => $post['attrs'],
+            'is_buyable' => $post['is_buyable'],
+            'is_tradeable' => $post['is_tradeable'],
+            'is_refundable' => $post['is_refundable'],
+            'category_id' => $post['category_id'],
+            'expiry_time' => $post['expiry_time'],
+            'flags' => $post['flags']
+        );
 
         foreach ($data as $key => $value)
         {
@@ -199,7 +180,7 @@ class Items_Model extends CI_Model
         }
     }
 
-    function add_item($name, $display_name, $description, $web_description, $type, $loadout_slot, $price, $attrs, $is_buyable = 1, $is_tradeable = 1, $is_refundable = 1, $category_id, $expiry_time = NULL, $flags = NULL)
+    function add_item($name, $display_name, $description, $web_description, $type, $loadout_slot, $price, $attrs, $is_buyable = 1, $is_tradeable = 1, $is_refundable = 1, $category_id, $expiry_time = NULL, $flags = NULL, $priority=0)
     {
 
         if ($expiry_time == 0)
@@ -207,6 +188,7 @@ class Items_Model extends CI_Model
 
         $DB_Main = $this->load->database('default', TRUE);
         $data = array(
+            'priority' => $priority,
             'name' => $name,
             'display_name' => $display_name,
             'description' => $description,

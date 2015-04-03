@@ -69,7 +69,7 @@ class Categories extends CI_Controller
             {
                 str_replace("%23", "#", $post['web_color']);
             }
-            $this->categories_model->add_category($post['display_name'], $post['description'], $post['require_plugin'], $post['web_description'], $post['web_color']);
+            $this->categories_model->add_category($post['display_name'], $post['description'], $post['require_plugin'], $post['web_description'], $post['web_color'], $post['priority']);
         }
         elseif ($post['action'] == 'remove')
         {

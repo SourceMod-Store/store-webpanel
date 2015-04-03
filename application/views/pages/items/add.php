@@ -9,6 +9,12 @@
 <form class="form-horizontal" action="<?php echo base_url('index.php/items/process'); ?>" method="post">
     <input type="hidden" name="action" value="add">
     <div class="control-group">
+        <label class="control-label" for="itemPriority">Priority</label>
+        <div class="controls">
+            <input type="text" id="itemPriority" name="priority">
+        </div>
+    </div>
+    <div class="control-group">
         <label class="control-label" for="itemName">Name</label>
         <div class="controls">
             <input type="text" id="itemName" name="name">
@@ -109,7 +115,7 @@
     editor.getSession().setMode("ace/mode/json");
     var attrs = $('textarea[name="attrs"]').hide();
     editor.getSession().setValue(attrs.val());
-    editor.getSession().on("change", function() {
+    editor.getSession().on("change", function () {
         attrs.val(editor.getSession().getValue());
     });
 </script>

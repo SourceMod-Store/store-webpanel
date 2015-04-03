@@ -16,6 +16,12 @@
         </div>
     </div>
     <div class="control-group">
+        <label class="control-label" for="itemPriority">Priority</label>
+        <div class="controls">
+            <input type="text" id="itemPriority" name="priority" value="<?php echo $item_info['priority']; ?>">
+        </div>
+    </div>
+    <div class="control-group">
         <label class="control-label" for="itemName">Name</label>
         <div class="controls">
             <input type="text" id="itemName" name="name" value="<?php echo $item_info['name']; ?>">
@@ -64,10 +70,10 @@
                 <option>-- Select Category --<?php echo $item_info['category_id']; ?></option>
                 <?php foreach ($categories as $category): ?>
                     <option value="<?php echo $category['id']; ?>" <?php
-                if ($category['id'] == $item_info['category_id'])
-                {
-                    echo "selected";
-                }
+                    if ($category['id'] == $item_info['category_id'])
+                    {
+                        echo "selected";
+                    }
                     ?>><?php echo $category['display_name']; ?></option>
                         <?php endforeach; ?>
             </select>
@@ -105,10 +111,10 @@
         </div>
     </div>	
     <div class="control-group">
-      <label class="control-label" for="itemFlags">Flags</label>
-      <div class="controls">
-        <input type="text" class="input-small" id="itemFlags" name="flags" value="<?php echo $item_info['flags']; ?>">
-      </div>
+        <label class="control-label" for="itemFlags">Flags</label>
+        <div class="controls">
+            <input type="text" class="input-small" id="itemFlags" name="flags" value="<?php echo $item_info['flags']; ?>">
+        </div>
     </div>
     <div class="form-actions">
         <button type="submit" class="btn btn-primary">Save Changes</button>
@@ -121,7 +127,7 @@
     editor.getSession().setMode("ace/mode/json");
     var attrs = $('textarea[name="attrs"]').hide();
     editor.getSession().setValue(attrs.val());
-    editor.getSession().on("change", function (){
+    editor.getSession().on("change", function () {
         attrs.val(editor.getSession().getValue());
     });
 </script>
