@@ -157,7 +157,20 @@ class Users extends CI_Controller
             {
                 if (isset($input['bSearchable_' . $i]) && $input['bSearchable_' . $i] == 'true')
                 {
-                    $aFilteringRules[] = "`" . $aColumns[$i] . "` LIKE '%" . $db->real_escape_string($input['sSearch']) . "%'";
+                    log_message('debug', 'INPUT: sSearch - ' . $input['sSearch']);
+                    log_message('debug', 'INPUT: STRPOS  - ' . strpos($input['sSearch'], "STEAM_"));
+                    if (strpos($input['sSearch'], "STEAM_") !== false)
+                    {
+                        log_message('debug', 'INPUT STEAMID - '.$input['sSearch']);
+                        log_message('debug', 'INPUT AUTH - '.$this->users_model->steamid_to_auth($input['sSearch']));
+                        $sSearch = $input['sSearch'];
+                        $sSearch = $this->users_model->steamid_to_auth($sSearch);
+                        $aFilteringRules[] = "`" . $aColumns[$i] . "` LIKE '%" . $db->real_escape_string($sSearch) . "%'";
+                    }
+                    else
+                    {
+                        $aFilteringRules[] = "`" . $aColumns[$i] . "` LIKE '%" . $db->real_escape_string($input['sSearch']) . "%'";
+                    }
                 }
             }
             if (!empty($aFilteringRules))
