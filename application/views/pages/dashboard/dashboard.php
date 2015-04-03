@@ -15,7 +15,7 @@
           <?php foreach($top_items as $item):?>
           <tr>
             <td><a href="<?php echo base_url('index.php/items/edit')."/".$item["item_id"]?>"><?=$item['display_name']?></a></td>
-            <td><?=$item['num']?></td>
+            <td><?=$item['anzahl']?></td>
           </tr>
           <?php endforeach;?>
         </tbody>

@@ -60,46 +60,20 @@ class Items_Model extends CI_Model
     function get_top_items($num = 5)
     {
         $DB_Main = $this->load->database('default', TRUE);
-        $query_users_items = $DB_Main->get('store_users_items');
-
-        $amount = array();
-        $i = 0;
-
-        foreach ($query_users_items->result() as $user_item)
-        {
-            if (!isset($amount[$user_item->item_id]))
-            {
-                $amount[$user_item->item_id] = 1;
-            }
-            else
-            {
-                $amount[$user_item->item_id] += 1;
-            }
-        }
-
-        arsort($amount);
-        $i = 0;
-        $result = array();
-
-        foreach ($amount as $key => $value)
-        {
-            if ($i <= $num - 1)
-            {
-                $DB_Main->where('id', $key);
-                $query_items = $DB_Main->get('store_items');
-
-                foreach ($query_items->result() as $item)
-                {
-                    $result[$i]['key'] = $key;
-                    $result[$i]['item_id'] = $item->id;
-                    $result[$i]['name'] = $item->name;
-                    $result[$i]['display_name'] = $item->display_name;
-                    $result[$i]['num'] = $value;
-                }
-            }
-            $i++;
-        }
-
+        $query = $DB_Main->query('SELECT 
+                si.display_name,
+                sui.item_id, 
+                COUNT(sui.item_id) anzahl
+            FROM 
+                store_users_items sui
+            LEFT JOIN
+                store_items si ON (sui.item_id = si.id)
+            GROUP BY 
+                item_id
+            ORDER BY 
+                anzahl DESC
+            LIMIT '.$DB_Main->escape($num));
+        $result = $query->result_array();
         return $result;
     }
 
@@ -180,7 +154,7 @@ class Items_Model extends CI_Model
         }
     }
 
-    function add_item($name, $display_name, $description, $web_description, $type, $loadout_slot, $price, $attrs, $is_buyable = 1, $is_tradeable = 1, $is_refundable = 1, $category_id, $expiry_time = NULL, $flags = NULL, $priority=0)
+    function add_item($name, $display_name, $description, $web_description, $type, $loadout_slot, $price, $attrs, $is_buyable = 1, $is_tradeable = 1, $is_refundable = 1, $category_id, $expiry_time = NULL, $flags = NULL, $priority = 0)
     {
 
         if ($expiry_time == 0)

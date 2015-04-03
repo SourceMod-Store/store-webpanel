@@ -26,7 +26,7 @@ class Dashboard extends CI_Controller
 
         if ($this->config->item('storewebpanel_dashboard_lite') == 0)
         {
-            $data['top_users'] = $this->users_model->get_users(0, 'credits desc', 5);
+            $data['top_users'] = $this->users_model->get_richest_users(5);
             $data['top_items'] = $this->items_model->get_top_items(5);
         }
         elseif ($this->config->item('storewebpanel_dashboard_lite') == 1)

@@ -25,7 +25,6 @@ class Users extends CI_Controller
         $data['version'] = $this->tools_model->get_installed_version();
         $search = $this->input->get('s');
 
-        //$data['users'] = $this->users_model->get_users($search);
         $data['search'] = $search;
 
         $this->load->view('parts/header', $data);
