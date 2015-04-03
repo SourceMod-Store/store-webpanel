@@ -159,8 +159,10 @@ class Users extends CI_Controller
                 {
                     log_message('debug', 'INPUT: sSearch - ' . $input['sSearch']);
                     log_message('debug', 'INPUT: STRPOS  - ' . strpos($input['sSearch'], "STEAM_"));
+                    // Check if the Search String contains STEAM_
                     if (strpos($input['sSearch'], "STEAM_") !== false)
                     {
+                        //If yes, then then convert the steamid to the auth string
                         log_message('debug', 'INPUT STEAMID - '.$input['sSearch']);
                         log_message('debug', 'INPUT AUTH - '.$this->users_model->steamid_to_auth($input['sSearch']));
                         $sSearch = $input['sSearch'];
