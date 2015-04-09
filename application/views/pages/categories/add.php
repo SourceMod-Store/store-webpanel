@@ -15,6 +15,12 @@
       </div>
     </div>
     <div class="control-group">
+      <label class="control-label" for="catPriority">Priority</label>
+      <div class="controls">
+        <input type="text" id="catPriority" name="priority">
+      </div>
+    </div>
+    <div class="control-group">
       <label class="control-label" for="catDesc">Description</label>
       <div class="controls">
         <textarea id="catDesc" rows="3" name="description"></textarea>

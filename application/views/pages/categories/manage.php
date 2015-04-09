@@ -14,6 +14,7 @@ $(document).ready(function() {
     <thead>
       <tr>
         <th>ID</th>
+        <th>Priority</th>
         <th>Category</th>
         <th>Description</th>
         <th>Plugin</th>
@@ -25,6 +26,7 @@ $(document).ready(function() {
       <?php foreach($query_categories as $cat): ?>
       <tr>
         <td><?php echo $cat['id']; ?></td>
+        <td><?php echo $cat['priority']; ?></td>
         <td><a href="<?php echo base_url('index.php/categories/edit')."/".$cat['id']?>"><?php echo $cat['display_name']; ?></a></td>
         <td><?php echo $cat['web_description']; ?></td>
         <td><?php echo $cat['require_plugin']; ?></td>

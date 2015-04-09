@@ -7,22 +7,23 @@
 </div>
 <script>
     jQuery.extend(jQuery.fn.dataTableExt.oSort, {
-        "num-html-pre": function(a) {
+        "num-html-pre": function (a) {
             var x = String(a).replace(/<[\s\S]*?>/g, "");
             return parseFloat(x);
         },
-        "num-html-asc": function(a, b) {
+        "num-html-asc": function (a, b) {
             return ((a < b) ? -1 : ((a > b) ? 1 : 0));
         },
-        "num-html-desc": function(a, b) {
+        "num-html-desc": function (a, b) {
             return ((a < b) ? 1 : ((a > b) ? -1 : 0));
         }
     });
 </script>
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#manageItems').dataTable({
             "aoColumns": [
+                null,
                 null,
                 null,
                 null,
@@ -40,6 +41,7 @@
         <thead>
             <tr>
                 <th>ID</th>
+                <th>Priority</th>
                 <th>Item Name</th>
                 <th>Category</th>
                 <th>Loadout Slot</th>
@@ -49,9 +51,10 @@
             </tr>
         </thead>
         <tbody>
-    <?php foreach ($items as $item): ?>
+            <?php foreach ($items as $item): ?>
                 <tr>
                     <td><a href="<?php echo base_url('index.php/items/edit') . '/' . $item['id']; ?>"><?php echo $item['id'] ?></a></td>
+                    <td><?php echo $item['priority'] ?></td>
                     <td><a href="<?php echo base_url('index.php/items/edit') . '/' . $item['id']; ?>"><?php echo $item['display_name'] ?></a></td>
                     <td><?php echo $item['type'] ?></td>
                     <td><?php echo $item['loadout_slot'] ?>
@@ -62,11 +65,11 @@
                             <input type="hidden" name="item_id" value="<?php echo $item['id'] ?>">
                             <button class="btn btn-small btn-danger" name="action" value="remove" type="submit"><i class="icon-remove icon-white"></i> Remove</button>
                             <button class="btn btn-small btn-danger" name="action" value="remove_refund" type="submit"><i class="icon-remove icon-white"></i> Remove + Refund</button>
-    
+
                         </form> 
                     </td>
                 </tr>
-    <?php endforeach; ?>
+            <?php endforeach; ?>
         </tbody>
     </table>
 </div>

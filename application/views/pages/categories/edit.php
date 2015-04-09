@@ -16,6 +16,12 @@
       </div>
     </div>
     <div class="control-group">
+      <label class="control-label" for="catPriority">Priority</label>
+      <div class="controls">
+        <input type="text" class="input-mini" id="catPriority" name="priority" value="<?php echo $category["priority"]; ?>">
+      </div>
+    </div>
+    <div class="control-group">
       <label class="control-label" for="catName">Display Name</label>
       <div class="controls">
         <input type="text" id="catName" name="display_name" value="<?php echo $category["display_name"]; ?>">

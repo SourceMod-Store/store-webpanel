@@ -61,17 +61,19 @@ class Categories_Model extends CI_Model
             'description' => $post['description'],
             'require_plugin' => $post['require_plugin'],
             'web_description' => $post['web_description'],
-            'web_color' => $post['web_color']
+            'web_color' => $post['web_color'],
+            'priority' => $post['priority']
         );
         $DB_Main->where('id', $post['id']);
         $DB_Main->update('store_categories', $data);
     }
 
-    function add_category($display_name, $description, $require_plugin, $web_description, $web_color)
+    function add_category($display_name, $description, $require_plugin, $web_description, $web_color, $priority=0)
     {
         $DB_Main = $this->load->database('default', TRUE);
         $data = array(
             'display_name' => $display_name,
+            'priority' => $priority,
             'description' => $description,
             'require_plugin' => $require_plugin,
             'web_description' => $web_description,

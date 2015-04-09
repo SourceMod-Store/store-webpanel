@@ -21,58 +21,20 @@ class Users_Model extends CI_Model
         $this->edit_user($data);
     }
 
-    function get_users($search = 0, $order_by = 0, $num = 0)
+    function get_richest_users($num = 0)
     {
         $DB_Main = $this->load->database('default', TRUE);
-
-        if ($search !== 0)
-        {
-            if (strpos($search, "STEAM_" !== false))
-            {
-                $DB_Main->where('auth', steamid_to_auth($search));
-            }
-            else
-            {
-                $DB_Main->like('name', $search);
-            }
-        }
-
-        if ($order_by !== 0)
-        {
-            $DB_Main->order_by($order_by);
-        }
-
-        $query_users = $DB_Main->get('store_users');
-        if ($query_users->num_rows() > 0)
-        {
-            $array_users = $query_users->result_array();
-
-            $i = 0;
-            foreach ($array_users as $user)
-            {
-                $array_users[$i]['num_items'] = $this->get_user_items($user['id']);
-                $i++;
-            }
-
-
-            if ($num !== 0)
-            {
-                $array_users = array_slice($array_users, 0, $num);
-            }
-
-            return $array_users;
-        }
-        else
-        {
-            return array();
-        }
+        $DB_Main->order_by("credits", "desc");
+        $DB_Main->limit($num);
+        $query = $DB_Main->get('store_users');
+        return $query->result_array();
     }
 
     function get_userid_by_auth($auth)
     {
         $DB_Main = $this->load->database('default', TRUE);
-        $query_user = $DB_Main->get('store_users')->where('auth',$auth);
-        if($query_user->num_rows() == 1)
+        $query_user = $DB_Main->get('store_users')->where('auth', $auth);
+        if ($query_user->num_rows() == 1)
         {
             $row_user = $query_user->row();
             return $row_user->id;
@@ -82,7 +44,7 @@ class Users_Model extends CI_Model
             return false;
         }
     }
-    
+
     function get_user_items_count($user_id)
     {
         $DB_Main = $this->load->database('default', TRUE);
@@ -129,7 +91,7 @@ class Users_Model extends CI_Model
         }
         else
         {
-            log_message('error', 'User with auth: '.$store_auth.' does not exist in the Store DB');
+            log_message('error', 'User with auth: ' . $store_auth . ' does not exist in the Store DB');
             return NULL;
         }
     }
@@ -164,8 +126,9 @@ class Users_Model extends CI_Model
 
     function steamid_to_auth($steamid)
     {
-        if(substr_count($steamid,":") != 2) return 0;
-        
+        if (substr_count($steamid, ":") != 2)
+            return 0;
+
         //from https://forums.alliedmods.net/showpost.php?p=1890083&postcount=234
         $toks = explode(":", $steamid);
         $odd = (int) $toks[1];
