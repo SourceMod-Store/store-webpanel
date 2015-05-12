@@ -1,10 +1,10 @@
 {
     "version_name": "",
-    "version_number": "1.2.9",
+    "version_number": "1.2.10",
     "version_details": {
         "major": "1",
         "minor": "2",
-        "patch": "9",
+        "patch": "10",
         "type":  "stable"
     }
 }
