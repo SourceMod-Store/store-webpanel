@@ -189,6 +189,31 @@ class Items_Model extends CI_Model
         $DB_Main->insert('store_items', $data);
     }
 
+    function add_json_items($items,$category_id)
+    {
+        $DB_Main = $this->load->database('default', TRUE);
+
+        foreach ($items as $key => $item)
+        {
+            $items[$key]['category_id']= $category_id;
+            if (PHP_MAJOR_VERSION >= 5 && PHP_MINOR_VERSION >= 4)
+            {
+                $items[$key]['attrs'] = json_encode($items[$key]['attrs'], JSON_UNESCAPED_SLASHES);
+            }
+            else
+            {
+                $items[$key]['attrs'] = json_encode($items[$key]['attrs']);
+            }
+
+            if(!isset($items[$key]['priority'])) $items[$key]['priority'] = 0;
+
+            if($items[$key]['priority'] == NULL) $items[$key]['priority'] = 0;
+
+        }
+
+        $DB_Main->insert_batch('store_items', $items);
+    }
+
     function remove_item($item_id)
     {
         $DB_Main = $this->load->database('default', TRUE);
