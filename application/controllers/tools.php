@@ -110,11 +110,11 @@ class Tools extends CI_Controller
             {
                 if (PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION >= 4)
                 {
-                    $this->items_model->add_item($item->name, $item->display_name, $item->description, $item->web_description, $item->type, $item->loadout_slot, $item->price, json_encode($item->attrs, JSON_UNESCAPED_SLASHES), $item->is_buyable, $item->is_tradeable, $item->is_refundable, $category_id, $item->expiry_time, $item->flags = NULL);
+                    $this->items_model->add_item($item->name, $item->display_name, $item->description, $item->web_description, $item->type, $item->loadout_slot, $item->price, json_encode($item->attrs, JSON_UNESCAPED_SLASHES), $item->is_buyable, $item->is_tradeable, $item->is_refundable, $category_id, $item->expiry_time, $item->flags = NULL, 0);
                 }
                 else
                 {
-                    $this->items_model->add_item($item->name, $item->display_name, $item->description, $item->web_description, $item->type, $item->loadout_slot, $item->price, json_encode($item->attrs), $item->is_buyable, $item->is_tradeable, $item->is_refundable, $category_id, $item->expiry_time, $item->flags = NULL);
+                    $this->items_model->add_item($item->name, $item->display_name, $item->description, $item->web_description, $item->type, $item->loadout_slot, $item->price, json_encode($item->attrs), $item->is_buyable, $item->is_tradeable, $item->is_refundable, $category_id, $item->expiry_time, $item->flags = NULL, 0);
                 }
             }
         }

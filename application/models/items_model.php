@@ -162,7 +162,6 @@ class Items_Model extends CI_Model
 
         $DB_Main = $this->load->database('default', TRUE);
         $data = array(
-            'priority' => $priority,
             'name' => $name,
             'display_name' => $display_name,
             'description' => $description,
@@ -176,14 +175,16 @@ class Items_Model extends CI_Model
             'is_refundable' => $is_refundable,
             'category_id' => $category_id,
             'expiry_time' => $expiry_time,
-            'flags' => $flags
+            'flags' => $flags,
+            'priority' => $priority,
         );
 
         foreach ($data as $key => $value)
         {
-            if ($data[$key] == "")
-                $data[$key] = NULL;
+            if ($data[$key] == "") $data[$key] = NULL;
         }
+
+        if($data['priority'] == NULL) $data['priority'] = 0;
 
         $DB_Main->insert('store_items', $data);
     }
