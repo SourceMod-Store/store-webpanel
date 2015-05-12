@@ -105,18 +105,15 @@ class Tools extends CI_Controller
 
         foreach ($json->categories as $category)
         {
-            $category_id = $this->categories_model->add_category($category->display_name, $category->description, $category->require_plugin, $category->web_description, $category->web_color);
+            $items_array = array();
+
             foreach ($category->items as $item)
             {
-                if (PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION >= 4)
-                {
-                    $this->items_model->add_item($item->name, $item->display_name, $item->description, $item->web_description, $item->type, $item->loadout_slot, $item->price, json_encode($item->attrs, JSON_UNESCAPED_SLASHES), $item->is_buyable, $item->is_tradeable, $item->is_refundable, $category_id, $item->expiry_time, $item->flags = NULL);
-                }
-                else
-                {
-                    $this->items_model->add_item($item->name, $item->display_name, $item->description, $item->web_description, $item->type, $item->loadout_slot, $item->price, json_encode($item->attrs), $item->is_buyable, $item->is_tradeable, $item->is_refundable, $category_id, $item->expiry_time, $item->flags = NULL);
-                }
+                $items_array[] = (array) $item;
             }
+
+            $category_id = $this->categories_model->add_category($category->display_name, $category->description, $category->require_plugin, $category->web_description, $category->web_color);
+            $this->items_model->add_json_items($items_array,$category_id);
         }
         redirect('items');
     }
