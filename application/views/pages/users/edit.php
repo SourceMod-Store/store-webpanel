@@ -43,7 +43,7 @@
             <div class="control-group">
                 <label class="control-label" for="userSteamID">SteamID</label>
                 <div class="controls">
-                    <input type="text" id="userSteamID" disabled class="input-medium" name="steamid" value="<?php echo $user['steam_id']; ?>">
+                    <input type="text" id="userSteamID" class="input-medium" name="steamid" value="<?php echo $user['steam_id']; ?>">
                 </div>
             </div>
             <div class="control-group">
