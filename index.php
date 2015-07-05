@@ -190,6 +190,24 @@ if (defined('ENVIRONMENT'))
 
 		define('APPPATH', BASEPATH.$application_folder.'/');
 	}
+	
+/*
+ *
+ * --------------------------------------------------------------------
+ * CHECK IF INSTALLED
+ * --------------------------------------------------------------------
+ *
+ * If not, we are heading to the installer.
+ *
+ */
+if ( ! file_exists( APPPATH."config/database.php" ) )
+{
+	// The database info doesn't exist. Redirect the user to the install script immediately.
+	header( 'Location: install.php' , true , 303 ); // Bai!
+	// Some old bots don't pay attention to headers, and this redirect is incompatible with many pre-HTTP/1.1 user agents.
+	// So to make sure we stay safe, we kill the script. And to keep it simple, we include a link to the installer.
+	exit('Please complete the software installation <a href="./install.php">here</a>!<!-- If you are a spider or a crawler, your developer should make you respect headers. -->');
+}
 
 /*
  * --------------------------------------------------------------------
