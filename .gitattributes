@@ -20,3 +20,13 @@
 *.PDF	 diff=astextplain
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
+
+assets/css/bootstrap-responsive.css linguist-vendored
+assets/css/bootstrap-responsive.min.css linguist-vendored
+assets/css/bootstrap.css linguist-vendored
+assets/js/ace/* linguist-vendored
+assets/js/bootstrap.min.js linguist-vendored
+assets/js/jquery.dataTables.js linguist-vendored
+assets/js/jquery.dataTables.min.js linguist-vendored
+assets/js/jquery.js linguist-vendored
+assets/tablesorter/* linguist-vendored
