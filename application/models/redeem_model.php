@@ -99,7 +99,7 @@ class Redeem_Model extends CI_Model
             $data["redeem_times_user"] = $times_user;
         }
 
-        if ($expire_time != NULL && expire_time != "")
+        if ($expire_time != NULL && $expire_time != "")
         {
             $data["expire_time"] = $expire_time;
         }
