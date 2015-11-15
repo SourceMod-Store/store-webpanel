@@ -72,14 +72,16 @@ class Auth extends CI_Controller {
 				//if the login is successful
 				//redirect them back to the home page
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect('/', 'refresh');
+				header("Location: ".site_url('/dashboard'));
+				echo anchor('/dashboard','Click here if the redirect is not working');
 			}
 			else
 			{
 				//if the login was un-successful
 				//redirect them back to the login page
 				$this->session->set_flashdata('message', $this->ion_auth->errors());
-				redirect('auth/login', 'refresh'); //use redirects instead of loading views for compatibility with MY_Controller libraries
+				header("Location: ".site_url('/auth/login'));
+				echo anchor('/auth/login','Click here if the redirect is not working');
 			}
 		}
 		else
@@ -112,7 +114,10 @@ class Auth extends CI_Controller {
 
 		//redirect them to the login page
 		$this->session->set_flashdata('message', $this->ion_auth->messages());
-		redirect('auth/login', 'refresh');
+		//redirect('auth/login', 'refresh');
+		header("Location: ".site_url());
+
+		echo anchor('/','Click here if the redirect is not working');
 	}
 
 	//change password
