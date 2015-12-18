@@ -23,6 +23,11 @@ class Tools_Model extends CI_Model
             {
                 echo "Item " . $item["name"] . " with ID " . $item["id"] . " has a valid attrs field </br>";
             }
+			
+			if ($item['attrs'] == null || trim($item['attrs']) == "" )
+			{
+				echo "Item " . $item["name"] . " with ID " . $item["id"] . " does not have a filled out attrs field </br>";
+			}
         }
     }
 
